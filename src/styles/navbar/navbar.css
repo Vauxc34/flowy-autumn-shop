@@ -1,0 +1,32 @@
+.navbar-itself {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  width: auto;
+  background: green;
+}
+
+.navbar-itself img {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin: 15px;
+}
+
+.cart-icon {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background: yellow;
+  color: white;
+}
+
+.nmbr-items {
+  z-index: 99;
+  color: black;
+}
+/*# sourceMappingURL=navbar.css.map */

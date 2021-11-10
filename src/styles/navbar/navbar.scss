@@ -1,0 +1,26 @@
+.navbar-itself {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    background: green;
+}
+
+.navbar-itself img {
+    align-self: flex-start;
+    margin: 15px;
+}
+
+.cart-icon {
+    position: relative;
+    height: 30px;
+    width: 30px;
+    background: yellow;
+    color: white;
+}
+
+.nmbr-items {
+    z-index: 99;
+    color: black;
+}

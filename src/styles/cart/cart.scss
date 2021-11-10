@@ -1,0 +1,35 @@
+.cart-itself {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background: purple;
+    width: auto;
+}
+
+.actual-cart {
+    position: relative;
+    display: flex;
+    height: 60px;
+    width: 100%;
+    margin: 10px;
+    background: violet;
+
+
+}
+
+.cart-item-name {
+    position: relative;
+    color: white;
+}
+
+.container-of-btn input {
+
+margin: 10px;
+
+}
+
+.container-for-a-cart-options input {
+    margin: 10px;
+}
