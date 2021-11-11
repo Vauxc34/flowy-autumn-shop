@@ -1,3 +1,13 @@
+.else-message-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.else-message-container h1 {
+    font-family: 'Signika', sans-serif;
+}
+
 .cart-itself {
     position: relative;
     display: flex;
@@ -74,16 +84,22 @@ border: 2px solid black;
 /* cart item */
 
 .container-of-filled-cart {
-    align-self: center;
     display: flex;
-    width: auto;
-    background: red;
-    margin: 10px;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    align-self: center;
+    height: 250px;
+    width: 200px;
+    margin: 30px;
+    background: #f1f1f1;
 }
 
 .cart-item-itself {
-
+    height: 250px;
+    width: 200px;
 display: flex;
+justify-content: space-between;
 flex-direction: column;
 }
 

@@ -20,11 +20,14 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
         </>
     )
 
-    if(!cart.line_items) return 'Loading...'
-
+    if(!cart.line_items) return <div className="else-message-container">
+        <h1>Możliwe, że zapomniałeś czegoś dodać do koszyka ;)</h1>
+        </div>
+        
     return (
         <div className="cart-itself">
-            <h1>twój koszyk</h1>
+            <img className="product-image" />
+            <h1>Twój koszyk</h1>
             {!cart.line_items ? <EmptyCart/> : <FilledCart /> }
             <h1>Całość: 
                 <p>
