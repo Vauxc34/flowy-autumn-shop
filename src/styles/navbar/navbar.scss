@@ -1,26 +1,55 @@
 .navbar-itself {
     position: relative;
     display: flex;
-    justify-content: center;
     text-align: center;
+    justify-content: space-between;
     width: auto;
-    background: green;
+    background: white;
+    height: 75px;
 }
 
 .navbar-itself img {
-    align-self: flex-start;
+    align-self: center;
     margin: 15px;
+    height: 100px;
+}
+
+.navigation-options-bar {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    width: 80%;
+    background: yellow;
+    align-self: center;
+}
+
+.navigation-options-bar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navigation-options-bar ul li {
+    margin: 10px;
 }
 
 .cart-icon {
+    display: flex;
+    justify-content: center;
     position: relative;
+    margin: 10px;
     height: 30px;
     width: 30px;
-    background: yellow;
-    color: white;
+    border-radius: 25px;
+    background: #4c74d4;
+    align-self: center;
 }
-
+.option {
+    text-decoration: none;
+    font-size: 12px;
+}
 .nmbr-items {
+    align-self: center;
     z-index: 99;
+    font-family: 'Signika', sans-serif;
     color: black;
 }

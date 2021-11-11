@@ -3,30 +3,77 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   text-align: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   width: auto;
-  background: green;
+  background: white;
+  height: 75px;
 }
 
 .navbar-itself img {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
   margin: 15px;
+  height: 100px;
+}
+
+.navigation-options-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 50px;
+  width: 80%;
+  background: yellow;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.navigation-options-bar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+}
+
+.navigation-options-bar ul li {
+  margin: 10px;
 }
 
 .cart-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: relative;
+  margin: 10px;
   height: 30px;
   width: 30px;
-  background: yellow;
-  color: white;
+  border-radius: 25px;
+  background: #4c74d4;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.option {
+  text-decoration: none;
+  font-size: 12px;
 }
 
 .nmbr-items {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
   z-index: 99;
+  font-family: 'Signika', sans-serif;
   color: black;
 }
 /*# sourceMappingURL=navbar.css.map */

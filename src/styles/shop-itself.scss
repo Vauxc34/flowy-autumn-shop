@@ -3,6 +3,8 @@
 @import './cart/cart';
 @import './checkout/checkout';
 
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Signika:wght@300&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +26,8 @@
     justify-content: center;
     position: relative;
     width: auto;
-    background: #000;
+    background: #f7f7f7;
+    z-index: 10;
 }
 
 .container-for-a-cart-options {
