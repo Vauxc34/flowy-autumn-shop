@@ -1,0 +1,61 @@
+.checkout-itself {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.checkout-itself h4 {
+    text-align: center;
+    color: white;
+    margin: 10px;
+}
+.container-for-payment-steps {
+    position: relative;
+    display: flex;
+    align-self: center;
+}
+.payment-form {
+    position: relative;
+    display: flex;
+    align-self:center;
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+    width: 125px;
+    background: #25a34b;
+}
+.step-payment {
+    align-self: center;
+    color: white;
+
+}
+.step-payment-name {
+    align-self: center;
+    color: white;
+
+}
+
+/* address form */
+
+.address-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    height: 400px;
+    width: 300px;
+    margin: 10px;
+    background: red;
+}
+
+.details-container {
+    position: relative;
+    align-self: center;
+    background: green;
+}
+
+#test {
+    position: relative;
+    background: green;
+    padding: 20px;
+}

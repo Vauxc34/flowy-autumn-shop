@@ -1,8 +1,6 @@
 import React from 'react'
 
-import Route from 'react-router-dom'
-
-import { Router, Routes, Link } from 'react-router-dom'
+import {Link}  from 'react-router-dom'
 
 import CartItem from './CartItem/CartItem'
 
@@ -35,8 +33,7 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
             </h1>
             <div className="container-for-a-cart-options">
             <input type="button" value="pusty koszyk" onClick={handleEmptyCart}/>
-            <input component={Link} to='/checkout'  type="button" value="idź do kasy"/>
-
+            <button><Link to='/checkout'>idź do kasy</Link></button>
             </div>
         </div>
     )

@@ -70,7 +70,7 @@ const Shop = () =>  {
             <Routes>
 
             <Route 
-            exact path='/' 
+            exact path='/sklep' 
             element={<Products products={products} 
             onAddToCart={handleAddToCart} />}>
             </Route>
@@ -86,7 +86,7 @@ const Shop = () =>  {
 
             <Route 
             exact path='/checkout'
-            element={<Checkout /> }>
+            element={<Checkout />}>
             </Route>
             
             </Routes>

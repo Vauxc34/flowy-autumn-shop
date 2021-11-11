@@ -20,6 +20,7 @@ export const Navbar = ({ totalItems }) => {
             
             <div className="cart-icon">
                 <Link to="/cart">to cart</Link>
+                <Link to="/sklep">go to home page</Link>
                 <p className="nmbr-items" dangerouslySetInnerHTML={{__html:totalItems}} />
             </div>
             
