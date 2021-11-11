@@ -24,7 +24,7 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
 
     return (
         <div className="cart-itself">
-            <h1>your shopping cart</h1>
+            <h1>twój koszyk</h1>
             {!cart.line_items ? <EmptyCart/> : <FilledCart /> }
             <h1>Całość: 
                 <p>
@@ -32,8 +32,8 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
                 </p>
             </h1>
             <div className="container-for-a-cart-options">
-            <input type="button" value="pusty koszyk" onClick={handleEmptyCart}/>
-            <button><Link to='/checkout'>idź do kasy</Link></button>
+            <button className="checkout-btns first" onClick={handleEmptyCart}>pusty koszyk</button>
+            <button className="checkout-btns secondary" ><Link to='/checkout'>idź do kasy</Link></button>
             </div>
         </div>
     )

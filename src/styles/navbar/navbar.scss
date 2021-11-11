@@ -8,7 +8,12 @@
     height: 75px;
 }
 
-.navbar-itself img {
+.img-container {
+    display: flex;
+    width: 10%;
+}
+
+.img-container img {
     align-self: center;
     margin: 15px;
     height: 100px;
@@ -16,11 +21,20 @@
 
 .navigation-options-bar {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-start;
     height: 50px;
     width: 80%;
-    background: yellow;
     align-self: center;
+}
+
+.shopping-home {
+    color: black;
+    margin-left: 7.5px;
+}
+
+.shopping-cart {
+    color: black;
+    margin-left: 7.5px;
 }
 
 .navigation-options-bar ul {
@@ -29,6 +43,8 @@
 }
 
 .navigation-options-bar ul li {
+    text-transform: uppercase;
+    align-self: center;
     margin: 10px;
 }
 
@@ -36,16 +52,38 @@
     display: flex;
     justify-content: center;
     position: relative;
-    margin: 10px;
     height: 30px;
-    width: 30px;
-    border-radius: 25px;
+    width: 100px;
+    border-top-right-radius:25px;
+    border-bottom-right-radius:25px;
     background: #4c74d4;
     align-self: center;
 }
+
+.favourite-icon {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 30px;
+    width: 100px;
+    border-top-left-radius:25px;
+    border-bottom-left-radius:25px;
+    background: #c40941;
+    align-self: center; 
+}
+
+.container-for-icons {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
 .option {
     text-decoration: none;
     font-size: 12px;
+    color: black;
+    font-family: 'Signika', sans-serif;
+    margin: 10px;
 }
 .nmbr-items {
     align-self: center;

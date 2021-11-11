@@ -4,17 +4,16 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
 
     return (
 
-        <div>
-            
+        <div className="cart-item-itself">
+        
         <h4>{item.name}</h4>
-        <h4>{item.line_total.formatted_with_symbol}</h4>
+        <span>{item.line_total.formatted_with_symbol}</span>
 
         <div className="container-of-btn">
-        <input type="button" value="-" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}/>
-        <input type="button" value="+" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}/>
-        <input type="button" value="delete this" onClick={() => onRemoveFromCart(item.id)}/>
+        <input type="button" className="btn-" value="-" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}/>
+        <input type="button" className="btn--" value="+" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}/>
         </div>
-
+        <input type="button" className="delete-item-btn" value="delete this" onClick={() => onRemoveFromCart(item.id)}/>
         </div>
     )
 }

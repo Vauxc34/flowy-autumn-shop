@@ -7,13 +7,10 @@
       -ms-flex-direction: column;
           flex-direction: column;
   position: relative;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   text-align: center;
   -ms-flex-item-align: center;
       align-self: center;
-  height: 200px;
+  height: 250px;
   width: 200px;
   margin: 30px;
   background: #f1f1f1;
@@ -21,6 +18,13 @@
 
 .item .product-container:hover {
   opacity: 1;
+}
+
+.icon {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  color: white;
 }
 
 .product-container {
@@ -46,19 +50,20 @@
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  height: 100px;
+  height: 200px;
   width: auto;
 }
 
 .container-for-cart-btn {
+  -ms-flex-item-align: center;
+      align-self: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   position: relative;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
 }
 
@@ -70,6 +75,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding: 10px;
 }
 
 .container-for-desc-item h1 {
@@ -79,16 +85,20 @@
 }
 
 .container-for-desc-item p {
+  text-align: justify;
   font-size: 18px;
-  margin: 5px;
   font-family: 'Nanum Gothic', sans-serif;
 }
 
-.cart-btn {
+.btn {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -97,25 +107,17 @@
   height: 45px;
   width: 45px;
   margin: 5px;
-  background: blue;
-  border: 2px solid #4b4bff;
+  background: white;
+  border: 2px solid black;
   -webkit-transition: .5s;
   transition: .5s;
 }
 
-.cart-btn p {
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  font-family: 'Signika', sans-serif;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: white;
+.btn .icon {
+  color: black;
 }
 
-.cart-btn:hover {
-  background: white;
-  border: 2px solid black;
+.btn:hover {
   cursor: pointer;
 }
 /*# sourceMappingURL=item.css.map */

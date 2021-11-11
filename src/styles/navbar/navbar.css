@@ -12,7 +12,14 @@
   height: 75px;
 }
 
-.navbar-itself img {
+.img-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 10%;
+}
+
+.img-container img {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -24,15 +31,23 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   height: 50px;
   width: 80%;
-  background: yellow;
   -ms-flex-item-align: center;
       align-self: center;
+}
+
+.shopping-home {
+  color: black;
+  margin-left: 7.5px;
+}
+
+.shopping-cart {
+  color: black;
+  margin-left: 7.5px;
 }
 
 .navigation-options-bar ul {
@@ -43,6 +58,10 @@
 }
 
 .navigation-options-bar ul li {
+  text-transform: uppercase;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
   margin: 10px;
 }
 
@@ -54,18 +73,48 @@
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  margin: 10px;
   height: 30px;
-  width: 30px;
-  border-radius: 25px;
+  width: 100px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
   background: #4c74d4;
   -ms-flex-item-align: center;
       align-self: center;
 }
 
+.favourite-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  height: 30px;
+  width: 100px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background: #c40941;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.container-for-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10px;
+}
+
 .option {
   text-decoration: none;
   font-size: 12px;
+  color: black;
+  font-family: 'Signika', sans-serif;
+  margin: 10px;
 }
 
 .nmbr-items {
