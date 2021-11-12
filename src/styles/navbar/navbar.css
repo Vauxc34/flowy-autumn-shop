@@ -28,26 +28,30 @@
 }
 
 .navigation-options-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  display: none;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   height: 50px;
   width: 80%;
   -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
       align-self: center;
 }
 
 .shopping-home {
-  color: black;
+  color: #3b047a;
   margin-left: 7.5px;
 }
 
 .shopping-cart {
-  color: black;
+  color: #4c74d4;
   margin-left: 7.5px;
+}
+
+.favourites {
+  margin-left: 7.5px;
+  color: #c40941;
 }
 
 .navigation-options-bar ul {
@@ -99,6 +103,23 @@
       align-self: center;
 }
 
+.hamburger-menu-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin: 10px;
+  background: #3b047a;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
 .cart-ico {
   position: absolute;
   font-size: 30px;
@@ -110,6 +131,13 @@
       -ms-grid-row-align: center;
       align-self: center;
   font-size: 28px;
+}
+
+.menu-ico {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 26px;
 }
 
 .container-for-icons {
@@ -130,6 +158,21 @@
   margin: 10px;
 }
 
+.-hidden {
+  display: block;
+  font-size: 44px;
+  position: absolute;
+  bottom: -10px;
+  color: transparent;
+}
+
+.-hidden-shop {
+  display: block;
+  font-size: 44px;
+  position: absolute;
+  color: transparent;
+}
+
 .nmbr-items {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -139,5 +182,25 @@
   z-index: 99;
   font-family: 'Signika', sans-serif;
   color: #4c74d4;
+}
+
+@media (max-width: 280px) {
+  .favourite-icon {
+    display: none;
+  }
+  .cart-icon {
+    display: none;
+  }
+}
+
+@media (min-width: 599px) {
+  .container-for-icons {
+    display: none;
+  }
+  .navigation-options-bar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 /*# sourceMappingURL=navbar.css.map */

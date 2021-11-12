@@ -7,6 +7,7 @@ import { faStore } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 import { Link, useLocation } from 'react-router-dom'
 
@@ -20,10 +21,12 @@ export const Navbar = ({ totalItems }) => {
     
             <div className="img-container">
             <img src={logo} component={Link} to/>
+            <Link className="-hidden-shop" to="/sklep">▇▇▇</Link>
             </div>
             <div className='navigation-options-bar'>
             <ul>
                 <li><Link className="option -second" to="/sklep">Sklep<FontAwesomeIcon className="icon shopping-home" icon={faStore} /></Link></li>
+                <li><Link className="option -second" to="/sklep">Ulubione<FontAwesomeIcon className="icon favourites" icon={faHeart} /></Link></li>
                 <li><Link className="option -one" to="/cart">Koszyk<FontAwesomeIcon className="icon shopping-cart" icon={faShoppingBasket} /></Link></li>
             </ul>
             </div>
@@ -34,6 +37,10 @@ export const Navbar = ({ totalItems }) => {
             <div className="cart-icon">
                 <FontAwesomeIcon className="icon cart-ico" icon={faShoppingBag} />
                 <p className="nmbr-items" dangerouslySetInnerHTML={{__html:totalItems}} />
+                <Link className="option -hidden" to="/cart">@</Link>
+            </div>
+            <div className="hamburger-menu-icon">
+                <FontAwesomeIcon className="icon menu-ico" icon={faBars} />
             </div>
             </div>
             

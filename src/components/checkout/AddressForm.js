@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 
-import FormInput from './FormInput'
+import { commerce } from '../../lib/commerce'
 
 export const AddressForm = () => {
 
@@ -9,9 +9,29 @@ export const AddressForm = () => {
 
     return (
         <form className="address-form">
-                <h3>Adres dostawy</h3>
                 <FormProvider {...methods}>
-                <FormInput required name="name" label="imie i nazwisko"/>
+                <label>imie</label>
+                <input type="text" name="name" required/>
+                <label>nazwisko</label>
+                <input type="text" name="username" required/>
+                <label>adres e-mail</label>
+                <input type="text" name="e-mail" required/>
+                <label>numer domu/mieszkania</label>
+                <input type="text" name="address" required/>
+                <label>ulica</label>
+                <input type="text" name="street" required/>
+                <label>kod pocztowy</label>
+                <input type="text" name="zip-code" required/>
+                <label>miasto</label>
+                <input type="text" name="city" required/>
+                <select>
+                </select>
+                <select value="opcja wysyłki">
+                <option></option>
+                </select>
+                <select>
+                <option></option>
+                </select>
                 </FormProvider>
         </form>
     )
