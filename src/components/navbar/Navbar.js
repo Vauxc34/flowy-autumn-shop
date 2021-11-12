@@ -5,6 +5,8 @@ import logo from './images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStore } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import { Link, useLocation } from 'react-router-dom'
 
@@ -27,9 +29,10 @@ export const Navbar = ({ totalItems }) => {
             </div>
             <div className="container-for-icons">
             <div className="favourite-icon">
-                <p></p>
+                <FontAwesomeIcon className="icon heart-ico" icon={faHeart} />
             </div>
             <div className="cart-icon">
+                <FontAwesomeIcon className="icon cart-ico" icon={faShoppingBag} />
                 <p className="nmbr-items" dangerouslySetInnerHTML={{__html:totalItems}} />
             </div>
             </div>

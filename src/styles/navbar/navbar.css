@@ -73,10 +73,10 @@
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  height: 30px;
-  width: 100px;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin: 10px;
   background: #4c74d4;
   -ms-flex-item-align: center;
       align-self: center;
@@ -90,13 +90,26 @@
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
-  height: 30px;
-  width: 100px;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin: 10px;
   background: #c40941;
   -ms-flex-item-align: center;
       align-self: center;
+}
+
+.cart-ico {
+  position: absolute;
+  font-size: 30px;
+  margin-bottom: 2.5px;
+}
+
+.heart-ico {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 28px;
 }
 
 .container-for-icons {
@@ -121,8 +134,10 @@
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  margin-top: 10px;
+  font-size: 12px;
   z-index: 99;
   font-family: 'Signika', sans-serif;
-  color: black;
+  color: #4c74d4;
 }
 /*# sourceMappingURL=navbar.css.map */
