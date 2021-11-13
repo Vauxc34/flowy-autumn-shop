@@ -56,19 +56,17 @@ export const AddressForm = ({ checkoutToken, next }) => {
         <form className="address-form" onSubmit={methods.handleSubmit((data) => next({ ...data, shippingCountry, shippingSubdivision, shippingOption }))}>
                 <FormProvider {...methods}>
                 <label>imie</label>
-                <input type="text" name="firstname" required/>
+                <input required name="firstName" label="First name" />
                 <label>nazwisko</label>
-                <input type="text" name="lastname" required/>
+                <input required name="lastName" label="Last name" />
                 <label>adres e-mail</label>
-                <input type="text" name="email" required/>
+                <input required name="address1" label="Address line 1" />
                 <label>numer domu/mieszkania</label>
-                <input type="text" name="house_nmbr" required/>
+                <input required name="email" label="Email" />
                 <label>ulica</label>
-                <input type="text" name="street" required/>
+                <FormInput required name="city" label="City" />
                 <label>kod pocztowy</label>
-                <input type="text" name="postal_zip_code" required/>
-                <label>miasto</label>
-                <input type="text" name="town_city" required/>
+                <input required name="zip" label="Zip / Postal code" />
                 <label>panstwo</label>
                 
                 <select value={shippingCountry} fullWidth onChange={(e) => setShippingCountry(e.target.value)}>
