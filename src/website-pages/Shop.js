@@ -10,6 +10,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
  
 import '../styles/shop-itself.css'
 
+import logoReact from './images/footer-logo.png'
+
 const Shop = () =>  {
 
     const [products, setProducts] = useState([])
@@ -90,6 +92,12 @@ const Shop = () =>  {
             </Route>
             
             </Routes>
+            <div className="Footer-itself">
+            <div className="Footer-container"></div>
+            <p>stworzone dzieki technologi</p>
+            <span>ReactJS</span>
+            <img src={logoReact}/>
+            </div>
 
         </Router>
 

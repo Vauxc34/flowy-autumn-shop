@@ -27,6 +27,7 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
     return (
         <div className="cart-itself">
             <img className="product-image" />
+            
             <h1>Twój koszyk</h1>
             {!cart.line_items ? <EmptyCart/> : <FilledCart /> }
             <h1>Całość: 

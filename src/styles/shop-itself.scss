@@ -30,6 +30,50 @@
     z-index: 10;
 }
 
+/* footer section */
+
+.Footer-itself {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    height: 75px;
+    background: #34444c;
+}
+
+.Footer-itself img {
+    display: block;
+    margin: 10px;
+    align-self: center;
+    height:60px;
+}
+
+.Footer-itself p {
+    display: inline;
+    align-self: center;
+    color: white;
+    margin: 5px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Footer-itself span {
+    display: none;
+    align-self: center;
+    margin: 15px;
+    color: #6bc4e7;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+@media (min-width:599px) {
+
+    .Footer-itself img {
+        display: none;
+    }
+
+    .Footer-itself span {
+        display: inline;
+    }
+
+}
 
 @media (min-width:1199px) {
 

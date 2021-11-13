@@ -21,9 +21,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   text-align: center;
   width: auto;
 }
@@ -51,7 +48,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 150px;
+  height: 100px;
   width: auto;
   background: #343c4c;
 }
@@ -65,15 +62,83 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 50%;
+  width: 100%;
 }
 
 .container-of-btn input {
-  border: 2px solid black;
-  width: 50%;
+  border: none;
+  height: 45px;
+  width: 45px;
+  margin: 10px;
+  border-radius: 25px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
+.container-for-etc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container-for-etc span {
+  margin: 10px;
+}
+
+.product-image-cart {
+  height: 100px;
+  width: 100px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+/* minus and plus button */
+.btn- {
+  background: #ff000052;
+}
+
+.btn-- {
+  background: #25a34b85;
+}
+
+/* */
 .delete-item-btn {
-  border: 2px solid black;
+  border: none;
+  background: #80008063;
+  height: 100%;
+  width: 100%;
+  font-size: 10px;
+  color: white;
+  text-transform: uppercase;
+}
+
+.container-delete-all {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 25px;
+}
+
+.container-for-all-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 130px;
 }
 
 .checkout-btns {
@@ -81,24 +146,33 @@
       -ms-grid-row-align: center;
       align-self: center;
   position: relative;
-  height: 50%;
+  height: 55%;
+  margin: 10px;
   width: 175px;
   border: none;
+  border-radius: 25px;
+  font-family: 'Signika', sans-serif;
+  color: white;
+}
+
+.checkout-btns a {
+  text-transform: uppercase;
+  color: white;
 }
 
 .first {
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+  text-transform: uppercase;
+  background: #145094;
 }
 
 .secondary {
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  background: #2b1494;
 }
 
 .secondary a {
   text-decoration: none;
-  color: black;
+  font-family: 'Signika', sans-serif;
+  color: white;
 }
 
 /* cart item */
@@ -114,25 +188,19 @@
   text-align: center;
   -ms-flex-item-align: center;
       align-self: center;
-  height: 250px;
-  width: 200px;
+  width: 100%;
   margin: 30px;
   background: #f1f1f1;
 }
 
 .cart-item-itself {
-  height: 250px;
-  width: 200px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  width: 100%;
 }
 
 .cart-item-itself h4 {
