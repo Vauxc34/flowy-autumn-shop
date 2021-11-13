@@ -24,14 +24,18 @@ export const AddressForm = () => {
                 <input type="text" name="zip-code" required/>
                 <label>miasto</label>
                 <input type="text" name="city" required/>
+                <label>panstwo</label>
                 <select>
                 </select>
+                <label>wojewodztwo</label>
+                <select>
+                <option></option>
+                </select>
+                <label>opcja wysyłki</label>
                 <select value="opcja wysyłki">
                 <option></option>
                 </select>
-                <select>
-                <option></option>
-                </select>
+                <button>przejdź do płatnosci</button>
                 </FormProvider>
         </form>
     )

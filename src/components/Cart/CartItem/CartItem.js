@@ -3,12 +3,24 @@ import React from 'react'
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => { 
 
     return (
-
+        
         <div className="cart-item-itself">
         <div className="container-for-etc">
-        <h4>{item.name}</h4>
+        <div className="container-for-img-h4">
         <img className="product-image-cart" src={item.image.url} />
+        </div>
+        <div className="container-for-item-name-h4">
+        <h4>Produkt:</h4>
+        <h4>{item.name}</h4>
+        </div>
+        <div className="container-for-item-price-h4">
+        <h4>Cena:</h4>
         <span>{item.line_total.formatted_with_symbol}</span>
+        </div>
+        <div className="container-for-item-price-h4">
+        <h4>Ilość:</h4>
+        <p dangerouslySetInnerHTML={{__html:item.quantity}} />
+        </div>
         </div>
         <div className="container-for-all-btns">
         <div className="container-of-btn">

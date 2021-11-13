@@ -141,6 +141,10 @@
   background: #dadada;
 }
 
+.address-form button {
+  margin: 10px;
+}
+
 @media (min-width: 599px) {
   .container-for-payment-steps {
     width: 50%;
