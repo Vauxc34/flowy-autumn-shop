@@ -11,7 +11,12 @@
   position: relative;
   height: 780px;
   width: 100%;
-  background: url(../website-pages/images/bg-image.svg);
+}
+
+.Background {
+  position: absolute;
+  height: 780px;
+  width: 365px;
 }
 
 .BackdropWithDescription {
@@ -95,6 +100,170 @@
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+.Widget-container-second {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: center;
+      align-self: center;
+  position: relative;
+  width: 100%;
+}
+
+.Widget-container-second h1 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 40px;
+  width: 250px;
+  margin: 10px;
+  color: #0B254B;
+  text-align: center;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Widget-container-second p {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 18px;
+  font-weight: 800;
+  margin: 15px;
+  width: 310px;
+  color: #5E6E89;
+  text-align: center;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Widget-container-second button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  -ms-flex-item-align: center;
+      align-self: center;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background: #56B280;
+  height: 40px;
+  width: 176px;
+  margin: 10px;
+}
+
+.Widget-container-second button a {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Widget-container-third {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+  position: relative;
+  height: 925px;
+  width: 100%;
+}
+
+.Widget-container-third h1 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 350px;
+  font-size: 40px;
+  text-align: center;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Widget-container-third span {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 16px;
+  width: 250px;
+  margin: 10px;
+  color: #56B280;
+  text-align: center;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.Widget-container-third img {
+  margin: 0px;
+}
+
+.Widget-container-third button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  -ms-flex-item-align: center;
+      align-self: center;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background: #56B280;
+  top: 570px;
+  height: 40px;
+  width: 176px;
+}
+
+img.feature-details {
+  margin: 10px;
+}
+
+.FeaturesContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+  position: relative;
+  margin-top: -25px;
+  height: 150px;
+  width: 100%;
+}
+
+/* */
 .item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -108,10 +277,12 @@
   -ms-flex-item-align: center;
       align-self: center;
   height: 250px;
-  width: 200px;
+  width: 90vw;
   margin: 30px;
   background: #f1f1f1;
   overflow: hidden;
+  -webkit-box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
 }
 
 .item .product-container:hover {
