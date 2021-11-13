@@ -88,6 +88,7 @@ const Shop = () =>  {
         <Router>
 
             <Navbar totalItems={cart.total_items} />
+            
             <Routes>
 
             <Route 

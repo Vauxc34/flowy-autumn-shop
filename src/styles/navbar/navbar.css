@@ -4,19 +4,26 @@
   display: -ms-flexbox;
   display: flex;
   text-align: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   width: auto;
   background: white;
   height: 75px;
 }
 
 .img-container {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 10%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 50%;
 }
 
 .img-container img {
@@ -24,7 +31,7 @@
       -ms-grid-row-align: center;
       align-self: center;
   margin: 15px;
-  height: 100px;
+  height: 40px;
 }
 
 .navigation-options-bar {
@@ -69,75 +76,38 @@
   margin: 10px;
 }
 
-.cart-icon {
+.---icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  position: relative;
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  margin: 10px;
-  background: #4c74d4;
   -ms-flex-item-align: center;
       align-self: center;
-}
-
-.favourite-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  position: relative;
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
   margin: 10px;
-  background: #c40941;
-  -ms-flex-item-align: center;
-      align-self: center;
 }
 
-.hamburger-menu-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  position: relative;
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  margin: 10px;
-  background: #3b047a;
-  -ms-flex-item-align: center;
-      align-self: center;
-}
-
-.cart-ico {
-  position: absolute;
-  font-size: 30px;
-  margin-bottom: 2.5px;
-}
-
-.heart-ico {
+.---icon {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  font-size: 28px;
 }
 
-.menu-ico {
+.hamburger-menu {
+  position: relative;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.icon {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
   font-size: 26px;
+  color: #000000;
 }
 
 .container-for-icons {

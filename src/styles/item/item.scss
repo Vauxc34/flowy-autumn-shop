@@ -1,3 +1,73 @@
+.Widget-container-first {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+    height: 780px;
+    width: 100%;
+    background: url(../website-pages/images/bg-image.svg);
+
+}
+
+.BackdropWithDescription {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-self: center;
+    position: relative;
+    height: 371px;
+    width: 346px;
+    background: url(../website-pages/images/card-bg.svg);
+}
+
+.BackdropWithDescription span {
+    font-size: 40px;
+    text-align: center;
+}
+
+.BackdropWithDescription h1 {
+    align-self: center;
+    font-size: 40px;
+    width: 250px;
+    text-align: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.BackdropWithDescription p {
+    align-self: center;
+    font-size: 18px;
+    font-weight: 800;
+    margin: 10px;
+    width: 350px;
+    text-align: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.BackdropWithDescription button {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    align-self: center;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background: #56B280;
+    height: 41px;
+    width: 310px;
+    margin: 20px;
+}
+
+.BackdropWithDescription button a {
+    align-self: center;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 900;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 .item {
     display: flex;
     flex-direction: column;
