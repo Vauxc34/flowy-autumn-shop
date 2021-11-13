@@ -64,7 +64,7 @@ export const AddressForm = ({ checkoutToken, next }) => {
                 <label>numer domu/mieszkania</label>
                 <input required name="email" label="Email" />
                 <label>ulica</label>
-                <FormInput required name="city" label="City" />
+                <input required name="city" label="City" />
                 <label>kod pocztowy</label>
                 <input required name="zip" label="Zip / Postal code" />
                 <label>panstwo</label>
