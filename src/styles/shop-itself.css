@@ -791,7 +791,7 @@
   }
 }
 
-@media (min-width: 1199px) {
+@media (min-width: 899px) {
   .product-page {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
