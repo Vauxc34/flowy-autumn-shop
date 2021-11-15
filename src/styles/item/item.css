@@ -18,13 +18,15 @@
   width: 100%;
 }
 
+.First-Section__ {
+  height: 925px;
+  background: #F7F8FA;
+}
+
 .BackdropWithDescription {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -32,8 +34,9 @@
   -ms-flex-item-align: center;
       align-self: center;
   position: relative;
-  height: 371px;
+  height: 420px;
   width: 346px;
+  margin: 10px 10px 320px;
   background: url(../website-pages/images/card-bg.svg);
 }
 
@@ -161,7 +164,7 @@
   background: #56B280;
   height: 40px;
   width: 176px;
-  margin: 10px;
+  margin: 10px 10px 30px;
 }
 
 .Widget-container-second button a {
@@ -206,7 +209,7 @@
       align-self: center;
   font-size: 16px;
   width: 250px;
-  margin: 10px;
+  margin: 10px 10px -30px;
   color: #56B280;
   text-align: center;
   font-family: 'Nanum Gothic', sans-serif;
@@ -234,7 +237,7 @@
   border: none;
   border-radius: 5px;
   background: #56B280;
-  top: 570px;
+  top: 670px;
   height: 40px;
   width: 176px;
 }

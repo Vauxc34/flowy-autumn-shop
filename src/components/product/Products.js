@@ -52,7 +52,7 @@ const Products = ({products, onAddToCart}) => {
         </div>    
         
         <div className="Widget-container-third">
-            <img className="Background First-Section" src={BgThirdSection}></img>
+            <div className="Background First-Section__" /* src={BgThirdSection} */></div>
             <div className="BackdropWithDescription">
             <h1>Clean and</h1>
             <h1>fragrant soy wax</h1>
