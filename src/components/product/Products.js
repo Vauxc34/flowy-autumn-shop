@@ -75,6 +75,34 @@ const Products = ({products, onAddToCart}) => {
             </div>
 
         </div>
+
+        <div className="Widget-container-Fourth">
+
+            <div className="BackdropWithDescription _third">
+            <h1>Testimonials</h1>
+            <span>Some quotes from our happy customers</span>
+
+            </div>
+
+        </div>
+
+        <div className="Widget-container-second">
+
+        <h1>Products</h1>
+
+        <p>Order it for you or for your beloved ones </p>
+
+        {products.map((product) => (
+            
+            <Product product={product} onAddToCart={onAddToCart}/>
+            
+        ))}
+
+        <button>
+            <Link exact path to='/sklep'>See more</Link>
+        </button>
+
+        </div>  
         
         </div>
     )

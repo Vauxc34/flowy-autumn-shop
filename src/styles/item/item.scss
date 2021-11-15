@@ -100,7 +100,7 @@
     align-self: center;
     font-size: 40px;
     width: 250px;
-    margin: 10px;
+    margin: 20px 10px;
     color: #0B254B;
     text-align: center;
     font-family: 'Nanum Gothic', sans-serif;
@@ -129,7 +129,7 @@
     background: #56B280;
     height: 40px;
     width: 176px;
-    margin: 10px 10px 30px;
+    margin: 10px 10px 60px;
 }
 
 .Widget-container-second button a {
@@ -202,6 +202,45 @@ img.feature-details {
     height: 150px;
     width: 100%;
 }
+
+.Widget-container-Fourth {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: center;
+    position: relative;
+    height: 601px;
+    width: 100%;
+    background: #56b27f2c;
+}
+
+._third {
+    height: 121px;
+    margin: 50px 10px 10px;
+    background: none;
+}
+
+._third h1 {
+    align-self: center;
+    font-size: 40px;
+    width: 250px;
+    margin: 10px;
+    color: #0B254B;
+    text-align: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+._third span {
+    align-self: center;
+    font-size: 18px;
+    font-weight: 600;
+    width: 250px;
+    margin: 10px;
+    color: #5E6E89;
+    text-align: center;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 
 /* */
 
