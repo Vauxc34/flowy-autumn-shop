@@ -20,7 +20,7 @@ const Products = ({products, onAddToCart}) => {
         <div className="product-page">
         <div className="Widget-container-first">
             <img className="Background First-Section" src={BgFirstSection} ></img>
-            <div className="BackdropWithDescription">
+            <div className="BackdropWithDescription _first">
             <span>🌱</span>
             <h1>The nature candle</h1>
             <p>
@@ -53,7 +53,7 @@ const Products = ({products, onAddToCart}) => {
         
         <div className="Widget-container-third">
             <div className="Background First-Section__" /* src={BgThirdSection} */></div>
-            <div className="BackdropWithDescription">
+            <div className="BackdropWithDescription _second">
             <h1>Clean and</h1>
             <h1>fragrant soy wax</h1>
             <span>
