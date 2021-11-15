@@ -10,7 +10,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
  
 import '../styles/shop-itself.css'
 
-import logoReact from './images/footer-logo.png'
+import logoCandleAf from './images/logo-web_footer.svg'
 
 const Shop = () =>  {
 
@@ -118,10 +118,13 @@ const Shop = () =>  {
             
             </Routes>
             <div className="Footer-itself">
-            <div className="Footer-container"></div>
-            <p>stworzone dzieki technologi</p>
+            <div className="Footer-container">
+            <hr></hr>
+            <img src={logoCandleAf}></img>
+            <p>Your natural candle made for your home and for your wellness.</p>
             <span>ReactJS</span>
-            <img src={logoReact}/>
+            </div>
+
             </div>
 
         </Router>
