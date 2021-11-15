@@ -1202,9 +1202,6 @@ hr {
 }
 
 @media (min-width: 599px) {
-  .Footer-itself img {
-    display: none;
-  }
   .Footer-itself span {
     display: inline;
   }
