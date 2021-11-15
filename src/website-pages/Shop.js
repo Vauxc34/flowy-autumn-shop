@@ -10,7 +10,12 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
  
 import '../styles/shop-itself.css'
 
+import footerBgc from './images/footer-bg.svg'
+
+import SecondfooterBgc from './images/bg.svg'
+
 import logoCandleAf from './images/logo-web_footer.svg'
+
 
 const Shop = () =>  {
 
@@ -118,15 +123,42 @@ const Shop = () =>  {
             
             </Routes>
             <div className="Footer-itself">
+            <img className="Footer-itself_Img" src={footerBgc}></img>
             <div className="Footer-container">
             <hr></hr>
             <img src={logoCandleAf}></img>
-            <p>Your natural candle made for your home and for your wellness.</p>
-            <span>ReactJS</span>
-            </div>
+            <p className="Footer-itself_p">Your natural candle made for your home and for your wellness.</p>
+            <div className="Second-footer-container">
+            <div className="Infos-container">
+            <div className="Infos-widget">
+
+            <p className="Infos-widget_p">Discovery</p>
+            <span className="Infos-Widget_span">New season</span>
+            <span className="Infos-Widget_span">Most searched</span>
+            <span className="Infos-Widget_span">Most selled</span>
+
+            <p className="Infos-widget_p">About</p>
+            <span className="Infos-Widget_span">Help</span>
+            <span className="Infos-Widget_span">Shipping</span>
+            <span className="Infos-Widget_span">Affiliate</span>
 
             </div>
+            <div className="Infos-widget">
 
+            <p className="Infos-widget_p">Info</p>
+            <span className="Infos-Widget_span">Contact Us</span>
+            <span className="Infos-Widget_span">Privacy Policies</span>
+            <span className="Infos-Widget_span">Terms &amp; Conditions</span>
+    
+            </div>
+            </div>
+            </div>
+            </div>
+            <div className="CopyrightContainer">
+            <img className="Last-bgc"src={SecondfooterBgc}></img>
+            <h3 className="FooterCopyright" >©Candleaf All Rights Reserved.</h3>
+            </div>
+            </div> 
         </Router>
 
         </div>
