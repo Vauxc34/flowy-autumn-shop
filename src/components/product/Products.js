@@ -13,6 +13,13 @@ import FeatureFour from '../../website-pages/images/feature4.svg'
 import BgFirstSection from '../../website-pages/images/bg-image.svg'
 import BgThirdSection from '../../website-pages/images/section-bg.svg'
 
+/* Images */
+
+import ProfilePicTestimonial from './images/user-profile-pic.svg'
+import StarFilled from './images/star-filled.svg'
+
+/* Images */
+
 
 const Products = ({products, onAddToCart}) => {
     
@@ -81,6 +88,106 @@ const Products = ({products, onAddToCart}) => {
             <div className="BackdropWithDescription _third">
             <h1>Testimonials</h1>
             <span>Some quotes from our happy customers</span>
+            </div>
+
+            <div className='Testimonials-carousel'>
+
+            
+            <div class="marquee">
+            <div class="marquee--inner">
+
+
+            <span>
+            <div className="Testimonial-iselft">
+
+            <img src={ProfilePicTestimonial} className="user-profile-pic" />
+            <div className='stars-container'>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            </div>
+
+            <h1 className='testimonial-desc'>
+            “I love it! No more air fresheners”
+            </h1>
+            <h2 className='testimonial-guy-name'>
+            Luisa
+            </h2>
+
+            </div>
+
+            <div className="Testimonial-iselft">
+
+<img src={ProfilePicTestimonial} className="user-profile-pic" />
+<div className='stars-container'>
+<img className='star-itself' src={StarFilled}></img>
+<img className='star-itself' src={StarFilled}></img>
+<img className='star-itself' src={StarFilled}></img>
+<img className='star-itself' src={StarFilled}></img>
+<img className='star-itself' src={StarFilled}></img>
+</div>
+
+<h1 className='testimonial-desc'>
+“I love it! No more air fresheners”
+</h1>
+<h2 className='testimonial-guy-name'>
+Luisa
+</h2>
+
+            </div>
+
+            <div className="Testimonial-iselft">
+
+            <img src={ProfilePicTestimonial} className="user-profile-pic" />
+            <div className='stars-container'>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            </div>
+
+            <h1 className='testimonial-desc'>
+            “I love it! No more air fresheners”
+            </h1>
+            <h2 className='testimonial-guy-name'>
+            Luisa
+            </h2>
+
+            </div>
+
+            </span>
+        
+
+            <span>
+            <div className="Testimonial-iselft">
+
+            <img src={ProfilePicTestimonial} className="user-profile-pic" />
+            <div className='stars-container'>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            <img className='star-itself' src={StarFilled}></img>
+            </div>
+
+            <h1 className='testimonial-desc'>
+            “I love it! No more air fresheners”
+            </h1>
+            <h2 className='testimonial-guy-name'>
+            Luisa
+            </h2>
+
+            </div>
+            
+            </span>
+
+            </div>
+            </div>
+
+            
 
             </div>
 

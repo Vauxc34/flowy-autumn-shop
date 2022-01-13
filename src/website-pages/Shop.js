@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { commerce } from '../lib/commerce'
 
 import Products from '../components/product/Products'
+import ProductPage from './ProductPage'
+
 import { Navbar } from '../components/navbar/Navbar'
 import { Cart } from '../components/Cart/Cart'
 import { Checkout  } from '../components/checkout/Checkout'
@@ -24,7 +26,6 @@ const Shop = () =>  {
     const [order,  setOrder] = useState({})
     const [errorMessage,  setErrorMessage] = useState('')
     
-
     const fetchProducts = async() => {
 
     const { data } = await commerce.products.list();
@@ -98,8 +99,18 @@ const Shop = () =>  {
 
             <Route 
             exact path='/sklep' 
-            element={<Products products={products} 
+            element={<Products 
+            products={products} 
             onAddToCart={handleAddToCart} />}>
+            </Route>
+
+            <Route 
+            exact path='/produkt' 
+            element={<ProductPage 
+            products={products} 
+            onAddToCart={handleAddToCart} 
+            handleRemoveFromCart={handleRemoveFromCart}
+            />}>
             </Route>
 
             <Route 

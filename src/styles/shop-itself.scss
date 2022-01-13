@@ -1,7 +1,8 @@
-@import './item/item';
-@import './navbar/navbar';
-@import './cart/cart';
-@import './checkout/checkout';
+@import './item.scss';
+@import './navbar.scss';
+@import './cart.scss';
+@import './checkout.scss';
+@import './product-page.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Signika:wght@300&display=swap');
 
@@ -83,8 +84,6 @@ hr {
     justify-content: space-evenly;
     flex-direction: column;
     display: flex;
-
-
 }
 
 .Infos-container {
