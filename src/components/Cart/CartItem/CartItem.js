@@ -10,27 +10,30 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
         <img className="product-image-cart" src={item.image.url} />
         </div>
         <div className="container-for-item-name-h4">
-        <h4>Produkt:</h4>
         <h4>{item.name}</h4>
+        <a onClick={() => onRemoveFromCart(item.id)}>remove</a>
         </div>
         <div className="container-for-item-price-h4">
         <h4>Cena:</h4>
-        <span>{item.line_total.formatted_with_symbol}</span>
+        <span>{item.line_total.formatted_with_symbol}</span>        
+        <div className='quantity-box-container'>
+        <p>Quantity</p>
+        <div className='quantity-box'>
+        <div className='select-item-quantity'>
+        <div onClick={() => onUpdateCartQty(item.id, item.quantity + 1)} className='p__'>
+            +
         </div>
-        <div className="container-for-item-price-h4">
-        <h4>Ilość:</h4>
-        <p dangerouslySetInnerHTML={{__html:item.quantity}} />
+        <span className='p_quantity-itself' dangerouslySetInnerHTML={{__html:item.quantity}} />
+        <div onClick={() => onUpdateCartQty(item.id, item.quantity - 1)} className='p__'>
+            -
+        </div>
+        
         </div>
         </div>
-        <div className="container-for-all-btns">
-        <div className="container-of-btn">
-        <input type="button" className="btn-" value="-" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}/>
-        <input type="button" className="btn--" value="+" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}/>
-        </div>
-        <div className="container-delete-all">
-        <input type="button" className="delete-item-btn" value="wyrzuc z koszyka" onClick={() => onRemoveFromCart(item.id)}/>
         </div>
         </div>
+        </div>
+        <hr></hr>
         </div>
     )
 }

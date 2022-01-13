@@ -8,6 +8,8 @@ import { AddressForm } from './AddressForm'
 import PaymentForm from './PaymentForm'
 import { Confirmation } from './Confirmation'
 
+import ArrowSteps from '../../website-pages/images/arrow-steps.svg'
+
 const steps = ['Adres dostawy', 'Szczegóły płatności']
 
 export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
@@ -49,17 +51,19 @@ export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
     return (
         <>
          <div className="checkout-itself">
+           <div>
+             <h2>See  your order details</h2>
+           </div>
              <div className="container-for-payment-steps">  
              <div className="Container-for-h4">
-                 <h4>Podsumowanie:</h4>
-                 </div>
+                 <h4>Cart</h4>
+                 <img src={ArrowSteps}></img>
+                 <h4>Shipping</h4>
+                 <img src={ArrowSteps}></img>
+                 <h4>Payment</h4>
+              </div>
             <div className="payment-form-container">
-             {steps.map((step) => ( 
-             <div className="payment-form" key={step}>
-                 <label className="step-payment" activeStep={0}></label>
-                <label className="step-payment-name" >{step}</label> 
-             </div>  
-             ))}
+             
              </div>
              </div>
              {activeStep == steps.length ? <Confirmation /> : checkoutToken && <Form />}

@@ -41,14 +41,21 @@
 .Container-for-h4 {
     display: flex;
     justify-content: center;
-    background: #80008063;
+    align-items: center;
+    height: 87px;
     width: 100%;
+    background: #F2F2F2;
+}
+
+.Container-for-h4 img {
+    height: 12px;
+    width: 8px;
 }
 
 .Container-for-h4 h4 {
+    color: #56B280;
     text-align: center;
-    color: white;
-    margin: 10px;
+    margin: 20px;
     font-family: 'Signika', sans-serif;
 }
 
@@ -95,13 +102,16 @@
 .address-form input {
     border: none;
     margin: 5px;
-    background: #dadada;
+    height: 40px;
+    border: 1px solid #898989;
 }
 
 .address-form select {
     border: none;
     margin: 5px;
-    background: #dadada;
+    height: 40px;
+    border: 1px solid #898989;
+    background: #fff;
 }
 
 .address-form button {
