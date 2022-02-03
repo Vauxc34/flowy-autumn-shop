@@ -121,6 +121,7 @@
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+/* second section */
 .Widget-container-second {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -142,9 +143,9 @@
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  font-size: 20px;
+  font-size: 40px;
   width: 250px;
-  margin: 20px 10px;
+  margin: 10px;
   color: #0B254B;
   text-align: center;
   font-family: 'Nanum Gothic', sans-serif;
@@ -223,6 +224,8 @@
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+/* second section */
+/* third section */
 .Widget-container-third {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -432,6 +435,8 @@ img.feature-details {
 }
 
 /* testimonial carousel */
+/* third section */
+/* fourth section */
 .user-profile-pic {
   height: 63px;
   width: 64px;
@@ -497,6 +502,7 @@ img.feature-details {
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+/* fourth section */
 /* */
 .item {
   display: -webkit-box;
@@ -684,6 +690,44 @@ img.feature-details {
       align-self: center;
 }
 
+.hamburger-menu-itself {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  background: #fff;
+  top: 75px;
+  left: 0px;
+  z-index: 23;
+}
+
+.hamburger-menu-itself ul {
+  list-style: none;
+  text-align: left;
+}
+
+.hamburger-menu-itself ul li {
+  background: #f7f7f7;
+  font-size: medium;
+  text-transform: uppercase;
+  font-family: 'Signika', sans-serif;
+  padding: 20px;
+  border-bottom: 2.5px solid black;
+}
+
+.hamburger-menu-itself ul li:hover {
+  cursor: pointer;
+}
+
+.hide-hamburger {
+  display: none;
+}
+
 .shopping-home {
   color: #3b047a;
   margin-left: 7.5px;
@@ -775,7 +819,8 @@ img.feature-details {
 .-hidden-shop {
   display: block;
   font-size: 44px;
-  position: absolute;
+  margin: -10px 0 -20px;
+  position: relative;
   color: transparent;
 }
 
@@ -823,6 +868,8 @@ img.feature-details {
 }
 
 .else-message-container h1 {
+  font-size: 18px;
+  text-align: center;
   font-family: 'Signika', sans-serif;
 }
 

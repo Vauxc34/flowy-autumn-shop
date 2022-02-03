@@ -93,8 +93,8 @@ const Products = ({products, onAddToCart}) => {
             <div className='Testimonials-carousel'>
 
             
-            <div class="marquee">
-            <div class="marquee--inner">
+            <div className="marquee">
+            <div className="marquee--inner">
 
 
             <span>

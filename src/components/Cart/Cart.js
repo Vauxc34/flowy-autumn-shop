@@ -21,7 +21,7 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
     )
 
     if(!cart.line_items) return <div className="else-message-container">
-        <h1>Możliwe, że zapomniałeś czegoś dodać do koszyka ;)</h1>
+        <h1>Nie znaleziono przedmiotów w twoim koszyku</h1>
         </div>
         
     return (

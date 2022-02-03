@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import logo from './images/logo.svg'
@@ -15,19 +15,35 @@ import HamburgerMenuSVG from './images/hamburger-menu.svg'
 
 export const Navbar = ({ totalItems }) => {
 
-    const location = useLocation()
+    const [HamburgerOpen, isHamburgerOpen] = useState(false)
+    const [Hamburger, setHamburger] = useState('hide-hamburger')
+
+    const HandleMenuOpen = () => {
+        isHamburgerOpen(!HamburgerOpen)
+        if(HamburgerOpen == true) {
+            setHamburger('hamburger-menu-itself')
+        } else {
+            setHamburger('hide-hamburger')
+        }
+    }
 
     return (
         
         <div className="navbar-itself">
             <div className="container-for-icons">
-            <div className="---icon hamburger-menu">
+            <div onClick={HandleMenuOpen} className="---icon hamburger-menu">
             <img src={HamburgerMenuSVG} ></img>
+            </div>
+            <div className={Hamburger}>
+            <ul>
+                <li>sklep</li>
+                <li>koszyk</li>
+                <li>twoje konto</li>
+            </ul>
             </div>
             </div>
             <div className="img-container">
-            <img src={logo} component={Link} to/>
-            <Link className="-hidden-shop" to="/sklep">▇▇▇▇</Link>
+            <Link className="-hidden-shop" to="/sklep"><img src={logo} component={Link} to/></Link>
             </div>
             <div className='navigation-options-bar'>
             <ul>
