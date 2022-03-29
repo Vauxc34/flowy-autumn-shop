@@ -1,0 +1,619 @@
+/* google font's */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* google font's */
+
+:root {
+    --black-color-itself: #272727;
+    --green-color-itself: #56B280;
+    --white-color-itself: #FFFFFF;
+} 
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font: 400 40px 'Roboto', sans-serif;
+    color: #1D252C;
+}
+
+h5 {
+    font: 400 16px 'Roboto', sans-serif;
+    color: #1D293F;
+}
+
+span {
+    font: 400 16px 'Roboto', sans-serif;
+    color: var(--green-color-itself);
+}
+
+p {
+    font: 400 18px 'Roboto', sans-serif;
+    color: #1D252C;
+}
+
+li {
+    font: 400 16px 'Roboto', sans-serif;
+    cursor: pointer;
+}
+
+.footer-text {
+    font: 300 16px 'Roboto', sans-serif;
+    color: var(--white-color-itself);
+}
+
+.copyright-text {
+    font: 400 16px 'Roboto', sans-serif;
+    color: #5E6E89;
+}
+
+.wrapper {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    background: #e9e8e8;
+    width: 100%;
+}
+
+.site-btn {
+    display: block;
+    position: relative;
+    padding: 10px 30px;
+    background: var(--green-color-itself);
+    border: none;
+    border-radius: 4px;
+    font: 400 20.65px 'Roboto', sans-serif;
+    color: var(--white-color-itself);
+    cursor: pointer;
+}
+
+/* header */
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 75px;
+    width: 100%;
+    background: var(--white-color-itself);
+}
+
+.navbar_icon {
+    display: block;
+}
+
+.navbar_icon {
+    display: block;
+}
+
+.desktop-options {
+    display: none;
+}
+
+.navigation-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-option {
+    display: flex;
+    align-items: center;
+    margin: 0 .4em;
+}
+
+.arrow-menu {
+    margin: 0 .7em;
+}
+
+/* header */
+
+/* first main widget */
+
+.startup-screen {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background: url(../images/bg-image.svg) no-repeat 50% 50%;
+    background-size: cover;
+    width: 100%;
+    padding: 10em 0;
+}
+
+.widget-description {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background: #F7F8FA;
+    opacity: 80%;
+    height: calc(200px + 25%);
+    width: calc(100px + 60%);
+    padding: 10px;
+}
+
+.description-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    height: 10em;
+    max-width: 20em;
+    margin: .25rem 0 2rem;
+}
+
+/* first main widget */
+
+/* second main widget */
+
+.products-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 1em 0 5em;
+}
+
+.products-list button {
+    margin: 2em 0 0em;
+} 
+
+.product-grid {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+/* product-itself */
+
+.product-itself {
+    display: flex;
+    flex-direction: column;
+    background: var(--white-color-itself);
+    -webkit-box-shadow: 0px 0px 15px -5px #000000; 
+    box-shadow: 0px 0px 15px -5px #000000;
+    height: 147px;
+    width: calc(150px + 50%);
+    margin: .5em 0;
+}
+
+.product-img {
+    height: 80%;
+    background: #797676;
+}
+
+.description-box-product {
+    display: flex;
+    flex-direction: column;
+    height: 48.5px;
+    padding: 4px 6px;
+}
+
+.price-product {
+    align-self: flex-end;  
+}
+
+/* product-itself */
+
+/* second main widget */
+
+/* third main widget */
+
+.another-informations {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 3em 0;
+    background: #F7F8FA;
+}
+
+.description-green {
+    margin: 1em 0 0em;
+    color: var(--green-color-itself);
+}
+
+.another-information-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.another-information-img {
+    overflow: hidden;
+    display: none;
+}
+
+.another-information-img-mobile {
+    overflow: hidden;
+    width: 100%;
+    margin: -5em 0;
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 2em 1.5em;
+}
+
+.feature {
+    cursor: default;
+    margin: 10px 0;
+}
+
+.checkmark {
+    margin: 0 .5em;
+}
+
+/* third main widget */
+
+/* fourth main widget */
+
+.testimonials {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(86, 178, 128, 0.1);
+    padding: 50px;
+    width: 100%;
+}
+
+/* testimonial carousel */
+
+.testimonials-carousel {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    margin: 40px 0;
+    background: #ffffff00;
+}
+
+.testimonial-itself {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 267px;
+    height: 244px;
+    border-radius: 6px;
+    background: #fff;
+    margin: 0 12.35px;
+    float: left;
+    text-align: center;
+    transition: all .2s ease-out;
+  }
+  
+  .testimonial-itself:hover {
+    transform: scale(1.2);
+    margin: 0 24.7px;
+    opacity: .5;
+    cursor: pointer;
+  }
+
+  .opinon-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .marquee {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 1100px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  .marquee--inner {
+    display: block;
+    width: 300%;
+    position: absolute;
+    animation: marquee 20s linear infinite;
+  }
+  
+  .marquee--inner:hover {
+    animation-play-state: paused;
+  }
+  
+  
+  @keyframes marquee {
+    0% { left: 0; }
+    100% { left: -100%; }
+  }
+
+/* testimonial carousel */
+
+/* fourth main widget */
+
+/* footer */
+
+.footer-line {
+    position: relative;
+    align-self: center;
+    height: 1.5px;
+    margin: 3.5vh 0 -5vh;
+    width: 95%;
+    background: var(--white-color-itself);
+}
+
+.footer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    background: #272727;
+}
+
+.footer-container-huge {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1vw 2.5vw;
+    margin: 4.5vh 0 0;
+    width: 100%;
+}
+
+.footer-container-second {
+   display: grid;
+   grid-template-columns: auto auto;
+   justify-content: space-around;
+   align-self: center;
+   justify-content: space-between;
+   padding:4vh 0;
+   width: 100%;
+}
+
+.footer-nav-links {
+    color: #fff;
+    line-height: 28.8px;
+    margin: 0 2.5vw;
+}
+
+.footer-nav-links li {
+    line-height: 28.8px;
+}
+
+.footer-nav-main {
+    color: var(--green-color-itself);
+    cursor: default;
+}
+
+
+.logo-footer {
+    max-width: 20vh;
+}
+
+.footer-credits {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    width: 100%;
+    background: #E5E5E5;
+}
+
+.footer-nav-links {
+    list-style: none;
+}
+
+/* footer */
+
+/* media queries */
+
+@media (min-width: 599px) {
+
+/* second main widget */
+
+.product-grid {
+   display: grid;
+   grid-template-columns: auto auto;
+}
+
+.products-list button {
+    display: none;
+} 
+
+/* product-itself */
+
+.product-itself {
+    height: 230px;
+    width: 255px;
+    margin: 1em 1em;
+}
+
+.description-box-product {
+    height: 76px;
+    padding: 15px;
+}
+
+/* product-itself */
+
+/* second main widget */
+
+/* footer */
+
+.footer-container-second {
+  grid-template-columns: auto auto auto;
+ }
+
+/* footer */
+
+}
+
+@media (min-width:768px) {
+
+    /* header */
+
+    .navbar_icon {
+        display: none;
+    }
+
+    .desktop-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        width: 24.5em;
+    }
+
+    /* header */
+
+    /* first main widget */
+
+    .startup-screen {
+        background: url(../images/bg-image-desktop.svg) no-repeat 50% 50%;
+        background-size: cover;
+        padding: 20em 0;
+    }
+
+    .widget-description {
+        width: calc(160px + 30%);
+        padding: 10em 0;
+    }
+
+    /* first main widget */
+
+    /* fourth widget */
+
+    .testimonial-itself {
+        height: 295px;
+        width: 350px;
+    }
+
+    .testimonial-itself:hover {
+        transform: scale(1);
+        margin: 0 24.7px;
+        opacity: .5;
+        cursor: pointer;
+      }
+
+    /* fourth widget */
+
+    /* footer */
+
+    .footer {
+        padding: 5vh 0;
+    }
+
+    .footer-line {
+        margin: 0px 0 0px;
+    }
+
+    .footer-container-huge {
+       flex-direction: row;
+    }
+
+    .footer-container {
+        align-self: flex-start;
+        margin: 0;
+    }
+
+    /* footer */
+
+}
+
+@media (min-width: 1129px) {
+
+/* second main widget */
+
+.product-grid {
+   display: grid;
+   grid-template-columns: auto auto auto auto;
+}
+
+/* second main widget */
+
+/* third main widget */
+
+.another-information-img {
+    width: 40rem;
+}
+
+.another-informations {
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0;
+}
+
+.another-information-container {
+    align-items: center;
+}
+
+.another-information-container .description-box {
+    align-items: baseline;
+    text-align: left;
+    align-self: center;
+}
+
+.another-information-container button {
+    margin: 2.5em 0 0em;
+}
+
+.features-list {
+    margin: 0;
+}
+
+.another-information-img {
+    display: block;
+}
+
+.another-information-img-mobile {
+    display: none;
+}
+
+/* third main widget */
+
+}
+
+/* media queries */

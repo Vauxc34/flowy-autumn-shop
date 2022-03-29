@@ -9,14 +9,12 @@ import { Cart } from '../components/Cart/Cart'
 import { Checkout  } from '../components/checkout/Checkout'
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
- 
-import '../styles/shop-itself.css'
 
-import footerBgc from './images/footer-bg.svg'
+import footerBgc from '../images/footer-bg.svg'
 
-import SecondfooterBgc from './images/bg.svg'
+import SecondfooterBgc from '../images/bg.svg'
 
-import logoCandleAf from './images/logo-web_footer.svg'
+import logoCandleAf from '../images/logo-web_footer.svg'
 
 
 const Shop = () =>  {
@@ -89,7 +87,7 @@ const Shop = () =>  {
 
      return (
 
-        <div className="shop-itself-container">
+        <div class="wrapper">
 
         <Router>
 
@@ -133,43 +131,46 @@ const Shop = () =>  {
             </Route>
             
             </Routes>
-            <div className="Footer-itself">
-            <img className="Footer-itself_Img" src={footerBgc}></img>
-            <div className="Footer-container">
-            <hr></hr>
-            <img src={logoCandleAf}></img>
-            <p className="Footer-itself_p">Your natural candle made for your home and for your wellness.</p>
-            <div className="Second-footer-container">
-            <div className="Infos-container">
-            <div className="Infos-widget">
+            
+        <div class="footer">
 
-            <p className="Infos-widget_p">Discovery</p>
-            <span className="Infos-Widget_span">New season</span>
-            <span className="Infos-Widget_span">Most searched</span>
-            <span className="Infos-Widget_span">Most selled</span>
+            <hr class="footer-line" />
+            <div class="footer-container-huge">
 
-            <p className="Infos-widget_p">About</p>
-            <span className="Infos-Widget_span">Help</span>
-            <span className="Infos-Widget_span">Shipping</span>
-            <span className="Infos-Widget_span">Affiliate</span>
+                <div class="footer-container">
+                    <img src={logoCandleAf} alt="" class="logo-footer"/>
+                    <span class="footer-text" >Your natural candle made for your home and for your wellness.</span>    
+                </div>
+                <div class="footer-container-second">
+                    <ul class="footer-nav-links">
+                    <li class="footer-nav-main">Discovery</li>
+                    <li>New season</li>
+                    <li>Most searched</li>
+                    <li>Most selled</li>
+                    </ul>
+                    <ul class="footer-nav-links">
+                    <li class="footer-nav-main">Info</li>
+                    <li>Contact Us</li>
+                    <li>Privacy Policies</li>
+                    <li>Terms & Conditions</li>
+                    </ul>
+                    <ul class="footer-nav-links">
+                    <li class="footer-nav-main">About</li>
+                    <li>Help</li>
+                    <li>Shipping</li>
+                    <li>Affiliate</li>
+                    </ul>    
+                </div>
 
             </div>
-            <div className="Infos-widget">
+            
+        </div>
+        <div class="footer-credits">
+            <span class="copyright-text">
+                ©Candleaf All Rights Reserved.
+            </span>
+        </div>
 
-            <p className="Infos-widget_p">Info</p>
-            <span className="Infos-Widget_span">Contact Us</span>
-            <span className="Infos-Widget_span">Privacy Policies</span>
-            <span className="Infos-Widget_span">Terms &amp; Conditions</span>
-    
-            </div>
-            </div>
-            </div>
-            </div>
-            <div className="CopyrightContainer">
-            <img className="Last-bgc"src={SecondfooterBgc}></img>
-            <h3 className="FooterCopyright" >©Candleaf All Rights Reserved.</h3>
-            </div>
-            </div> 
         </Router>
 
         </div>

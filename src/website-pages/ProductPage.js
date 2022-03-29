@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react-dom'
 
 /* image's */
 
-import prodctPageImage from './images/prodct-page-image.svg'
+import prodctPageImage from '../images/prodct-page-image.svg'
 
 /* */
 

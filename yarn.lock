@@ -3447,7 +3447,7 @@
   optionalDependencies:
     "fsevents" "^1.2.7"
 
-"chokidar@^3.4.1":
+"chokidar@^3.4.1", "chokidar@>=3.0.0 <4.0.0":
   "integrity" "sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ=="
   "resolved" "https://registry.npmjs.org/chokidar/-/chokidar-3.5.2.tgz"
   "version" "3.5.2"
@@ -6005,6 +6005,11 @@
   "integrity" "sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA=="
   "resolved" "https://registry.npmjs.org/immer/-/immer-8.0.1.tgz"
   "version" "8.0.1"
+
+"immutable@^4.0.0":
+  "integrity" "sha512-zIE9hX70qew5qTUjSS7wi1iwj/l7+m54KWU247nhM3v806UdGj1yDndXj+IOYxxtW9zyLI+xqFNZjTuDaLUqFw=="
+  "resolved" "https://registry.npmmirror.com/immutable/-/immutable-4.0.0.tgz"
+  "version" "4.0.0"
 
 "import-cwd@^2.0.0":
   "integrity" "sha1-qmzzbnInYShcs3HsZRn1PiQ1sKk="
@@ -10096,15 +10101,32 @@
   "version" "10.0.0"
 
 "sass-loader@^10.0.5":
-  "integrity" "sha512-kUceLzC1gIHz0zNJPpqRsJyisWatGYNFRmv2CKZK2/ngMJgLqxTbXwe/hJ85luyvZkgqU3VlJ33UVF2T/0g6mw=="
-  "resolved" "https://registry.npmjs.org/sass-loader/-/sass-loader-10.2.0.tgz"
-  "version" "10.2.0"
+  "integrity" "sha512-RRvWl+3K2LSMezIsd008ErK4rk6CulIMSwrcc2aZvjymUgKo/vjXGp1rSWmfTUX7bblEOz8tst4wBwWtCGBqKA=="
+  "resolved" "https://registry.npmmirror.com/sass-loader/-/sass-loader-10.2.1.tgz"
+  "version" "10.2.1"
   dependencies:
     "klona" "^2.0.4"
     "loader-utils" "^2.0.0"
     "neo-async" "^2.6.2"
     "schema-utils" "^3.0.0"
     "semver" "^7.3.2"
+
+"sass-loader@^12.6.0":
+  "integrity" "sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA=="
+  "resolved" "https://registry.npmmirror.com/sass-loader/-/sass-loader-12.6.0.tgz"
+  "version" "12.6.0"
+  dependencies:
+    "klona" "^2.0.4"
+    "neo-async" "^2.6.2"
+
+"sass@^1.49.9":
+  "integrity" "sha512-YlYWkkHP9fbwaFRZQRXgDi3mXZShslVmmo+FVK3kHLUELHHEYrCmL1x6IUjC7wLS6VuJSAFXRQS/DxdsC4xL1A=="
+  "resolved" "https://registry.npmmirror.com/sass/-/sass-1.49.9.tgz"
+  "version" "1.49.9"
+  dependencies:
+    "chokidar" ">=3.0.0 <4.0.0"
+    "immutable" "^4.0.0"
+    "source-map-js" ">=0.6.2 <2.0.0"
 
 "sax@~1.2.4":
   "integrity" "sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw=="
@@ -10453,7 +10475,7 @@
   "resolved" "https://registry.npmjs.org/source-list-map/-/source-list-map-2.0.1.tgz"
   "version" "2.0.1"
 
-"source-map-js@^0.6.2":
+"source-map-js@^0.6.2", "source-map-js@>=0.6.2 <2.0.0":
   "integrity" "sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug=="
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-0.6.2.tgz"
   "version" "0.6.2"

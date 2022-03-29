@@ -8,7 +8,7 @@ import { AddressForm } from './AddressForm'
 import PaymentForm from './PaymentForm'
 import { Confirmation } from './Confirmation'
 
-import ArrowSteps from '../../website-pages/images/arrow-steps.svg'
+import ArrowSteps from '../../images/arrow-steps.svg'
 
 const steps = ['Adres dostawy', 'Szczegóły płatności']
 

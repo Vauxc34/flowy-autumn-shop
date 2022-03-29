@@ -1,22 +1,13 @@
 import React from 'react'
 import Product from './Product'
-
 import { Link } from 'react-router-dom'
-
-import ImageSecondary from '../../website-pages/images/image.svg'
-
-import FeatureOne from '../../website-pages/images/feature1.svg'
-import FeatureTwo from '../../website-pages/images/feature2.svg'
-import FeatureThree from '../../website-pages/images/feature3.svg'
-import FeatureFour from '../../website-pages/images/feature4.svg'
-
-import BgFirstSection from '../../website-pages/images/bg-image.svg'
-import BgThirdSection from '../../website-pages/images/section-bg.svg'
 
 /* Images */
 
-import ProfilePicTestimonial from './images/user-profile-pic.svg'
-import StarFilled from './images/star-filled.svg'
+import ProfilePicTestimonial from '../../images/img-1.svg'
+import CheckmarkFeatures from '../../images/checkmark-circle-outline 1.svg'
+import ImageFeatures from '../../images/image.svg'
+import StarFilled from '../../images/star-filled.svg'
 
 /* Images */
 
@@ -24,194 +15,177 @@ import StarFilled from './images/star-filled.svg'
 const Products = ({products, onAddToCart}) => {
     
     return (
-        <div className="product-page">
-        <div className="Widget-container-first">
-            <img className="Background First-Section" src={BgFirstSection} ></img>
-            <div className="BackdropWithDescription _first">
-            <span>🌱</span>
-            <h1>The nature candle</h1>
-            <p>
-                All handmade with natural soy wax, Candleaf is a companion for all your 
-                pleasure moments
-            </p>
-            <button>
-                <Link exact path to='/sklep'>Discovery our collection</Link>
+
+        <>
+
+        <div class="startup-screen">
+
+            <div class="widget-description">
+                <div class="description-box">
+                    <h1>🌱 <br/> The nature candle</h1>
+                    <p>All handmade with natural soy wax, Candleaf is a companion for all your pleasure moments </p>
+                </div>
+                <button class="site-btn">
+                    Discovery our collection
+                </button>
+            </div>
+
+        </div>
+        <div class="products-list">
+
+            <div class="description-box">
+                <h1>Products</h1>
+                <p>Order it for you or for your beloved ones</p>
+            </div>
+
+
+            <div class="product-grid">
+
+                <Product
+                
+                />
+                
+            </div>
+
+            <button class="site-btn">
+                See more
             </button>
+
+        </div>
+        <div class="another-informations">
+
+            <div class="another-information-container">
+
+                <div class="description-box">
+                    <h1>Clean and <br/> fragrant soy wax</h1>
+                    <p class="description-green">Made for your home and for your wellness</p>
+                </div>
+
+                <img src={ImageFeatures} alt="" class="another-information-img-mobile"/>
+                
+                <ul class="features-list">
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Eco-sustainable:</b>All recyclable materials, 0% CO2 emissions</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Hyphoallergenic:</b> 100% natural, human friendly ingredients </li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Handmade:</b> All candles are craftly made with love.</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Long burning:</b> No more waste. Created for last long.</li>
+                </ul>
+    
+                <button class="site-btn">
+                    See more
+                </button>
+
+            </div>
+
+
+            <div class="another-information-container">
+
+                <img src={ImageFeatures} alt="" class="another-information-img"/>
+
+            </div>
+            
+
+        </div>
+        <div class="testimonials">
+
+            <div class="description-box">
+                <h1>Testimonials</h1>
+                <p>Some quotes from our happy customers</p>
+            </div>
+
+
+            <div class="testimonials-carousel">
+
+                <span>
+
+                    <div class="testimonial-itself">
+
+
+                        <img src={ProfilePicTestimonial} alt="" class="profile-pic"/>
+
+                        <div class="stars-container">
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                        </div>
+
+                        <div class="opinon-box">
+                            <p>“I love it! No more air fresheners”</p>
+                            <span>Luisa</span>
+                        </div>
+
+                    </div>  
+                   
+                </span>
+
+                <span>
+                    <div class="testimonial-itself">
+
+
+                        <img src={ProfilePicTestimonial} alt="" class="profile-pic"/>
+
+                        <div class="stars-container">
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                        </div>
+
+                        <div class="opinon-box">
+                            <p>“Raccomended for everyone”</p>
+                            <span>Edoarto</span>
+                        </div>
+
+                    </div>  
+                </span>
+
+                <span>
+                    <div class="testimonial-itself">
+
+
+                        <img src={ProfilePicTestimonial} alt="" class="profile-pic"/>
+
+                        <div class="stars-container">
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                            <img src={StarFilled} alt="" class="star-itself"/>
+                        </div>
+
+                        <div class="opinon-box">
+                            <p>“Looks very natural, the smell is awesome”</p>
+                            <span>Mart</span>
+                        </div>
+
+                    </div>  
+                </span>
+
             </div>
 
         </div>
-        <div className="Widget-container-second">
+        <div class="products-list">
 
-        <h1>Products</h1>
-
-        <p>Order it for you or for your beloved ones </p>
-
-        {products.map((product) => (
-            
-            <Product product={product} onAddToCart={onAddToCart}/>
-            
-        ))}
-
-        <button>
-            <Link exact path to='/sklep'>See more</Link>
-        </button>
-
-        </div>    
-        
-        <div className="Widget-container-third">
-            <div className="Background First-Section__" /* src={BgThirdSection} */></div>
-            <div className="BackdropWithDescription _second">
-            <h1>Clean and</h1>
-            <h1>fragrant soy wax</h1>
-            <span>
-                Made for your home and for your wellness
-            </span>
-            
-            <img src={ImageSecondary}></img>
-            
-            <div className="FeaturesContainer">
-            <img className="feature-details" src={FeatureOne}></img>
-            <img className="feature-details" src={FeatureTwo}></img>
-            <img className="feature-details" src={FeatureThree}></img>
-            <img className="feature-details" src={FeatureFour}></img>
+            <div class="description-box">
+                <h1>Popular</h1>
+                <p>Our top selling product that you may like</p>
             </div>
 
-            <button>
-                <Link exact path to='/sklep'>See more</Link>
+
+            <div class="product-grid">
+               
+            <Product/>
+
+            </div>
+
+            <button class="site-btn">
+                See more
             </button>
-            </div>
 
         </div>
-
-        <div className="Widget-container-Fourth">
-
-            <div className="BackdropWithDescription _third">
-            <h1>Testimonials</h1>
-            <span>Some quotes from our happy customers</span>
-            </div>
-
-            <div className='Testimonials-carousel'>
-
-            
-            <div className="marquee">
-            <div className="marquee--inner">
-
-
-            <span>
-            <div className="Testimonial-iselft">
-
-            <img src={ProfilePicTestimonial} className="user-profile-pic" />
-            <div className='stars-container'>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            </div>
-
-            <h1 className='testimonial-desc'>
-            “I love it! No more air fresheners”
-            </h1>
-            <h2 className='testimonial-guy-name'>
-            Luisa
-            </h2>
-
-            </div>
-
-            <div className="Testimonial-iselft">
-
-<img src={ProfilePicTestimonial} className="user-profile-pic" />
-<div className='stars-container'>
-<img className='star-itself' src={StarFilled}></img>
-<img className='star-itself' src={StarFilled}></img>
-<img className='star-itself' src={StarFilled}></img>
-<img className='star-itself' src={StarFilled}></img>
-<img className='star-itself' src={StarFilled}></img>
-</div>
-
-<h1 className='testimonial-desc'>
-“I love it! No more air fresheners”
-</h1>
-<h2 className='testimonial-guy-name'>
-Luisa
-</h2>
-
-            </div>
-
-            <div className="Testimonial-iselft">
-
-            <img src={ProfilePicTestimonial} className="user-profile-pic" />
-            <div className='stars-container'>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            </div>
-
-            <h1 className='testimonial-desc'>
-            “I love it! No more air fresheners”
-            </h1>
-            <h2 className='testimonial-guy-name'>
-            Luisa
-            </h2>
-
-            </div>
-
-            </span>
-        
-
-            <span>
-            <div className="Testimonial-iselft">
-
-            <img src={ProfilePicTestimonial} className="user-profile-pic" />
-            <div className='stars-container'>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            <img className='star-itself' src={StarFilled}></img>
-            </div>
-
-            <h1 className='testimonial-desc'>
-            “I love it! No more air fresheners”
-            </h1>
-            <h2 className='testimonial-guy-name'>
-            Luisa
-            </h2>
-
-            </div>
-            
-            </span>
-
-            </div>
-            </div>
-
-            
-
-            </div>
-
-        </div>
-
-        <div className="Widget-container-second">
-
-        <h1>Products</h1>
-
-        <p>Order it for you or for your beloved ones </p>
-
-        {products.map((product) => (
-            
-            <Product product={product} onAddToCart={onAddToCart}/>
-            
-        ))}
-
-        <button>
-            <Link exact path to='/sklep'>See more</Link>
-        </button>
-
-        </div>  
-        
-        </div>
+        </>
     )
 }
 
