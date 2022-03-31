@@ -10,11 +10,11 @@ import { Checkout  } from '../components/checkout/Checkout'
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
-import footerBgc from '../images/footer-bg.svg'
-
-import SecondfooterBgc from '../images/bg.svg'
+/* image's */
 
 import logoCandleAf from '../images/logo-web_footer.svg'
+
+/* image's */
 
 
 const Shop = () =>  {
@@ -23,13 +23,10 @@ const Shop = () =>  {
     const [cart,  setCart] = useState({})
     const [order,  setOrder] = useState({})
     const [errorMessage,  setErrorMessage] = useState('')
-    
+     
     const fetchProducts = async() => {
-
     const { data } = await commerce.products.list();
-
     setProducts(data)
-
     }
 
     const FetchCart = async() => {
@@ -38,27 +35,22 @@ const Shop = () =>  {
 
     const handleAddToCart = async(productId, quantity) => {
         const { cart } = await commerce.cart.add(productId, quantity)
-
         setCart(cart)
     }
 
     const handleUpdateCartQty = async (productId, quantity) => {
         const { cart } = await commerce.cart.update(productId, { quantity })
-
         setCart(cart)
     }
 
     const handleRemoveFromCart = async (productId) => {
         const { cart } = await commerce.cart.remove(productId)
-
         setCart(cart)
     }
 
     const handleEmptyCart = async() => {
         const {cart} = await commerce.cart.empty()
-
         setCart(cart)
-
     }
 
     useEffect(() => {
@@ -96,32 +88,33 @@ const Shop = () =>  {
             <Routes>
 
             <Route 
-            exact path='/sklep' 
+            exact path='/' 
             element={<Products 
             products={products} 
             onAddToCart={handleAddToCart} />}>
             </Route>
 
             <Route 
-            exact path='/produkt' 
-            element={<ProductPage 
+            exact path='/produkt/:id' 
+            element={<ProductPage
+            cart={cart}
             products={products} 
             onAddToCart={handleAddToCart} 
             handleRemoveFromCart={handleRemoveFromCart}
+            
             />}>
             </Route>
 
             <Route 
-            exact path='/cart' 
+            exact path='/koszyk' 
             element={<Cart cart={cart}
-            handleUpdateCartQty={handleUpdateCartQty}
-            handleRemoveFromCart={handleRemoveFromCart} 
+            
             handleEmptyCart={handleEmptyCart}
             /> }>
             </Route>
 
             <Route 
-            exact path='/checkout'
+            exact path='/dostawa-i-płatności'
             element={<Checkout 
             cart={cart} 
             order={order}
@@ -138,7 +131,7 @@ const Shop = () =>  {
             <div class="footer-container-huge">
 
                 <div class="footer-container">
-                    <img src={logoCandleAf} alt="" class="logo-footer"/>
+                    <img src={logoCandleAf} alt="logo" class="logo-footer"/>
                     <span class="footer-text" >Your natural candle made for your home and for your wellness.</span>    
                 </div>
                 <div class="footer-container-second">
