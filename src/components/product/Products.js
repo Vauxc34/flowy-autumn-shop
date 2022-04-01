@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Product from './Product'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 /* Images */
@@ -12,9 +12,10 @@ import StarFilled from '../../images/star-filled.svg'
 /* Images */
 
 
+
 const Products = ({products, onAddToCart}) => {
 
-    console.log(products[0])
+    const navigate = useNavigate()
 
     return (
 
@@ -45,15 +46,17 @@ const Products = ({products, onAddToCart}) => {
             <div class="product-grid">
 
         {products.map((item, key) => 
-        <Link to={`/produkt/${item.id}`}>
+        
+        
         <div class="product-itself" item={item.id} key={item}>
-        <div class="product-img" style={{ background: `url(${item.image.url}) 50% 50% no-repeat` }}></div>
+        <div onClick={() => {navigate(`/produkt/${item.id}`)}} class="product-img" style={{ background: `url(${item.image.url}) 50% 50% no-repeat` }}></div>
         <div class="description-box-product" onClick={() => onAddToCart(item.id, 1)}>
         <h5 class="title-product">{item.name}</h5>
         <span dangerouslySetInnerHTML={{__html: item.price.formatted_with_code }} class="price-product" />
         </div>
+        
         </div>
-        </Link>
+        
         )}
                 
             </div>
@@ -191,15 +194,15 @@ const Products = ({products, onAddToCart}) => {
             <div class="product-grid">
                
         {products.map((item) => 
-        <Link to={`/produkt/${item.id}`}>
+        
         <div class="product-itself" item={item.id}>
-        <div class="product-img" style={{ background: `url(${item.image.url}) 50% 50% no-repeat` }} ></div>
+        <div onClick={() => {navigate(`/produkt/${item.id}`)}} class="product-img" style={{ background: `url(${item.image.url}) 50% 50% no-repeat` }} ></div>
         <div class="description-box-product" onClick={() => onAddToCart(item.id, 1)}>
         <h5 class="title-product">{item.name}</h5>
         <span dangerouslySetInnerHTML={{__html: item.price.formatted_with_code }} class="price-product" />
         </div>
         </div>
-        </Link>
+      
         )}
 
             </div>

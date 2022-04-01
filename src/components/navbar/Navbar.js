@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import logo from '../../images/logo.svg'
 
@@ -19,6 +19,8 @@ import CartIcon from '../../images/Cart.svg'
 
 export const Navbar = ({ totalItems }) => {
 
+    const navigate = useNavigate()
+
     const [HamburgerOpen, isHamburgerOpen] = useState(false)
     const [Hamburger, setHamburger] = useState('hide-hamburger')
 
@@ -31,6 +33,14 @@ export const Navbar = ({ totalItems }) => {
         }
     }
 
+    function GoToMainPage() {
+        navigate('/')
+    }
+
+    function GoToCart() {
+        navigate('/koszyk')
+    }
+
     return (
         <>
         
@@ -38,7 +48,7 @@ export const Navbar = ({ totalItems }) => {
 
             <img src={HamburgerMenuSVG} alt="" class="navbar_icon"/>
 
-            <img src={SomeLogo} alt="logo" class="logo"/>
+            <img src={SomeLogo} alt="logo" class="logo" onClick={GoToMainPage}/>
             
             
                 <ul class="desktop-options">
@@ -50,7 +60,8 @@ export const Navbar = ({ totalItems }) => {
             
                 <ul class="navigation-header">
                     <li class="nav-option" ><img src={ProfileIcon} alt="" class="user_icon"/></li>
-                    <li class="nav-option" ><img src={CartIcon} alt="" class="cart_icon"/></li>
+                    <li class="nav-option" onClick={GoToCart}><img src={CartIcon} alt="" class="cart_icon"/></li>
+                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: totalItems}}></div>
                 </ul>
 
         </div>

@@ -1,0 +1,102 @@
+/* form steps */
+
+.checkout-itself {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.baner-checkout {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 87px;
+    background: #F2F2F2;
+}
+
+.container-for-payment-steps {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.Container-for-h4 {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.Container-for-h4 img {
+    position: relative;
+    align-self: center;
+    height: 10px;
+}
+
+/* form steps */
+
+
+/* address form */
+
+.address-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.address-form h1 {
+    font: 500 20px 'Roboto', sans-serif;
+    line-height: 25.6px;
+    letter-spacing: -0.9px;
+    margin: 10px .5em;
+}
+
+.address-form .site-btn {
+    margin: 1em;
+}
+
+.address-form a {
+    font: 400 16px 'Roboto', sans-serif;
+    color: var(--green-color-itself);
+    margin: 1em;
+    text-align: center;
+}
+
+.input-form-address {
+    margin: 5px 1em;
+    padding: 7.5px 20px;
+}
+
+/* address form */
+
+/* checkout */
+
+.checkout-itself ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-btn-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 1em;
+}
+
+.checkout-btn-container .site-btn {
+    margin: 5px 0;
+}
+
+.stripe-card-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1em 1em;
+}
+
+/* checkout */

@@ -10,6 +10,9 @@ import { Confirmation } from './Confirmation'
 
 import ArrowSteps from '../../images/arrow-steps.svg'
 
+import CartImg from '../../images/Cart.svg'
+import ArrowGreen from '../../images/ChevronDowngreen.svg'
+
 const steps = ['Adres dostawy', 'Szczegóły płatności']
 
 export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
@@ -27,7 +30,7 @@ export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
     
               setCheckoutToken(token);
             } catch (error) {
-              navigate.pushState('/');
+              navigate('/');
             }
           };
     
@@ -51,8 +54,12 @@ export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
     return (
         <>
          <div className="checkout-itself">
-           <div>
+           <div className='baner-checkout'>
+            
+            <img src={CartImg}></img>
              <h2>See  your order details</h2>
+             <img src={ArrowGreen}></img>
+             <span>9.99</span>
            </div>
              <div className="container-for-payment-steps">  
              <div className="Container-for-h4">

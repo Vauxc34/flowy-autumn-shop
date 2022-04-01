@@ -101,20 +101,20 @@ const Shop = () =>  {
             products={products} 
             onAddToCart={handleAddToCart} 
             handleRemoveFromCart={handleRemoveFromCart}
-            
             />}>
             </Route>
 
             <Route 
             exact path='/koszyk' 
-            element={<Cart cart={cart}
-            
+            element={<Cart 
+            cart={cart}
+            handleUpdateCartQty={handleUpdateCartQty}
             handleEmptyCart={handleEmptyCart}
             /> }>
             </Route>
 
             <Route 
-            exact path='/dostawa-i-płatności'
+            exact path='/sposoby-dostawy-i-platnosci'
             element={<Checkout 
             cart={cart} 
             order={order}
@@ -131,7 +131,7 @@ const Shop = () =>  {
             <div class="footer-container-huge">
 
                 <div class="footer-container">
-                    <img src={logoCandleAf} alt="logo" class="logo-footer"/>
+                    <img src={logoCandleAf} alt="" class="logo-footer"/>
                     <span class="footer-text" >Your natural candle made for your home and for your wellness.</span>    
                 </div>
                 <div class="footer-container-second">

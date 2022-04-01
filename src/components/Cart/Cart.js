@@ -26,10 +26,11 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
         
     return (
         <div className="cart-itself">
-            <img className="product-image" />
             
+            <div className='cart-mess'>
             <h1>Your cart items</h1>
             <a>Back to shopping</a>
+            </div>
 
             <div className='label-for-cart-prod'>
                 <h3>Product</h3>
@@ -43,10 +44,10 @@ export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEm
                 <p>
                 {cart.subtotal.formatted_with_symbol}
                 </p>
+                <span>Tax and shipping cost will be calculated later</span>
             </h1>
-            <span>Tax and shipping cost will be calculated later</span>
-            <button className="checkout-btns first" ><Link to='/checkout'>idź do kasy</Link></button>
-            <button className="checkout-btns first" onClick={handleEmptyCart}>pusty koszyk</button>
+            <button className="site-btn" ><Link to='/sposoby-dostawy-i-platnosci'>idź do kasy</Link></button>
+            <button className="site-btn" onClick={handleEmptyCart}>pusty koszyk</button>
             </div>
         </div>
     )

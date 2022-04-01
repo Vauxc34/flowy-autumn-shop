@@ -21,6 +21,19 @@ h1 {
     color: #1D252C;
 }
 
+h2 {
+    font: 400 20px 'Roboto', sans-serif;
+    color: var(--green-color-itself);
+    line-height: 25.6px;
+}
+
+h4 {
+    font: 400 16px 'Roboto', sans-serif;
+    color:#616161;
+    letter-spacing: -0.9px;
+    line-height: 25.6px;
+}
+
 h5 {
     font: 400 16px 'Roboto', sans-serif;
     color: #1D293F;
@@ -84,6 +97,10 @@ li {
     background: var(--white-color-itself);
 }
 
+.logo {
+    cursor: pointer;
+}
+
 .navbar_icon {
     display: block;
 }
@@ -108,10 +125,27 @@ li {
     display: flex;
     align-items: center;
     margin: 0 .4em;
+    z-index: 1;
 }
 
 .arrow-menu {
     margin: 0 .7em;
+}
+
+.quantity-navbar {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 200 10px 'Roboto', sans-serif;
+    color: #fff;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--green-color-itself);
+    bottom: 1rem;
+    left: 6em;
+    z-index: 2;
 }
 
 /* header */

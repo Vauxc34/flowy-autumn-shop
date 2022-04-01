@@ -42,18 +42,24 @@ const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptur
   return (
     <>
       <Review checkoutToken={checkoutToken} />
-      <Divider />
-      <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment method</Typography>
+      
+      
       <Elements stripe={stripePromise}>
         <ElementsConsumer>{({ elements, stripe }) => (
-          <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+          <form className='stripe-card-area' onSubmit={(e) => handleSubmit(e, elements, stripe)}>
             <CardElement />
             <br /> <br />
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Button variant="outlined" onClick={backStep}>Back</Button>
-              <Button type="submit" variant="contained" disabled={!stripe} color="primary">
-                Pay {checkoutToken.live.subtotal.formatted_with_symbol}
-              </Button>
+            <div className="checkout-btn-container">
+              
+
+            <button className='site-btn' onClick={backStep}>
+            Back
+            </button>
+
+            <button className='site-btn'  disabled={!stripe}>
+            Pay {checkoutToken.live.subtotal.formatted_with_symbol}
+            </button>
+
             </div>
           </form>
         )}
