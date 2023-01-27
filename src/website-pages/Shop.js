@@ -1,81 +1,145 @@
 import React, {useState, useEffect} from 'react'
-import { commerce } from '../lib/commerce'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { getAuth } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider } from 'firebase/auth'
+import { FacebookAuthProvider } from 'firebase/auth'
+import { AuthThing, AuthSecond } from '../lib/config'
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import { i18n, i18next } from 'i18next'
 
-import Products from '../components/product/Products'
+/* page's */
+
+import Products from './Products'
 import ProductPage from './ProductPage'
+import RegisterPage from './RegisterPage'
+import Login from './LoginPage'
+import PrivacyAndPolicy from './PrivacyAndPolicy'
 
-import { Navbar } from '../components/navbar/Navbar'
-import { Cart } from '../components/Cart/Cart'
+/* page's */
+
+/* component's */
+
+import { Navbar } from '../components/Navbar'
+import { Cart } from '../components/cart/Cart'
 import { Checkout  } from '../components/checkout/Checkout'
 
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+/* component's */
 
 /* image's */
 
 import logoCandleAf from '../images/logo-web_footer.svg'
+import ArrowMenu from '../images/ChevronDown.svg'
+import ProfilePage from './ProfilePage'
 
 /* image's */
 
-
 const Shop = () =>  {
 
-    const [products, setProducts] = useState([])
-    const [cart,  setCart] = useState({})
-    const [order,  setOrder] = useState({})
-    const [errorMessage,  setErrorMessage] = useState('')
-     
-    const fetchProducts = async() => {
-    const { data } = await commerce.products.list();
-    setProducts(data)
-    }
+    const auth = getAuth()
 
-    const FetchCart = async() => {
-        setCart(commerce.cart.retrieve())
-    }
+    /* mobile menu */
 
-    const handleAddToCart = async(productId, quantity) => {
-        const { cart } = await commerce.cart.add(productId, quantity)
-        setCart(cart)
-    }
+    const [MobileMenu, setMobileMenu] = useState('navbar-menu')
+    const [Opener, setOpener] = useState(1)
 
-    const handleUpdateCartQty = async (productId, quantity) => {
-        const { cart } = await commerce.cart.update(productId, { quantity })
-        setCart(cart)
-    }
-
-    const handleRemoveFromCart = async (productId) => {
-        const { cart } = await commerce.cart.remove(productId)
-        setCart(cart)
-    }
-
-    const handleEmptyCart = async() => {
-        const {cart} = await commerce.cart.empty()
-        setCart(cart)
-    }
-
-    useEffect(() => {
-        fetchProducts()
-        FetchCart()
-    }, [])
-
-    const refreshCart = async() => {
-        const newCart = await commerce.cart.refresh()
-
-        setCart(newCart)
-
-    }
-
-    const handleCaptureCheckout = async( checkoutTokenId, newOrder ) => {
-
-        try{
-            const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder)
-
-            setOrder(incomingOrder)
-            refreshCart()
-        } catch (error) {
-            setErrorMessage(error.data.error.message)
+    const OpenMobileMenu = () => {
+        setOpener(Opener + 1)
+        setMobileMenu('navbar-menu opened')
+        if(Opener % 2) {
+            setMobileMenu('navbar-menu opened')
+            setOpener(Opener - 1)
+        } else {
+            setMobileMenu('navbar-menu')
         }
     }
+
+    /* mobile menu */
+
+    /* register thing's */
+
+  const [authListener, setAuthListener] = useState(null)
+
+  const [error, setError] = useState('')
+  const [userName, setUserName] = useState('')
+  const [userMail, setUserMail] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+  const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
+  const [user, setUser] = useState(null)
+
+    const validatePassword = () => {
+    let isValid = true
+    if (userPassword !== '' && userPasswordRepeat !== ''){
+      if (userPassword !== userPasswordRepeat) {
+        isValid = false
+        setError('Passwords does not match')
+      }
+    }
+    return isValid
+    }
+
+    const RegisterU = () => {
+        setError('')
+        if(validatePassword()) {
+            createUserWithEmailAndPassword(auth, userMail, userPassword)
+            .then((res) => {
+                console.log(res.user)
+              })
+            .catch(err => console.log(err.message))
+        }
+    }
+
+    const SignGoogle = () => {
+    const auth = getAuth();
+    signInWithPopup(auth, AuthThing)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        setUser(auth.currentUser)
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+    }
+
+    const SignFB = () => {
+      signInWithPopup(auth, AuthSecond)
+  .then((result) => {
+    const user = result.user;
+    const credential = FacebookAuthProvider.credentialFromResult(result);
+    const accessToken = credential.accessToken; 
+  })
+  .catch((error) => { 
+    const errorCode = error.code;
+    const errorMessage = error.message; 
+    const email = error.customData.email; 
+    const credential = FacebookAuthProvider.credentialFromError(error); 
+  });
+    }
+
+    const LoginU = () => {
+      signInWithEmailAndPassword(auth, userMail, userPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(auth.currentUser)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+    
+    }
+    /* register thing's */
+
+    console.log(user)
 
      return (
 
@@ -83,46 +147,83 @@ const Shop = () =>  {
 
         <Router>
 
-            <Navbar totalItems={cart.total_items} />
+            <Navbar
+            user={user}
+            />
+            <div className={`${MobileMenu}`}>
+            <ul>
+                    <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>
+                    <li class="nav-option">About</li>
+                    <li class="nav-option">Contact us</li>
+            </ul>
+        </div>
             
             <Routes>
 
             <Route 
             exact path='/' 
-            element={<Products 
-            products={products} 
-            onAddToCart={handleAddToCart} />}>
+            element={<Products/>}>
             </Route>
 
             <Route 
             exact path='/produkt/:id' 
-            element={<ProductPage
-            cart={cart}
-            products={products} 
-            onAddToCart={handleAddToCart} 
-            handleRemoveFromCart={handleRemoveFromCart}
-            />}>
+            element={<ProductPage/>}>
             </Route>
 
             <Route 
             exact path='/koszyk' 
-            element={<Cart 
-            cart={cart}
-            handleUpdateCartQty={handleUpdateCartQty}
-            handleEmptyCart={handleEmptyCart}
-            /> }>
+            element={<Cart/> }>
             </Route>
 
             <Route 
             exact path='/sposoby-dostawy-i-platnosci'
-            element={<Checkout 
-            cart={cart} 
-            order={order}
-            onCaptureCheckout={handleCaptureCheckout}
-            error={errorMessage}
-            />}>
+            element={<Checkout/>}>
             </Route>
             
+            <Route 
+            exact path="/rejestracja"
+            element={<RegisterPage
+            SignGoogle={SignGoogle}
+            SignFB={SignFB}
+            userName={userName}
+            setUserName={setUserName}
+            userMail={userMail}
+            setUserMail={setUserMail}
+            userPassword={userPassword}
+            setUserPassword={setUserPassword}
+            userPasswordRepeat={userPasswordRepeat}
+            setUserPasswordRepeat={setUserPasswordRepeat}
+            RegisterU={RegisterU}
+            />}>
+            </Route>
+
+            <Route
+            exact path="/logowanie"
+            element={<Login
+              SignGoogle={SignGoogle}
+              SignFB={SignFB}
+              userMail={userMail}
+              setUserMail={setUserMail}
+              userPassword={userPassword}
+              setUserPassword={setUserPassword}
+              LoginU={LoginU}
+            />}
+            >
+
+            </Route>
+
+            <Route 
+            exact path="/twoj-profil"
+            element={<ProfilePage
+            user={user}
+            />}>
+            </Route>
+
+            <Route 
+            exact path="/polityka-prywatnosci"
+            element={<PrivacyAndPolicy/>}>
+            </Route>
+
             </Routes>
             
         <div class="footer">
@@ -136,22 +237,22 @@ const Shop = () =>  {
                 </div>
                 <div class="footer-container-second">
                     <ul class="footer-nav-links">
-                    <li class="footer-nav-main">Discovery</li>
-                    <li>New season</li>
-                    <li>Most searched</li>
-                    <li>Most selled</li>
+                    <li class="footer-nav-main">Zakładki</li>
+                    <li><Link to='/'>Strona główna</Link></li>
+                    <li><Link to='/rejestracja'>Zarejestruj się</Link></li>
+                    <li><Link to='/twoj-profil'>Twój profil</Link></li>
                     </ul>
                     <ul class="footer-nav-links">
-                    <li class="footer-nav-main">Info</li>
-                    <li>Contact Us</li>
-                    <li>Privacy Policies</li>
-                    <li>Terms & Conditions</li>
+                    <li class="footer-nav-main">Informacje</li>
+                    <li><Link to='/kontakt'>Kontakt z nami</Link></li>
+                    <li><Link to='/polityka-prywatnosci'>Polityka prywatności</Link></li>
                     </ul>
                     <ul class="footer-nav-links">
-                    <li class="footer-nav-main">About</li>
-                    <li>Help</li>
-                    <li>Shipping</li>
-                    <li>Affiliate</li>
+                    <li class="footer-nav-main">Język strony</li>
+                    <select>
+                        <option>Polski (Słowiański)</option>
+                        <option>Angielski (Brytyjski)</option>
+                    </select>
                     </ul>    
                 </div>
 
@@ -160,7 +261,7 @@ const Shop = () =>  {
         </div>
         <div class="footer-credits">
             <span class="copyright-text">
-                ©Candleaf All Rights Reserved.
+                <a id="company_name">STJÄRNFLOCKA®</a> Wszelkie prawa zastrzeżone dla <a id="creator_1">@fox45</a> i <a id="creator_2">@dawid-karolczak</a>.
             </span>
         </div>
 

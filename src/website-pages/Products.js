@@ -1,25 +1,41 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { EffectCoverflow, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
 
 /* Images */
 
-import ProfilePicTestimonial from '../../images/img-1.svg'
-import CheckmarkFeatures from '../../images/checkmark-circle-outline 1.svg'
-import ImageFeatures from '../../images/image.svg'
-import StarFilled from '../../images/star-filled.svg'
+import ProfilePicTestimonial from '../images/img-1.svg'
+import CheckmarkFeatures from '../images/checkmark-circle-outline 1.svg'
+import ImageFeatures from '../images/image.svg'
+import StarFilled from '../images/star-filled.svg'
 
 /* Images */
-
-
 
 const Products = ({products, onAddToCart}) => {
 
     const navigate = useNavigate()
 
-    return (
+    const ProductItself = () => {
+        return(
 
+            <div class="product-itself">
+            <div onClick="" class="product-img" style={{ background: `#56B280` }}></div>
+            <div class="description-box-product" onClick="">
+            <h5 class="title-product" onClick={() => navigate('/produkt/:id')}>Lorem ipsum</h5>
+            <span class="price-product">9.99</span>
+            </div>
+            </div>
+
+        )
+    }
+
+    return (
         <>
+        <section id="main_page">
 
         <div class="startup-screen">
 
@@ -29,7 +45,7 @@ const Products = ({products, onAddToCart}) => {
                     <p>All handmade with natural soy wax, Candleaf is a companion for all your pleasure moments </p>
                 </div>
                 <button class="site-btn">
-                    Discovery our collection
+                   Odkryj nasz katalog
                 </button>
             </div>
 
@@ -43,23 +59,7 @@ const Products = ({products, onAddToCart}) => {
             </div>
 
 
-            <div class="product-grid">
-
-        {products.map((item, key) => 
-        
-        
-        <div class="product-itself" item={item.id} key={item}>
-        <div onClick={() => {navigate(`/produkt/${item.id}`)}} class="product-img" style={{ background: `url(${item.image.url}) 50% 50% no-repeat` }}></div>
-        <div class="description-box-product" onClick={() => onAddToCart(item.id, 1)}>
-        <h5 class="title-product">{item.name}</h5>
-        <span dangerouslySetInnerHTML={{__html: item.price.formatted_with_code }} class="price-product" />
-        </div>
-        
-        </div>
-        
-        )}
-                
-            </div>
+            <div class="product-grid"><ProductItself/><ProductItself/><ProductItself/><ProductItself/></div>
 
             <button class="site-btn">
                 See more
@@ -109,10 +109,55 @@ const Products = ({products, onAddToCart}) => {
             </div>
 
 
+             {/*<Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={true}
+        modules={[EffectCoverflow, Pagination]}
+        className="mySwiper"
+      >
+       <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+        </SwiperSlide>
+    </Swiper>*/}
+
+
             <div class="testimonials-carousel">
 
                 <span>
-
                     <div class="testimonial-itself">
 
 
@@ -132,7 +177,6 @@ const Products = ({products, onAddToCart}) => {
                         </div>
 
                     </div>  
-                   
                 </span>
 
                 <span>
@@ -191,21 +235,7 @@ const Products = ({products, onAddToCart}) => {
             </div>
 
 
-            <div class="product-grid">
-               
-        {products.map((item) => 
-        
-        <div class="product-itself" item={item.id}>
-        <div onClick={() => {navigate(`/produkt/${item.id}`)}} class="product-img" style={{ background: `url(${item.image.url}) 50% 50% no-repeat` }} ></div>
-        <div class="description-box-product" onClick={() => onAddToCart(item.id, 1)}>
-        <h5 class="title-product">{item.name}</h5>
-        <span dangerouslySetInnerHTML={{__html: item.price.formatted_with_code }} class="price-product" />
-        </div>
-        </div>
-      
-        )}
-
-            </div>
+            <div class="product-grid"><ProductItself/><ProductItself/><ProductItself/><ProductItself/></div>
 
             <button class="site-btn">
                 See more
@@ -213,6 +243,7 @@ const Products = ({products, onAddToCart}) => {
 
         </div>
 
+        </section>
         </>
     )
 }

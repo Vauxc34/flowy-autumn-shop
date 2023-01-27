@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
-
 import {useNavigate} from 'react-router-dom';
 
-import { commerce } from '../../lib/commerce'
 import { AddressForm } from './AddressForm'
 import PaymentForm from './PaymentForm'
 import { Confirmation } from './Confirmation'
@@ -21,22 +19,6 @@ export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
     const [checkoutToken, setCheckoutToken] = useState(null)
     const [shippingData, setshippingData] = useState({})
     const navigate = useNavigate()
-
-    useEffect(() => {
-        if (cart.id) {
-          const generateToken = async () => {
-            try {
-              const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' });
-    
-              setCheckoutToken(token);
-            } catch (error) {
-              navigate('/');
-            }
-          };
-    
-          generateToken();
-        }
-      }, [cart]);
       
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -57,17 +39,17 @@ export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
            <div className='baner-checkout'>
             
             <img src={CartImg}></img>
-             <h2>See  your order details</h2>
+             <h2>Twoje zamówienia</h2>
              <img src={ArrowGreen}></img>
              <span>9.99</span>
            </div>
              <div className="container-for-payment-steps">  
              <div className="Container-for-h4">
-                 <h4>Cart</h4>
+                 <h4>Koszyk</h4>
                  <img src={ArrowSteps}></img>
-                 <h4>Shipping</h4>
+                 <h4>Wysyłka</h4>
                  <img src={ArrowSteps}></img>
-                 <h4>Payment</h4>
+                 <h4>Płatność</h4>
               </div>
             <div className="payment-form-container">
              

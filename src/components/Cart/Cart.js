@@ -1,53 +1,47 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import {Link}  from 'react-router-dom'
 
-import CartItem from './CartItem/CartItem'
+import CartItem from './CartItem'
 
-export const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart }) => {
+export const Cart = () => {
+
+    const navigate = useNavigate()
 
     const EmptyCart = () => (
-        <h2 style="color:white;">kup se coś, <Link to='/'>ok?</Link></h2>
+        <></>
     )
 
     const FilledCart = () => (
-        <>
-        <div className="container-of-filled-cart">
-            {cart.line_items.map((item) => (
-                <CartItem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />
-            ))}
-        </div>
-        </>
+        <></>
     )
 
-    if(!cart.line_items) return <div className="else-message-container">
-        <h1>Nie znaleziono przedmiotów w twoim koszyku</h1>
-        </div>
+    function GoPay() {
+        navigate('/sposoby-dostawy-i-platnosci')
+    }
         
     return (
         <div className="cart-itself">
             
             <div className='cart-mess'>
-            <h1>Your cart items</h1>
-            <a>Back to shopping</a>
+            <h1>Twój koszyk z zakupami</h1>
+            <h2>Wróć do <Link to='/'>produktów</Link></h2>
             </div>
 
             <div className='label-for-cart-prod'>
-                <h3>Product</h3>
-                <h3>Price</h3>
+                <h3>Produkt i jego szczegóły</h3>
+                <h3>Cena</h3>
             </div>
             <hr className='product-line'></hr>
-
-            {!cart.line_items ? <EmptyCart/> : <FilledCart /> }
+            
             <div className="container-for-a-cart-options">
-            <h1>Sub-total: 
-                <p>
-                {cart.subtotal.formatted_with_symbol}
-                </p>
-                <span>Tax and shipping cost will be calculated later</span>
+            <h1>Całość: 
+                
+                <span>Każde zamówienie, VAT i inne podatki będzie miało doliczone</span>
             </h1>
-            <button className="site-btn" ><Link to='/sposoby-dostawy-i-platnosci'>idź do kasy</Link></button>
-            <button className="site-btn" onClick={handleEmptyCart}>pusty koszyk</button>
+            <button className="site-btn" onClick={GoPay}>Przejście do kasy</button>
+            <button className="site-btn" onClick="">Opróżnij koszyk ❌</button>
             </div>
         </div>
     )

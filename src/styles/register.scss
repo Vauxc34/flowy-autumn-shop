@@ -1,0 +1,82 @@
+/* login and register */
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin:.7em .5em;
+}
+
+.input-container label {
+    margin:.5em;
+}
+
+.container-wrapped {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;   
+}
+
+.container-wrapped .site-btn {
+    margin: .2em;
+    width: 40% !important;
+}
+
+.google_col {
+    background: #8b8b8bb6;
+    color: black;
+}
+
+.facebook_col {
+    background: #0000ffb6;
+}
+
+#register h1 {
+    margin-bottom: 1em;
+    padding: 0 1.5em;
+}
+
+#register .site-btn {
+    margin-top: 1em;
+    width: 80%;
+    align-self: center;
+}
+
+/* login and register */
+
+/* profile page */
+
+.user-profile-- {
+    height: 250px;
+    width: 250px;
+    margin: 2em;
+    border-radius: 50%;
+}
+
+#profile .container-for-a-parameters {
+    align-items: flex-start;
+}
+
+/* profile page */
+
+/*privacy and policy */
+
+#privacy h1 {
+text-align: center;
+margin-bottom: .5em;
+}
+
+.widget-description h3 {
+    margin: 1em 0;
+    padding: 0 3em;
+}
+
+@media(max-width:599px) {
+    .widget-description h3 {
+        margin: 1em 0;
+        padding: 0 1.5em;
+    }
+}
+
+/*privacy and policy */
