@@ -30,9 +30,9 @@ import PrivacyAndPolicy from './PrivacyAndPolicy'
 
 /* component's */
 
-import { Navbar } from '../components/Navbar'
-import { Cart } from '../components/cart/Cart'
-import { Checkout  } from '../components/checkout/Checkout'
+import { Navbar } from "../components/Navbar"
+import { Cart } from "../components/Cart"
+import { Checkout  } from "../components/checkout/Checkout"
 
 /* component's */
 
