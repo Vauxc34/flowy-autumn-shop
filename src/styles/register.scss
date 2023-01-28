@@ -1,3 +1,15 @@
+/* products all */
+
+#products-all .startup-screen {
+    padding: 8em 0 3em;
+}
+
+#products-all .widget-description {
+    width: calc(30px + 20%);
+}
+
+/* products all */
+
 /* login and register */
 
 .input-container {
@@ -47,6 +59,10 @@
 
 /* profile page */
 
+#profile h1 {
+    align-self: flex-start;
+}
+
 .user-profile-- {
     height: 250px;
     width: 250px;
@@ -59,6 +75,21 @@
 }
 
 /* profile page */
+
+/* contact */
+
+#contact h1 {
+    font: 400 1.5em "Roboto", sans-serif;
+    margin: 0 0 1em;
+}
+
+.textarea-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+}
+
+/* contact */
 
 /*privacy and policy */
 

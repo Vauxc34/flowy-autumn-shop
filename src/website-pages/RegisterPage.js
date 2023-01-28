@@ -12,7 +12,10 @@ const RegisterPage = ({
   setUserPassword,
   userPasswordRepeat,
   setUserPasswordRepeat,
+  DatabaseAddUser,
+  ToastMessReg,
   RegisterU,
+  ToastContainer
 }) => {
 
   const handleSubmit = async e => {
@@ -49,7 +52,7 @@ const RegisterPage = ({
       </div>
 
 
-      <input type="submit" className='site-btn' onClick={RegisterU} value={"Zarejestruj się"}></input>
+      <input type="submit" className='site-btn' onClick={()=>{RegisterU();DatabaseAddUser()}} value={"Zarejestruj się"}></input>
 
       <div className='container-wrapped'>
         <input 
@@ -60,6 +63,7 @@ const RegisterPage = ({
         ></input>
         <input type="submit" className='site-btn facebook_col' onClick={SignFB} value={"Zaloguj się z FB"}></input>
         <h4>Posiadasz konto? <Link to='/logowanie'>Zaloguj się</Link></h4>
+        <ToastContainer/>
       </div>
 
     </form>

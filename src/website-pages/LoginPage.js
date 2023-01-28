@@ -9,6 +9,7 @@ const RegisterPage = ({
   userPassword,
   setUserPassword,
   LoginU,
+  ToastContainer
 }) => {
 
   const handleSubmit = async e => {
@@ -54,7 +55,7 @@ const RegisterPage = ({
         ></input>
         <h4>Powrót do <Link to='/rejestracja'>rejestracji</Link></h4>
       </div>
-
+    <ToastContainer/>
     </form>
 
     </div>

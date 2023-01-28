@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import {Link}  from 'react-router-dom'
 
-import CartItem from '../components/cart/CartItem'
+import CartItem from './CartItem'
 
 export const Cart = () => {
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { connect } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import logo from '../images/logo.svg'
@@ -17,14 +18,15 @@ import ArrowMenu from '../images/ChevronDown.svg'
 import ProfileIcon from '../images/Profile.svg'
 import CartIcon from '../images/Cart.svg'
 
-export const Navbar = ({ totalItems, OpenMobileMenu, user }) => {
-
+export const Navbar = ({ totalItems, OpenMobileMenu, currentUser }) => {
+    
     const navigate = useNavigate()
 
     const [HamburgerOpen, isHamburgerOpen] = useState(false)
     const [Hamburger, setHamburger] = useState('hide-hamburger')
 
-    const [UserName, setUserName] = useState(user)
+    const [UserName, setUserName] = useState(currentUser)
+    const [ProfileUser, setProfileUser] = useState(currentUser)
 
     function GoToMainPage() {
         navigate('/')
@@ -39,17 +41,18 @@ export const Navbar = ({ totalItems, OpenMobileMenu, user }) => {
         navigate('/produkty')
     }
     function GoToContact() {
-        navigate('/skontatuj-sie')
+        navigate('/kontakt')
     }
-
     useEffect(() => {
-        if(user) {
-            setUserName("Witaj, " + user.displayName)
-           
+        if(currentUser) {
+            setUserName("Witaj, " + currentUser?.displayName)
+            setProfileUser(currentUser?.photoURL)
         } else {
             setUserName('Nie zalogowano')
         }
     })
+
+    console.log(ProfileUser)
 
     return (
         <>
@@ -66,22 +69,23 @@ export const Navbar = ({ totalItems, OpenMobileMenu, user }) => {
                     <li class="nav-option" onClick={GoToProfile}>
                         <img src={ProfileIcon} alt="navbar ico" class="user_icon"/>
                         </li>
-<div className='popup-navbar first_bar'>
-<img className='profile-pic' src='' />
-<h4>{UserName}</h4></div>
+                        <div className='popup-navbar first_bar'>
+                        <img className='profile-pic' src={ProfileUser} />
+                        <h4>{UserName}</h4></div>
                     <li class="nav-option" onClick={GoToCart}><img src={CartIcon} alt="navbar ico" class="cart_icon"/></li>
-<div className='popup-navbar second_bar'>
-<img className='profile-pic' src='' />
-<h4>Anthony Barbara</h4> </div>
+                        <div className='popup-navbar second_bar'>
+                        <img className='profile-pic' src='' />
+                        <h4>Anthony Barbara</h4> </div>
                     <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: totalItems}}></div>
                 </ul>
         </div>
-       
-
-        
 
         </>
     )
+
+    
+
 }
+
 
 export default Navbar

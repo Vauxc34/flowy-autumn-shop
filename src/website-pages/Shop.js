@@ -1,19 +1,28 @@
 import React, {useState, useEffect} from 'react'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { doc, setDoc, addDoc, collection, getDocs, collectionGroup, query, onSnapshot } from "firebase/firestore"; 
+import { getDatabase, ref, push, set, orderByChild } from "firebase/database";
+import { db } from '../lib/config'
 import { Link } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import { signInWithPopup } from 'firebase/auth'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { FacebookAuthProvider } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth';
 import { AuthThing, AuthSecond } from '../lib/config'
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import { i18n, i18next } from 'i18next'
 
 /* page's */
 
+import Allproducts from './Allproducts';
 import Products from './Products'
 import ProductPage from './ProductPage'
 import RegisterPage from './RegisterPage'
+import ProfilePage from './ProfilePage'
+import ContactForm from './ContactForm';
 import Login from './LoginPage'
 import PrivacyAndPolicy from './PrivacyAndPolicy'
 
@@ -22,7 +31,7 @@ import PrivacyAndPolicy from './PrivacyAndPolicy'
 /* component's */
 
 import { Navbar } from '../components/Navbar'
-import { Cart }  from "./Cart"
+import { Cart } from '../components/cart/Cart'
 import { Checkout  } from '../components/checkout/Checkout'
 
 /* component's */
@@ -31,13 +40,17 @@ import { Checkout  } from '../components/checkout/Checkout'
 
 import logoCandleAf from '../images/logo-web_footer.svg'
 import ArrowMenu from '../images/ChevronDown.svg'
-import ProfilePage from './ProfilePage'
+
 
 /* image's */
 
 const Shop = () =>  {
 
     const auth = getAuth()
+
+    //const navigate = useNavigate()
+
+    const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
 
     /* mobile menu */
 
@@ -57,16 +70,13 @@ const Shop = () =>  {
 
     /* mobile menu */
 
-    /* register thing's */
-
-  const [authListener, setAuthListener] = useState(null)
-
+/* register thing's */
   const [error, setError] = useState('')
   const [userName, setUserName] = useState('')
   const [userMail, setUserMail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
-  const [user, setUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null)
 
     const validatePassword = () => {
     let isValid = true
@@ -78,18 +88,18 @@ const Shop = () =>  {
     }
     return isValid
     }
-
     const RegisterU = () => {
         setError('')
         if(validatePassword()) {
             createUserWithEmailAndPassword(auth, userMail, userPassword)
             .then((res) => {
                 console.log(res.user)
+                setCurrentUser(res.user)
+                toast.success('Pomyślnie zarejestrowano 🥳')
               })
-            .catch(err => console.log(err.message))
+            .catch(err => toast.error(err.message))
         }
     }
-
     const SignGoogle = () => {
     const auth = getAuth();
     signInWithPopup(auth, AuthThing)
@@ -97,7 +107,9 @@ const Shop = () =>  {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        setUser(auth.currentUser)
+        setCurrentUser(result.user)
+        toast.success('Pomyślnie zalogowano 😃')
+
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -109,37 +121,95 @@ const Shop = () =>  {
         // ...
       });
     }
-
     const SignFB = () => {
       signInWithPopup(auth, AuthSecond)
   .then((result) => {
     const user = result.user;
+    setCurrentUser(result.user)
     const credential = FacebookAuthProvider.credentialFromResult(result);
     const accessToken = credential.accessToken; 
+    toast.success('Pomyślnie zalogowano 😃')
+    
   })
   .catch((error) => { 
     const errorCode = error.code;
     const errorMessage = error.message; 
     const email = error.customData.email; 
     const credential = FacebookAuthProvider.credentialFromError(error); 
+    toast.error(errorMessage + errorCode)
   });
     }
-
     const LoginU = () => {
       signInWithEmailAndPassword(auth, userMail, userPassword)
       .then((userCredential) => {
         const user = userCredential.user;
-        setUser(auth.currentUser)
+        setCurrentUser(user)
+        toast.success('Pomyślnie zalogowano 😃')
+        
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        toast.error(error.message)
       });
     
+    }    
+    const DatabaseAddUser = async () => { 
+      const docRef = await addDoc(collection(db, "users"), {
+        UserNickName: userName,
+        UserEmail: userMail,
+        Password: userPassword,
+        LoggedTrought: "SitePage",
+        Gender: "Men",
+        Age: 23,
+      });
+      console.log("Document written with ID: ", docRef.id);
     }
-    /* register thing's */
+  useEffect(() => {
+    const data = localStorage.getItem('currentUser');
+    if(data) {
+      setCurrentUser(JSON.parse(data))
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('currentUser', JSON.stringify(currentUser))
+    console.log(localStorage)
+  })
+/* register thing's */
 
-    console.log(user)
+/* product's */
+
+  const [ProductList, setProductList] = useState([ 
+  {
+    data:{
+      title: 'lorem ipsum', quantity: 34, price: 9.99,
+    }
+  },
+  {
+    data:{
+      title: 'lorem ipsum', quantity: 34, price: 9.99 
+    }
+  },
+  {
+    data:{
+      title: 'lorem ipsum', quantity: 34, price: 9.99 
+    }
+  }
+  ,])
+
+  useEffect(() => {
+   const q = query(collection(db, 'products'))
+   onSnapshot(q, (querySnapshot) => {
+    setProductList(querySnapshot.docs.map(doc => ({
+      id: doc.id, 
+      data: doc.data()
+     })))
+   })
+  }, []); 
+
+  console.log(ProductList)
+
+/* product's */
 
      return (
 
@@ -147,9 +217,7 @@ const Shop = () =>  {
 
         <Router>
 
-            <Navbar
-            user={user}
-            />
+            <Navbar currentUser={currentUser}/>
             <div className={`${MobileMenu}`}>
             <ul>
                     <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>
@@ -162,12 +230,18 @@ const Shop = () =>  {
 
             <Route 
             exact path='/' 
-            element={<Products/>}>
+            element={<Products ProductList={ProductList}/>}>
             </Route>
 
             <Route 
             exact path='/produkt/:id' 
-            element={<ProductPage/>}>
+            element={<ProductPage ProductList={ProductList}/>}>
+            </Route>
+
+            <Route
+            exact path="/produkty"
+            element={<Allproducts ProductList={ProductList}/>}
+            >
             </Route>
 
             <Route 
@@ -183,6 +257,7 @@ const Shop = () =>  {
             <Route 
             exact path="/rejestracja"
             element={<RegisterPage
+            ToastMessReg={ToastMessReg}
             SignGoogle={SignGoogle}
             SignFB={SignFB}
             userName={userName}
@@ -193,7 +268,9 @@ const Shop = () =>  {
             setUserPassword={setUserPassword}
             userPasswordRepeat={userPasswordRepeat}
             setUserPasswordRepeat={setUserPasswordRepeat}
+            DatabaseAddUser={DatabaseAddUser}
             RegisterU={RegisterU}
+            ToastContainer={ToastContainer}
             />}>
             </Route>
 
@@ -207,6 +284,7 @@ const Shop = () =>  {
               userPassword={userPassword}
               setUserPassword={setUserPassword}
               LoginU={LoginU}
+              ToastContainer={ToastContainer}
             />}
             >
 
@@ -215,8 +293,22 @@ const Shop = () =>  {
             <Route 
             exact path="/twoj-profil"
             element={<ProfilePage
-            user={user}
+            currentUser={currentUser}
+            
             />}>
+            </Route>
+
+            <Route
+            exact path='/kontakt' 
+            element={<ContactForm
+              userName={userName}
+              setUserName={setUserName}
+              userMail={userMail}
+              setUserMail={setUserMail}
+              ToastContainer={ToastContainer}
+              toast={toast}
+            />}
+            >
             </Route>
 
             <Route 

@@ -7,26 +7,26 @@ import ProfilePic from '../images/profile-pic.webp'
 
 /* */
 
-const ProfilePage = ({ user }) => {
+const ProfilePage = ({ currentUser }) => {
 
     const [ProfilePic, setProfilePic]= useState('')
     const [userName, setUserName]= useState('')
     const [Mail, setMail]= useState('')
-    const [RegistrationDate, setRegistrationDate] = useState('')
-    const [RegistrationDay, setRegistrationDay] = useState('')
+    const [RegistrationMethod, setRegistrationMethod] = useState('')
+    const [PhoneNumber, setPhoneNumber] = useState('+48')
    
-    const userSetter = async () => {
-        setProfilePic(user.photoURL)
-        setUserName(user.displayName)
-        setMail(user.reloadUserInfo.email)
-        setRegistrationDate(user.metadata.creationTime)
+    const userSetter = () => {
+    setProfilePic(currentUser?.photoURL)
+    setUserName(currentUser?.displayName)
+    setMail(currentUser?.providerData[0].email)
+    setRegistrationMethod(currentUser?.providerData[0].providerId)
     }
 
+    console.log(currentUser)
 
     useEffect(() => {userSetter()}, [userSetter])
 
-    console.log(RegistrationDay)
-    
+    console.log(userName)
 
 return (
     <>
@@ -69,15 +69,16 @@ return (
     Numer telefonu:
     </p>
     <p>
-    +48 533 432 245
+    
+    <input type='phone' value={PhoneNumber} maxLength='15' onChange={(e) => setPhoneNumber(e.target.value)}></input>
     </p>
 </span>
 <span className='parameter-itself'>
     <p>
-        Data rejestracji:
+       Zarejestrowany przez:
     </p>
     <p>
-       {RegistrationDate}
+       {RegistrationMethod}
     </p>
 </span>
 
@@ -94,7 +95,7 @@ return (
 
     <h3>Michał Matczak jest prawowitym właścicielem ziem Bieszczadzkich</h3>
 
-<h2>Ciekawostka dnia 🍬</h2>
+    <h2>Ciekawostka dnia 🍬</h2>
 
     </div>
 
@@ -102,7 +103,7 @@ return (
     <div className='row-product'>
 
     <div className='product-parameters'>
-        <h1>Zakupione i nieopłacone</h1>
+        <h1>Historia zakupów</h1>
     </div>
 
     </div>
@@ -112,7 +113,7 @@ return (
 
     </>
 )
-
 }
+
 
 export default ProfilePage

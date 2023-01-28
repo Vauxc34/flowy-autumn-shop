@@ -15,27 +15,13 @@ import StarFilled from '../images/star-filled.svg'
 
 /* Images */
 
-const Products = ({products, onAddToCart}) => {
+const Products = ({products, onAddToCart, ProductList }) => {
 
     const navigate = useNavigate()
 
-    const ProductItself = () => {
-        return(
-
-            <div class="product-itself">
-            <div onClick="" class="product-img" style={{ background: `#56B280` }}></div>
-            <div class="description-box-product" onClick="">
-            <h5 class="title-product" onClick={() => navigate('/produkt/:id')}>Lorem ipsum</h5>
-            <span class="price-product">9.99</span>
-            </div>
-            </div>
-
-        )
-    }
-
     return (
         <>
-        <section id="main_page">
+        <section id="product_page">
 
         <div class="startup-screen">
 
@@ -54,12 +40,19 @@ const Products = ({products, onAddToCart}) => {
         <div class="products-list">
 
             <div class="description-box">
-                <h1>Products</h1>
+                <h1>Produkty</h1>
                 <p>Order it for you or for your beloved ones</p>
             </div>
 
 
-            <div class="product-grid"><ProductItself/><ProductItself/><ProductItself/><ProductItself/></div>
+            <div class="product-grid">{ProductList.map(item =>  <div class="product-itself">
+            <div onClick="" class="product-img" style={{ background: `url(${item.data.image})50% 50%`, backgroundSize: 'cover' }}></div>
+            <div class="description-box-product" onClick="">
+            <h5 class="title-product" onClick={() => navigate(`/produkt/${item.id}`)}>{item.data.title}</h5>
+            <span class="price-product">{item.data.price} zł</span>
+            </div>
+            </div>
+            )}</div>
 
             <button class="site-btn">
                 See more
@@ -104,56 +97,9 @@ const Products = ({products, onAddToCart}) => {
         <div class="testimonials">
 
             <div class="description-box">
-                <h1>Testimonials</h1>
+                <h1>Opinie o nas</h1>
                 <p>Some quotes from our happy customers</p>
             </div>
-
-
-             {/*<Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        pagination={true}
-        modules={[EffectCoverflow, Pagination]}
-        className="mySwiper"
-      >
-       <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
-    </Swiper>*/}
-
 
             <div class="testimonials-carousel">
 
@@ -161,7 +107,7 @@ const Products = ({products, onAddToCart}) => {
                     <div class="testimonial-itself">
 
 
-                        <img src={ProfilePicTestimonial} alt="" class="profile-pic"/>
+                        <img src={ProfilePicTestimonial} alt="" class=""/>
 
                         <div class="stars-container">
                             <img src={StarFilled} alt="" class="star-itself"/>
@@ -183,7 +129,7 @@ const Products = ({products, onAddToCart}) => {
                     <div class="testimonial-itself">
 
 
-                        <img src={ProfilePicTestimonial} alt="" class="profile-pic"/>
+                        <img src={ProfilePicTestimonial} alt="" class=""/>
 
                         <div class="stars-container">
                             <img src={StarFilled} alt="" class="star-itself"/>
@@ -205,7 +151,7 @@ const Products = ({products, onAddToCart}) => {
                     <div class="testimonial-itself">
 
 
-                        <img src={ProfilePicTestimonial} alt="" class="profile-pic"/>
+                        <img src={ProfilePicTestimonial} alt="" class=""/>
 
                         <div class="stars-container">
                             <img src={StarFilled} alt="" class="star-itself"/>
@@ -226,23 +172,6 @@ const Products = ({products, onAddToCart}) => {
             </div>
 
         </div>
-
-        <div class="products-list">
-
-            <div class="description-box">
-                <h1>Popular</h1>
-                <p>Our top selling product that you may like</p>
-            </div>
-
-
-            <div class="product-grid"><ProductItself/><ProductItself/><ProductItself/><ProductItself/></div>
-
-            <button class="site-btn">
-                See more
-            </button>
-
-        </div>
-
         </section>
         </>
     )

@@ -21,11 +21,26 @@ width: 100%;
 .row-for-smaller-containers {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .product-title-- {
     align-self: flex-start;
-    margin: .8em .5em;
+    margin: 2.2em 0.5em 0.5em;
+}
+
+.product-image-- {
+    max-height: 40em;
+    max-width: 40em;
+    align-self: center;
+}
+
+@media (max-width: 599px) {
+    
+    .product-image-- {
+        max-height: 80vw;
+        max-width: 80vw;
+    }
 }
 
 .container-for-product-option {
@@ -101,7 +116,6 @@ margin: .4rem;
     padding:0  1em;
 }
 
-
 .product-option-itself:first-child {
     background: none;
 }
@@ -126,13 +140,29 @@ margin: .4rem;
     flex-direction: column;
     background: #fff;
     padding: 20px;
-    margin: .5rem;
+    margin: 1rem;
     border-radius: 6px;
     border: #818181 solid 1.5px;
 }
 
+.row-product h1 {
+    margin-top: .5em;
+    text-align: center !important;
+}
+
+.product-parameters:first-child {
+    margin: 1em 0rem;
+}
+
 .parameter-itself {
     display: flex;
+    align-items: center;
+}
+
+.parameter-itself input {
+    font-size: 18px;
+    height: 25px;
+    margin: .3em 0;
 }
 
 .parameter-itself p:first-child {
@@ -159,11 +189,39 @@ color: #1D252C ;
     margin: 1.5rem 0;
 }
 
+/* carousel */
+
+.swiper-wrapper {
+    width: 10em !important;
+    //z-index: 3;
+    margin: 3em 0 2.5em;
+}
+
+.swiper-pagination-bullet-active {
+    background: #56B280 !important;
+}
+
+.swiper .product-itself {
+height: 100% !important;
+width: 100% !important;
+}
+
+.swiper .product-img {
+    height: 75%;
+}
+
+.swiper .title-product {
+    align-self: flex-start;
+    margin-bottom: .2em;
+}
+
+/* carousel */
 
 @media (min-width: 992px) {
 
     .wrapper-product {
     flex-direction: row;
+    padding: 3em 0;
     }
 
     .row-product {
@@ -177,14 +235,20 @@ color: #1D252C ;
     .medium-hide {
     display: none;
     }
+    
+    .product-title-- {
+        margin: .8em .5em;
+        align-self: flex-end;
+    }
 
     .wrapper-product .site-btn {
         align-self: flex-end;
-        width: 350px;
+        width: 100%;
     }
 
     .row-for-smaller-containers {
         flex-direction: row;
+        flex-wrap: nowrap;
     }
 
     .quantity-box-container {
@@ -200,11 +264,6 @@ color: #1D252C ;
 
     #product-page .product-parameters {
         align-items: center;
-    }
-
-    .container-for-product-delivery {
-        width: 50%;
-        margin: 0 2em 0 0;
     }
 
     .container-for-a-parameters {
