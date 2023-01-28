@@ -22,7 +22,7 @@ import PrivacyAndPolicy from './PrivacyAndPolicy'
 /* component's */
 
 import { Navbar } from '../components/Navbar'
-import { Cart } from '../components/cart/Cart'
+import { Cart }  from "./Cart"
 import { Checkout  } from '../components/checkout/Checkout'
 
 /* component's */
