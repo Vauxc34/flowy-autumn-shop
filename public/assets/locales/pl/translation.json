@@ -1,0 +1,81 @@
+{
+    
+
+    "app_lang": "pl",
+    "menu_option_1": "Zakup samochód",
+    "menu_option_2": "Zamów lawetę",
+    "header_first_part1": "Szukasz pojazdu w",
+    "header_first_part2": "niskiej cenie?",
+
+    "resetBtn": "Resetuj",
+    
+    "filter_1": "Marka",
+
+    "header_auction1": "Posortuj",
+    "header_auction2": "i znajdź coś dla siebie",
+
+    "Trademark": "Marka™",
+    "YearProd": "Rocznik🕰",
+    "Burnin": "Spalanie🔥",
+    "Color": "Kolor🎨",
+    "VIN": "Numer VIN🆖",
+    "AuctionBtn": "Sprawdź",
+    "AuctionBtnSecond": "Sprawdź aukcje",
+
+    "vin_header_1": "Pewność siebie",
+    "vin_header_2": "to ludzkie prawo",
+    "tile_header": "Chcesz poznać historię pojazdu?",
+    "tile_input_placeholder": "Podaj numer VIN sprawdzanego pojazdu",
+    "tile_check_button": "SPRAWDŹ",
+
+    "vin_raport_header1": "Raport sprawdzanego pojazdu",
+    "vin_raport_header2": " Model sprawdzanego pojazdu",
+    "number_vin_text": "Numer VIN", 
+    "number_model_text": "Model", 
+    "year_vin_text": "Rok produkcji", 
+    "company_vin_text": "Firma", 
+    "production_vin_text": "Miejsce produkcji pojazdu", 
+    "body_type_vin_text": "Typ nadwozia", 
+    "door_number_vin_text": "Ilość drzwi", 
+    "gearbox_vin_text": "Skrzynia biegów", 
+
+
+    "header_map": "Potrzebujesz lawety?",
+    "smaller_header1": "Dystans:",
+    "smaller_header2": "Cena za przejazd w dwie strony: ",
+    "map_input_1": "> Skąd?",
+    "map_input_2": "> Dokąd?",
+    "map_input_3": "Sprawdź",
+    "map_input_4": "> Twój adres e-mail",
+    "map_input_5": "> Uwagi i zastrzeżenia",
+    "map_input_6": "Wyślij zapytanie",
+    "description": "W razie zainteresowania zamówienia lawety, skontaktuj się niżej",
+
+    "header_ask": "Skontaktuj się z nami!",
+
+    "form_text_1": "Imię i nazwisko",
+    "form_text_2": "Adres E-mail",
+    "form_text_3": "Numer telefonu",
+    "form_text_4": "Zapytanie",
+    "form_text_5": "Załącz pliki",
+    "form_text_6": "Wyślij zapytanie",
+
+
+    "footer_heading_1": "Jedziemy lawetą w okolice",
+    "footer_list_1_1": "Niemiec",
+    "footer_list_1_2": "Belgii",
+    "footer_list_1_3": "Holandii",
+    "footer_list_1_4": "Francji",
+    "footer_list_1_5": "Hiszpani",
+
+    "footer_heading_2": "SKRÓTY 🤞",
+    "footer_list_2_1": "Sprawdź pojazdy",
+    "footer_list_2_2": "Sprawdź historie pojazdu",
+    "footer_list_2_3": "Zamów lawete",
+
+    "footer_heading_3": "Język",
+
+    "rights_reserved_text": "Wszelkie prawa zastrzeżone dla"
+
+}
+    

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 /* image's */
 
@@ -31,7 +32,11 @@ const ProfilePage = ({ currentUser }) => {
 return (
     <>
 
-    <section id='profile'>
+    <motion.section id='profile'
+     initial={{ opacity: 0 }}
+     animate={{ opacity: 1 }}
+     exit={{ opacity: 0 }}
+    >
 
 
     <div className="wrapper-product">
@@ -109,7 +114,7 @@ return (
     </div>
     </div>
 
-    </section>
+    </motion.section>
 
     </>
 )

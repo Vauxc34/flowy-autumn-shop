@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { doc, getDocFromCache, getDocs, collection } from 'firebase/firestore'
+import { doc, getDocFromCache, getDocs, collection, query, onSnapshot } from 'firebase/firestore'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination } from 'swiper'
 import { db } from '../lib/config'
+import { motion } from 'framer-motion'
 
 /* image's */
 
@@ -17,30 +18,25 @@ const ProductPage = ({
     products, 
     onAddToCart, 
     onUpdateCartQty, 
-    ProductList
+    ProductList,
 }) => {
 
-    const location = useLocation()
-    let navigate = useNavigate()
     
+    let location = useLocation()
+    let navigate = useNavigate()
 
+    const [CartAdd, setAddToCart] = useState(null)
+
+    const [productId] = useState(location.pathname.split('/')[2]);
     const [ProductLink, setProductLink] = useState(location.pathname.split('/', 3)[2])
+    const item = ProductList.find(product => product.id == ProductLink)  
     const [NameProduct, setNameProduct] = useState('Lorem ipsum')
     const [ImageProd, setImageProd] = useState('basic.jpg')
     const [DescProduct, setDescProduct] = useState('lorem ipsum dolor lit amenus papa')
     const [PriceProduct, setPriceProduct] = useState('9.99')
     const [ProdQuantity ,setProdQuantity] = useState(0)
+    const [ColorItem, setColorItem] = useState('')
     const [Error, setError] = useState()
-
-    const ActualProductCheckList = {
-        title: 'lorem dolor lit amenus',
-        price: 9.99,
-        description: 'lorem ipsum'
-    }
-    const [productId] = useState(location.pathname.split('/')[2]);
-    const [Product, setProduct] = useState({});
-
-    const item = ProductList.find(product => product.id == ProductLink)    
 
     const ProductSet = async () => {
         if(item) {
@@ -49,25 +45,38 @@ const ProductPage = ({
             setImageProd(item.data.image)
             setPriceProduct(item.data.price)
             setProdQuantity(item.data.quantity)
+            setDescProduct(item.data.description)
+            setColorItem(item.data.attributes.colour)
         } else {
 
         }
-
     }
 
+    const HandleAddToCart = async () => {
+        
+const querySnapshot = await getDocs(collection(db, "users"));
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+});
+        
+    }
 
-    console.log(item)
+ 
 
-    useEffect(() => {
-        ProductSet()
-    })
+    console.log(ColorItem)
 
-    console.log(ProductLink)
+useEffect(() => {ProductSet()})
+
 
 return (
 <>
     
-<section id='product-page'>
+<motion.section id='product-page'
+initial={{ opacity: 0 }}
+animate={{ opacity: 1 }}
+exit={{ opacity: 0 }}
+>
 
 <div className="wrapper-product ">
 
@@ -125,21 +134,23 @@ return (
     
     </div>
 
-    <button className='site-btn'>Dodaj do koszyka</button>
+    <button className='site-btn' onClick={HandleAddToCart} id="buy_btn">Dodaj do koszyka</button>
 
 </div>
 </div>
 
 <div className='product-parameters'>
 
+    <h4>Specyfikacja:</h4>
+
     <span className='parameter-itself'>
-        <p>Wax: </p>
-        <p> Top grade Soy Vax that delivers a smoke less, consistent burn</p>
+        <p>Kolor: </p>
+        <p>{ColorItem}</p>
     </span>
 
     <span className='parameter-itself'>
         <p>
-            Fragrance:
+            Dodatki:
         </p>
         <p>
            Premium quality ingredients with natural essential oils
@@ -224,7 +235,7 @@ return (
 
 </div>
 
-</section>
+</motion.section>
 
     </>
 )

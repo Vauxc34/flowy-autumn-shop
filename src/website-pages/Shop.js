@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, useNavigate, useLocation} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { doc, setDoc, addDoc, collection, getDocs, collectionGroup, query, onSnapshot } from "firebase/firestore"; 
 import { getDatabase, ref, push, set, orderByChild } from "firebase/database";
+import { AnimatePresence } from 'framer-motion'
 import { db } from '../lib/config'
 import { Link } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
@@ -13,7 +14,10 @@ import { FacebookAuthProvider } from 'firebase/auth'
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthThing, AuthSecond } from '../lib/config'
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
-import { i18n, i18next } from 'i18next'
+import AnimatedPage from './AnimatedPage';
+import { initReactI18next } from 'react-i18next';
+import I18nextBrowserLanguageDetector from 'i18next-browser-languagedetector';
+import HttpApi from 'i18next-http-backend'
 
 /* page's */
 
@@ -38,9 +42,8 @@ import { Checkout  } from "../components/checkout/Checkout"
 
 /* image's */
 
-import logoCandleAf from '../images/logo-web_footer.svg'
+import logoFlowyAutumn from '../images/logo-szersze-biale.png'
 import ArrowMenu from '../images/ChevronDown.svg'
-
 
 /* image's */
 
@@ -49,6 +52,9 @@ const Shop = () =>  {
     const auth = getAuth()
 
     //const navigate = useNavigate()
+
+    const location = useLocation()
+   
 
     const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
 
@@ -177,25 +183,72 @@ const Shop = () =>  {
   })
 /* register thing's */
 
+
+
+/* data 
+
+i18n
+.use(initReactI18next)
+.use(I18nextBrowserLanguageDetector)
+.use(HttpApi)
+.init({ 
+supportedLngs:['en', 'pl'],
+lng: document.querySelector('html').lang,
+fallbackLng: "pl",
+detection: {
+    order: [
+        'cookie',
+        'htmlTag',
+        'path',
+    ],
+    caches: ['cookie']
+},
+backend: {
+    loadPath: '/assets/locales/{{lng}}/translation.json'
+},
+react: { useSuspense: false },
+});
+
+/* data */
+
 /* product's */
 
   const [ProductList, setProductList] = useState([ 
   {
+    id: 1,
     data:{
-      title: 'lorem ipsum', quantity: 34, price: 9.99,
+      title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
+    }
+  },
+  { 
+    id: 2,
+    data:{
+      title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
     }
   },
   {
+    id: 3,
     data:{
-      title: 'lorem ipsum', quantity: 34, price: 9.99 
-    }
-  },
-  {
-    data:{
-      title: 'lorem ipsum', quantity: 34, price: 9.99 
+      title: 'lorem ipsum', quantity: 34, price: 9.99, category: "rolki"
     }
   }
   ,])
+
+
+  console.log(ProductList)
+
+  /* categorie's */
+
+const [allData, setData] = useState(ProductList)
+
+const generateBrandDropdown = () => {
+return [...new Set(ProductList.map((item) => item.data.category))]
+}
+
+
+console.log(allData)
+
+/* categorie's */
 
   useEffect(() => {
    const q = query(collection(db, 'products'))
@@ -207,16 +260,32 @@ const Shop = () =>  {
    })
   }, []); 
 
-  console.log(ProductList)
+
+  useEffect(() => {
+    const q = query(collection(db, 'products'))
+    onSnapshot(q, (querySnapshot) => {
+      setData(querySnapshot.docs.map(doc => ({
+       id: doc.id, 
+       data: doc.data()
+      })))
+    })
+   }, []); 
+
+
+   const handleFilterBrand = (category) => {
+    const filteredData = ProductList.filter((item) => {
+      if (item.data.category === category) {
+        return item;
+      }
+    });
+    setData(filteredData);
+};
 
 /* product's */
 
      return (
 
         <div class="wrapper">
-
-        <Router>
-
             <Navbar currentUser={currentUser}/>
             <div className={`${MobileMenu}`}>
             <ul>
@@ -225,106 +294,37 @@ const Shop = () =>  {
                     <li class="nav-option">Contact us</li>
             </ul>
         </div>
-            
-            <Routes>
+<AnimatePresence>
+<AnimatedPage
+ProductList={ProductList}
+ToastMessReg={ToastMessReg}
+SignGoogle={SignGoogle}
+SignFB={SignFB}
+userName={userName}
+setUserName={setUserName}
+userMail={userMail}
+setUserMail={setUserMail}
+userPassword={userPassword}
+setUserPassword={setUserPassword}
+userPasswordRepeat={userPasswordRepeat}
+setUserPasswordRepeat={setUserPasswordRepeat}
+DatabaseAddUser={DatabaseAddUser}
+RegisterU={RegisterU}
+ToastContainer={ToastContainer}
+currentUser={currentUser}
+LoginU={LoginU}
+generateBrandDropdown={generateBrandDropdown}
+handleFilterBrand={handleFilterBrand}
+/>
 
-            <Route 
-            exact path='/' 
-            element={<Products ProductList={ProductList}/>}>
-            </Route>
-
-            <Route 
-            exact path='/produkt/:id' 
-            element={<ProductPage ProductList={ProductList}/>}>
-            </Route>
-
-            <Route
-            exact path="/produkty"
-            element={<Allproducts ProductList={ProductList}/>}
-            >
-            </Route>
-
-            <Route 
-            exact path='/koszyk' 
-            element={<Cart/> }>
-            </Route>
-
-            <Route 
-            exact path='/sposoby-dostawy-i-platnosci'
-            element={<Checkout/>}>
-            </Route>
-            
-            <Route 
-            exact path="/rejestracja"
-            element={<RegisterPage
-            ToastMessReg={ToastMessReg}
-            SignGoogle={SignGoogle}
-            SignFB={SignFB}
-            userName={userName}
-            setUserName={setUserName}
-            userMail={userMail}
-            setUserMail={setUserMail}
-            userPassword={userPassword}
-            setUserPassword={setUserPassword}
-            userPasswordRepeat={userPasswordRepeat}
-            setUserPasswordRepeat={setUserPasswordRepeat}
-            DatabaseAddUser={DatabaseAddUser}
-            RegisterU={RegisterU}
-            ToastContainer={ToastContainer}
-            />}>
-            </Route>
-
-            <Route
-            exact path="/logowanie"
-            element={<Login
-              SignGoogle={SignGoogle}
-              SignFB={SignFB}
-              userMail={userMail}
-              setUserMail={setUserMail}
-              userPassword={userPassword}
-              setUserPassword={setUserPassword}
-              LoginU={LoginU}
-              ToastContainer={ToastContainer}
-            />}
-            >
-
-            </Route>
-
-            <Route 
-            exact path="/twoj-profil"
-            element={<ProfilePage
-            currentUser={currentUser}
-            
-            />}>
-            </Route>
-
-            <Route
-            exact path='/kontakt' 
-            element={<ContactForm
-              userName={userName}
-              setUserName={setUserName}
-              userMail={userMail}
-              setUserMail={setUserMail}
-              ToastContainer={ToastContainer}
-              toast={toast}
-            />}
-            >
-            </Route>
-
-            <Route 
-            exact path="/polityka-prywatnosci"
-            element={<PrivacyAndPolicy/>}>
-            </Route>
-
-            </Routes>
-            
+</AnimatePresence>
         <div class="footer">
 
             <hr class="footer-line" />
             <div class="footer-container-huge">
 
                 <div class="footer-container">
-                    <img src={logoCandleAf} alt="" class="logo-footer"/>
+                    <img src={logoFlowyAutumn} alt="" class="logo-footer"/>
                     <span class="footer-text" >Your natural candle made for your home and for your wellness.</span>    
                 </div>
                 <div class="footer-container-second">
@@ -357,11 +357,8 @@ const Shop = () =>  {
             </span>
         </div>
 
-        </Router>
-
         </div>
     
-        
      )
 
 }

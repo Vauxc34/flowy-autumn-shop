@@ -1,0 +1,78 @@
+{
+    "app_lang": "en",
+    "menu_option_1": "Buy a car",
+    "menu_option_2": "order a tow truck",
+    "header_first_part1": "You search a venicle in",
+    "header_first_part2": "a low price?",
+
+    "resetBtn": "Reset",
+
+    "filter_1": "Brand",
+
+    "header_auction1": "Sort",
+    "header_auction2": "and find something for yourself",
+
+    "Trademark": "Brand™",
+    "YearProd": "Production year🕰",
+    "Burnin": "Combustion🔥",
+    "Color": "Colour🎨",
+    "VIN": "Number VIN🆖",
+    "AuctionBtn": "Check",
+    "AuctionBtnSecond": "Check auction",
+
+    "vin_header_1": "be confidence",
+    "vin_header_2": "is a human right",
+    "tile_header": "Do you wanna get know your car story?",
+    "tile_input_placeholder": "Enter VIN number checked car",
+    "tile_check_button": "CHECK",
+
+    "vin_raport_header1": "Checked vehicle report",
+    "vin_raport_header2": "Checked vehicle model",
+    "number_vin_text": "Number VIN", 
+    "number_model_text": "Model", 
+    "year_vin_text": "Production year", 
+    "company_vin_text": "Company", 
+    "production_vin_text": "Place of vehicle production", 
+    "body_type_vin_text": "Body type", 
+    "door_number_vin_text": "Door quantity", 
+    "gearbox_vin_text": "Gear box", 
+
+
+    "header_map": "do you need a tow truck?",
+    "smaller_header1": "Distance:",
+    "smaller_header2": "Price for a return trip: ",
+    "map_input_1": "> From where?",
+    "map_input_2": "> To where?",
+    "map_input_3": "Check",
+    "map_input_4": "> Your email address",
+    "map_input_5": "> Adnotation",
+    "map_input_6": "Send inquiry",
+    "description": "If you are interested in ordering a tow truck, please contact below",
+
+    "header_ask": "Contact with us!",
+
+    "form_text_1": "First name and second name",
+    "form_text_2": "E-mail Address",
+    "form_text_3": "Phone number",
+    "form_text_4": "Inquiry",
+    "form_text_5": "Attach file",
+    "form_text_6": "Send inquiry",
+
+    "footer_heading_1": "We are drive around",
+    "footer_list_1_1": "Germany",
+    "footer_list_1_2": "Belgium",
+    "footer_list_1_3": "Netherlands",
+    "footer_list_1_4": "France",
+    "footer_list_1_5": "Spain",
+
+    "footer_heading_2": "SHORTCUTS 🤞",
+    "footer_list_2_1": "Check vehicles",
+    "footer_list_2_2": "Check story of car",
+    "footer_list_2_3": "Order a tow truck",
+
+    "footer_heading_3": "Language",
+
+    "rights_reserved_text": "All right's reserved for"
+
+    
+}

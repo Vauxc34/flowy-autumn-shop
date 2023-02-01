@@ -1,9 +1,14 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const PrivacyAndPolicy = () => {
   return (
     <>
-      <section id="privacy">
+      <motion.section 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      id="privacy">
         <div className="startup-screen">
           <div className="widget-description">
             <h1>Polityka prywatności i zasady</h1>
@@ -51,7 +56,7 @@ const PrivacyAndPolicy = () => {
             </h3>
           </div>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 };

@@ -5,6 +5,7 @@ import { EffectCoverflow, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import { motion } from 'framer-motion';
 
 /* Images */
 
@@ -21,14 +22,20 @@ const Products = ({products, onAddToCart, ProductList }) => {
 
     return (
         <>
-        <section id="product_page">
+        <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        id="product_page">
 
         <div class="startup-screen">
 
             <div class="widget-description">
                 <div class="description-box">
-                    <h1>🌱 <br/> The nature candle</h1>
-                    <p>All handmade with natural soy wax, Candleaf is a companion for all your pleasure moments </p>
+                    <h1>Drogeria Flowy</h1>
+                    <p>
+                        Perfumeria, biżuteria ogólnodostępna dostępna w niskich cenach 
+                    </p>
                 </div>
                 <button class="site-btn">
                    Odkryj nasz katalog
@@ -46,8 +53,8 @@ const Products = ({products, onAddToCart, ProductList }) => {
 
 
             <div class="product-grid">{ProductList.map(item =>  <div class="product-itself">
-            <div onClick="" class="product-img" style={{ background: `url(${item.data.image})50% 50%`, backgroundSize: 'cover' }}></div>
-            <div class="description-box-product" onClick="">
+            <div onClick="" class="product-img" style={{ background: `url(${item.data.image})50%`, backgroundSize: '100%' }}></div>
+            <div class="description-box-product" onClick={() => window.location.replace('/produkt/' + item.id)}>
             <h5 class="title-product" onClick={() => navigate(`/produkt/${item.id}`)}>{item.data.title}</h5>
             <span class="price-product">{item.data.price} zł</span>
             </div>
@@ -55,7 +62,7 @@ const Products = ({products, onAddToCart, ProductList }) => {
             )}</div>
 
             <button class="site-btn">
-                See more
+                Zobacz więcej
             </button>
 
         </div>
@@ -65,21 +72,21 @@ const Products = ({products, onAddToCart, ProductList }) => {
             <div class="another-information-container">
 
                 <div class="description-box">
-                    <h1>Clean and <br/> fragrant soy wax</h1>
-                    <p class="description-green">Made for your home and for your wellness</p>
+                    <h1>Czysto i <br/> elegancko</h1>
+                    <p class="description-green">Dobór produktów pod ciebie i twoje potrzeby</p>
                 </div>
 
                 <img src={ImageFeatures} alt="" class="another-information-img-mobile"/>
                 
                 <ul class="features-list">
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Eco-sustainable:</b>All recyclable materials, 0% CO2 emissions</li>
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Hyphoallergenic:</b> 100% natural, human friendly ingredients </li>
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Handmade:</b> All candles are craftly made with love.</li>
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Long burning:</b> No more waste. Created for last long.</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Ekologiczne:</b>All recyclable materials, 0% CO2 emissions</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Sprawdzone:</b> 100% natural, human friendly ingredients </li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Ręcznie wytwarzane:</b> All candles are craftly made with love.</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Długowieczne:</b> No more waste. Created for last long.</li>
                 </ul>
     
                 <button class="site-btn">
-                    See more
+                    Zobacz więcej
                 </button>
 
             </div>
@@ -172,7 +179,7 @@ const Products = ({products, onAddToCart, ProductList }) => {
             </div>
 
         </div>
-        </section>
+        </motion.section>
         </>
     )
 }

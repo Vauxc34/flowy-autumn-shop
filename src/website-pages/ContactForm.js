@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const ContactForm = ({
     userName,
@@ -8,7 +9,6 @@ const ContactForm = ({
     ToastContainer,
     toast
 }) => {
-
 
   const [userPhone, setUserPhone] = useState('')
   const [userMessage, setUserMessage] = useState('')
@@ -47,7 +47,11 @@ const SendingEmail = (e) => {
   return (
     <>
     
-    <section id="contact">
+    <motion.section 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    id="contact">
 
     <div className="startup-screen">
           <div className="widget-description">
@@ -83,7 +87,7 @@ const SendingEmail = (e) => {
           </div>
         </div>
 
-    </section>
+    </motion.section>
 
     </>
   )

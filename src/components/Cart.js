@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 import {Link}  from 'react-router-dom'
 
@@ -22,7 +23,11 @@ export const Cart = () => {
     }
         
     return (
-        <div className="cart-itself">
+        <motion.div className="cart-itself"
+        initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+        >
             
             <div className='cart-mess'>
             <h1>Twój koszyk z zakupami</h1>
@@ -43,6 +48,6 @@ export const Cart = () => {
             <button className="site-btn" onClick={GoPay}>Przejście do kasy</button>
             <button className="site-btn" onClick="">Opróżnij koszyk ❌</button>
             </div>
-        </div>
+        </motion.div>
     )
 }

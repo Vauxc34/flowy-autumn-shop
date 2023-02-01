@@ -5,7 +5,12 @@
 }
 
 #products-all .widget-description {
-    width: calc(30px + 20%);
+    width: calc(190px + 20%);
+}
+
+#products-all select {
+    width: 80%;
+    border-radius: 0;
 }
 
 /* products all */
@@ -44,13 +49,17 @@
     background: #0000ffb6;
 }
 
+.widget-description {
+    border-radius: 10px;
+}
+
 #register h1 {
     margin-bottom: 1em;
     padding: 0 1.5em;
 }
 
 #register .site-btn {
-    margin-top: 1em;
+    margin-top: .4em;
     width: 80%;
     align-self: center;
 }

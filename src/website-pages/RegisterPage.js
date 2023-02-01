@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const RegisterPage = ({
   SignGoogle,
@@ -26,7 +27,11 @@ const RegisterPage = ({
   return (
     <>
     
-    <section id='register'>
+    <motion.section 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    id='register'>
 
     <div className='startup-screen'>
 
@@ -72,7 +77,7 @@ const RegisterPage = ({
 
     </div>
 
-    </section>
+    </motion.section>
 
     </>
   )

@@ -6,7 +6,7 @@
 
 :root {
     --black-color-itself: #272727;
-    --green-color-itself: #56B280;
+    --green-color-itself: #C82586;
     --white-color-itself: #FFFFFF;
 } 
 
@@ -53,6 +53,7 @@ span {
 select {
     font: 400 16px 'Roboto', sans-serif;
     height: 35px;
+    border-radius: 10px 10px 0 0;
     background: #E5E5E5;
 }
 
@@ -74,6 +75,13 @@ li {
 li a {
     color: white;
     text-decoration: none;
+}
+
+.header-mobile li {
+    font: 400 26px 'Roboto', sans-serif;
+    color: #1D252C;
+    cursor: pointer;
+    margin:.5em;
 }
 
 input {
@@ -159,7 +167,29 @@ form {
     z-index: 2;
 }
 
+.header-mobile {
+    position: fixed;
+    top: 75px;
+    width: 100%;
+    background: var(--white-color-itself);
+    transition: 1s;
+    opacity: 0;
+    z-index: 3;
+}
+
+.active-pop {
+    opacity: 1;
+    visibility: visible;
+}
+
+.unactive-pop {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
 .logo {
+    max-height: 40px;
     cursor: pointer;
 }
 
@@ -304,14 +334,14 @@ form {
     display: flex;
     justify-content: center;
     align-self: center;
-    background: url(../images/bg-image.svg) no-repeat 50% 50%;
+    background: url(https://images.unsplash.com/photo-1563804447971-6e113ab80713?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80) no-repeat 50% 50%;
     background-size: cover;
     width: 100%;
     padding: 10em 0;
 }
 
 #product_page .widget-description {
-    width: calc(30px + 30%);
+    width: calc(130px + 30%);
 }
 
 .widget-description {
@@ -377,7 +407,6 @@ form {
     background: var(--white-color-itself);
     -webkit-box-shadow: 0px 0px 15px -5px #000000; 
     box-shadow: 0px 0px 15px -5px #000000;
-    height: 147px;
     width: calc(100px + 50%);
     margin: .5em 0;
 }
@@ -387,14 +416,14 @@ form {
 }
 
 .product-img {
-    height: 80%;
+    height: 10em;
 }
 
 .description-box-product {
     display: flex;
     flex-direction: column;
-    height: 48.5px;
     padding: 4px 6px;
+    overflow: hidden;
 }
 
 .price-product {
@@ -466,7 +495,7 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(86, 178, 128, 0.1);
+    background: #c825871f;;
     padding: 50px;
     width: 100%;
 }
@@ -645,6 +674,7 @@ form {
 
 .logo-footer {
     max-width: 20vh;
+    margin: .75em 0;
 }
 
 .footer-credits {
@@ -681,14 +711,13 @@ form {
 /* product-itself */
 
 .product-itself {
-    height: 230px;
+    min-height: 15em;
     width: 255px;
     margin: 1em 1em;
 }
 
 .description-box-product {
-    height: 76px;
-    padding: 15px;
+    padding: 10px;
 }
 
 /* product-itself */
@@ -731,12 +760,16 @@ form {
     display: none;
 }
 
+
+.header-mobile {
+    display: none;
+}
+
     /* navbar menu */
 
     /* first main widget */
 
     .startup-screen {
-        background: url(../images/bg-image-desktop.svg) no-repeat 50% 50%;
         background-size: cover;
         padding: 10em 0;
     }
