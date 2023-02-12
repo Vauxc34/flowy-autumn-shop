@@ -13,10 +13,13 @@ import { GoogleAuthProvider } from 'firebase/auth'
 import { FacebookAuthProvider } from 'firebase/auth'
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthThing, AuthSecond } from '../lib/config'
+import Cookies from 'js-cookie'
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import AnimatedPage from './AnimatedPage';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next,  useTranslation } from 'react-i18next';
 import I18nextBrowserLanguageDetector from 'i18next-browser-languagedetector';
+import i18n from "i18next"
+import i18next from 'i18next'
 import HttpApi from 'i18next-http-backend'
 
 /* page's */
@@ -185,31 +188,7 @@ const Shop = () =>  {
 
 
 
-/* data 
 
-i18n
-.use(initReactI18next)
-.use(I18nextBrowserLanguageDetector)
-.use(HttpApi)
-.init({ 
-supportedLngs:['en', 'pl'],
-lng: document.querySelector('html').lang,
-fallbackLng: "pl",
-detection: {
-    order: [
-        'cookie',
-        'htmlTag',
-        'path',
-    ],
-    caches: ['cookie']
-},
-backend: {
-    loadPath: '/assets/locales/{{lng}}/translation.json'
-},
-react: { useSuspense: false },
-});
-
-/* data */
 
 /* product's */
 
@@ -341,9 +320,11 @@ handleFilterBrand={handleFilterBrand}
                     </ul>
                     <ul class="footer-nav-links">
                     <li class="footer-nav-main">Język strony</li>
-                    <select>
+                    <select name="langugage_change" id="langugage_change">
+                     
                         <option>Polski (Słowiański)</option>
                         <option>Angielski (Brytyjski)</option>
+                      
                     </select>
                     </ul>    
                 </div>

@@ -1,81 +1,41 @@
 {
-    
-
     "app_lang": "pl",
-    "menu_option_1": "Zakup samochód",
-    "menu_option_2": "Zamów lawetę",
-    "header_first_part1": "Szukasz pojazdu w",
-    "header_first_part2": "niskiej cenie?",
 
-    "resetBtn": "Resetuj",
-    
-    "filter_1": "Marka",
+    "navbar_option1": "Strona główna",
+    "navbar_option2": "Produkty",
+    "navbar_option3": "Porozmawiaj z nami",
 
-    "header_auction1": "Posortuj",
-    "header_auction2": "i znajdź coś dla siebie",
+    "product_header": "Produkty",
+    "product_paragraph": "Zamów dla siebie lub dla swoich bliskich",
+    "product_button": "Odkryj nasz katalog",
 
-    "Trademark": "Marka™",
-    "YearProd": "Rocznik🕰",
-    "Burnin": "Spalanie🔥",
-    "Color": "Kolor🎨",
-    "VIN": "Numer VIN🆖",
-    "AuctionBtn": "Sprawdź",
-    "AuctionBtnSecond": "Sprawdź aukcje",
+    "advertisment_header": "Czysto i elegancko",
+    "advertisment_paragraph": "Dobór produktów pod ciebie i twoje potrzeby",
+    "advertisment_head_1": "Ekologiczne",
+    "advertisment_paragraph_1": "Ekologiczne",
+    "advertisment_head_2": "Sprawdzone",
+    "advertisment_paragraph_2": "Ekologiczne",
+    "advertisment_head_3": "Ręcznie wytwarzane",
+    "advertisment_paragraph_3": "Ekologiczne",
+    "advertisment_head_4": "Ręcznie wytwarzane",
+    "advertisment_paragraph_4": "Długowieczne",
 
-    "vin_header_1": "Pewność siebie",
-    "vin_header_2": "to ludzkie prawo",
-    "tile_header": "Chcesz poznać historię pojazdu?",
-    "tile_input_placeholder": "Podaj numer VIN sprawdzanego pojazdu",
-    "tile_check_button": "SPRAWDŹ",
+    "opinion_header": "Opinie o nas",
+    "opinion_paragraph": "Parę zdań od klientów dla nas",
 
-    "vin_raport_header1": "Raport sprawdzanego pojazdu",
-    "vin_raport_header2": " Model sprawdzanego pojazdu",
-    "number_vin_text": "Numer VIN", 
-    "number_model_text": "Model", 
-    "year_vin_text": "Rok produkcji", 
-    "company_vin_text": "Firma", 
-    "production_vin_text": "Miejsce produkcji pojazdu", 
-    "body_type_vin_text": "Typ nadwozia", 
-    "door_number_vin_text": "Ilość drzwi", 
-    "gearbox_vin_text": "Skrzynia biegów", 
+    "slogan_text": "Wszystkie niezbędne akcesoria w niskich cenach",
 
+    "footer_heading_1": "Zakładki",
+    "footer_list_1_1": "Strona główna",
+    "footer_list_1_2": "Zarejestruj się",
+    "footer_list_1_3": "Twój profil",
 
-    "header_map": "Potrzebujesz lawety?",
-    "smaller_header1": "Dystans:",
-    "smaller_header2": "Cena za przejazd w dwie strony: ",
-    "map_input_1": "> Skąd?",
-    "map_input_2": "> Dokąd?",
-    "map_input_3": "Sprawdź",
-    "map_input_4": "> Twój adres e-mail",
-    "map_input_5": "> Uwagi i zastrzeżenia",
-    "map_input_6": "Wyślij zapytanie",
-    "description": "W razie zainteresowania zamówienia lawety, skontaktuj się niżej",
+    "footer_heading_2": "Informacje",
+    "footer_list_2_1": "Kontakt z nami",
+    "footer_list_2_2": "Polityka prywatności",
 
-    "header_ask": "Skontaktuj się z nami!",
-
-    "form_text_1": "Imię i nazwisko",
-    "form_text_2": "Adres E-mail",
-    "form_text_3": "Numer telefonu",
-    "form_text_4": "Zapytanie",
-    "form_text_5": "Załącz pliki",
-    "form_text_6": "Wyślij zapytanie",
-
-
-    "footer_heading_1": "Jedziemy lawetą w okolice",
-    "footer_list_1_1": "Niemiec",
-    "footer_list_1_2": "Belgii",
-    "footer_list_1_3": "Holandii",
-    "footer_list_1_4": "Francji",
-    "footer_list_1_5": "Hiszpani",
-
-    "footer_heading_2": "SKRÓTY 🤞",
-    "footer_list_2_1": "Sprawdź pojazdy",
-    "footer_list_2_2": "Sprawdź historie pojazdu",
-    "footer_list_2_3": "Zamów lawete",
-
-    "footer_heading_3": "Język",
+    "footer_heading_3": "Język strony",
 
     "rights_reserved_text": "Wszelkie prawa zastrzeżone dla"
-
 }
     
