@@ -53,10 +53,10 @@ const Products = ({products, onAddToCart, ProductList }) => {
 
 
             <div class="product-grid">{ProductList.map(item =>  <div class="product-itself">
-            <div onClick="" class="product-img" style={{ background: `url(${item.data.image})50%`, backgroundSize: '100%' }}></div>
+            <div onClick="" class="product-img" style={{ background: `url(${item.image})50%`, backgroundSize: '100%' }}></div>
             <div class="description-box-product" onClick={() => window.location.replace('/produkt/' + item.id)}>
-            <h5 class="title-product" onClick={() => navigate(`/produkt/${item.id}`)}>{item.data.title}</h5>
-            <span class="price-product">{item.data.price} zł</span>
+            <h5 class="title-product" onClick={() => navigate(`/produkt/${item.id}`)}>{item.title}</h5>
+            <span class="price-product">{item.price} zł</span>
             </div>
             </div>
             )}</div>

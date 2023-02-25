@@ -17,9 +17,9 @@ import PrivacyAndPolicy from './PrivacyAndPolicy'
 
 /* component's */
 
-import { Navbar } from "../components/Navbar"
 import { Cart } from "../components/Cart"
-import { Checkout  } from "../components/checkout/Checkout"
+import { Checkout } from "../components/checkout/Checkout"
+import { Confirmation } from "../components/checkout/Confirmation";
 
 /* component's */
 
@@ -44,6 +44,8 @@ LoginU,
 toast,
 generateBrandDropdown,
 handleFilterBrand,
+itemsQuantity,
+setItemsQuantity,
 }) => {
 
 const location = useLocation()
@@ -58,7 +60,12 @@ element={<Products ProductList={ProductList}/>}>
 
 <Route 
 exact path='/produkt/:id' 
-element={<ProductPage ProductList={ProductList}/>}>
+element={<ProductPage 
+ToastContainer={ToastContainer}
+toast={toast}
+itemsQuantity={itemsQuantity}
+setItemsQuantity={setItemsQuantity}
+ProductList={ProductList}/>}>
 </Route>
 
 <Route
@@ -141,6 +148,13 @@ element={<ContactForm
 exact path="/polityka-prywatnosci"
 element={<PrivacyAndPolicy/>}>
 </Route>
+
+
+<Route
+exact path ="/confirmation-order"
+element={<Confirmation/>}>
+</Route>
+
 </Routes>
 </>
 )

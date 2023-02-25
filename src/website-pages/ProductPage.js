@@ -1,73 +1,76 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { doc, getDocFromCache, getDocs, collection, query, onSnapshot } from 'firebase/firestore'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination } from 'swiper'
-import { db } from '../lib/config'
 import { motion } from 'framer-motion'
 
-/* image's */
-
-import prodctPageImage from '../images/prodct-page-image.svg'
-import ProfilePicTestimonial from '../images/img-1.svg'
-import StarFilled from '../images/star-filled.svg'
-
-/* */
-
 const ProductPage = ({
+    itemsQuantity,
+    setItemsQuantity,
     products, 
     onAddToCart, 
     onUpdateCartQty, 
     ProductList,
+    ToastContainer,
+    toast,
 }) => {
 
     
     let location = useLocation()
-    let navigate = useNavigate()
-
     const [CartAdd, setAddToCart] = useState(null)
-
-    const [productId] = useState(location.pathname.split('/')[2]);
-    const [ProductLink, setProductLink] = useState(location.pathname.split('/', 3)[2])
-    const item = ProductList.find(product => product.id == ProductLink)  
+    const  ProductLink  = location.pathname.split('/', 3)[2]
+    const idUser = 'qcC6uukDcp0yS7BkK0bf'
     const [NameProduct, setNameProduct] = useState('Lorem ipsum')
-    const [ImageProd, setImageProd] = useState('basic.jpg')
+    const [ImageProd, setImageProd] = useState('https://static.vecteezy.com/packs/media/vectors/term-bg-1-3d6355ab.jpg')
     const [DescProduct, setDescProduct] = useState('lorem ipsum dolor lit amenus papa')
     const [PriceProduct, setPriceProduct] = useState('9.99')
     const [ProdQuantity ,setProdQuantity] = useState(0)
+    const [userQuantity, setUserQuantity] = useState(ProdQuantity)
     const [ColorItem, setColorItem] = useState('')
     const [Error, setError] = useState()
 
-    const ProductSet = async () => {
-        if(item) {
-            setProductLink(item.id)
-            setNameProduct(item.data.title)
-            setImageProd(item.data.image)
-            setPriceProduct(item.data.price)
-            setProdQuantity(item.data.quantity)
-            setDescProduct(item.data.description)
-            setColorItem(item.data.attributes.colour)
-        } else {
-
+    useEffect(() => {
+    fetch('http://localhost:8080/product-list/' + ProductLink).then(data => data.json()).then(product =>  {
+        setNameProduct(product._fieldsProto.title.stringValue)
+        setImageProd(product._fieldsProto.image.stringValue)
+        setDescProduct(product._fieldsProto.description.stringValue)
+        //setPriceProduct(product._fieldsProto.price.double)
+        setProdQuantity(product._fieldsProto.quantity.integerValue)
+        //console.log(product._fieldsProto.quantity.integerValue)
         }
+    )
+    })
+
+    const HandleChangeUserQuantity = (name) => {
+
+        if(name == 'plus') {
+            setUserQuantity(userQuantity + 1)
+        }
+
+        if(name == 'minus') {
+            setUserQuantity(userQuantity - 1)
+        }
+
     }
 
-    const HandleAddToCart = async () => {
-        
-const querySnapshot = await getDocs(collection(db, "users"));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-});
-        
+    const HandleAddToCart = () => {
+    fetch('http://localhost:8080/cart/add-to/' + idUser, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+        {
+        NameProduct: NameProduct,
+        ImageProd: ImageProd,
+        PriceProduct: PriceProduct,
+        ProdQuantity: 1
+        }
+    )
+    });
+    toast.success('Dodano produkt do koszyka 😀')
     }
-
- 
-
-    console.log(ColorItem)
-
-useEffect(() => {ProductSet()})
-
 
 return (
 <>
@@ -104,20 +107,20 @@ exit={{ opacity: 0 }}
     
     <span className='price-etc'>{PriceProduct} zł</span>
 
-    <div className='quantity-box-container'>
+    {/*<div className='quantity-box-container'>
     <p>Quantity</p>
     <div className='quantity-box'>
     <div className='select-item-quantity'>
-    <div  className='p__'>
+    <div onClick={HandleChangeUserQuantity} name='plus' className='p__'>
         +
     </div>
-    <span className='p_quantity-itself'>{ProdQuantity}</span>
-    <div className='p__'>
+    <span className='p_quantity-itself'>{userQuantity}</span>
+    <div onClick={HandleChangeUserQuantity} name='minus' className='p__'>
         -
     </div>
     </div>
     </div>
-    </div>
+</div>*/}
 
 </div>
 <div className='container-for-product-delivery'>
@@ -210,10 +213,10 @@ exit={{ opacity: 0 }}
         
         <SwiperSlide key={item}>
         <div class="product-itself" style={{ position: 'absolute', zIndex: 32 }} onClick={() => window.location.replace('/produkt/' + item.id)}>
-            <div onClick="" class="product-img" style={{ background: `url(${item.data.image}) 50% 50%`, backgroundSize: 'cover' }}></div>
+            <div onClick="" class="product-img" style={{ background: `url(${item.image}) 50% 50%`, backgroundSize: 'cover' }}></div>
             <div class="description-box-product">
-            <h5 class="title-product" onClick="">{item.data.title}</h5>
-            <span class="price-product">{item.data.price} zł</span>
+            <h5 class="title-product" onClick="">{item.title}</h5>
+            <span class="price-product">{item.price} zł</span>
             </div>
             </div>
         </SwiperSlide>
@@ -236,7 +239,7 @@ exit={{ opacity: 0 }}
 </div>
 
 </motion.section>
-
+<ToastContainer/>
     </>
 )
 

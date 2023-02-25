@@ -71,6 +71,24 @@
     align-self: flex-start;
 }
 
+#profile .container-for-item-name-h4 {
+    flex-direction: column;
+    height: 50%;
+}
+
+#profile .container-for-etc {
+    margin: .5em .3em;
+    background: #e9e8e8;
+    border-radius: 5px;
+    justify-content: flex-start;
+    width: auto;
+}
+
+.orders-list {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
 .user-profile-- {
     height: 250px;
     width: 250px;

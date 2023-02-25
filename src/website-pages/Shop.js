@@ -54,10 +54,8 @@ const Shop = () =>  {
 
     const auth = getAuth()
 
-    //const navigate = useNavigate()
-
     const location = useLocation()
-   
+    let idUser = 'qcC6uukDcp0yS7BkK0bf'   
 
     const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
 
@@ -65,17 +63,11 @@ const Shop = () =>  {
 
     const [MobileMenu, setMobileMenu] = useState('navbar-menu')
     const [Opener, setOpener] = useState(1)
+    const [itemsQuantity, setItemsQuantity] = useState(0)
 
-    const OpenMobileMenu = () => {
-        setOpener(Opener + 1)
-        setMobileMenu('navbar-menu opened')
-        if(Opener % 2) {
-            setMobileMenu('navbar-menu opened')
-            setOpener(Opener - 1)
-        } else {
-            setMobileMenu('navbar-menu')
-        }
-    }
+    useEffect(() => {
+      fetch('http://localhost:8080/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setItemsQuantity(some.length))
+  })
 
     /* mobile menu */
 
@@ -172,7 +164,7 @@ const Shop = () =>  {
         Gender: "Men",
         Age: 23,
       });
-      console.log("Document written with ID: ", docRef.id);
+      //console.log("Document written with ID: ", docRef.id);
     }
   useEffect(() => {
     const data = localStorage.getItem('currentUser');
@@ -182,13 +174,9 @@ const Shop = () =>  {
   }, []);
   useEffect(() => {
     localStorage.setItem('currentUser', JSON.stringify(currentUser))
-    console.log(localStorage)
+    //console.log(localStorage)
   })
 /* register thing's */
-
-
-
-
 
 /* product's */
 
@@ -211,10 +199,7 @@ const Shop = () =>  {
       title: 'lorem ipsum', quantity: 34, price: 9.99, category: "rolki"
     }
   }
-  ,])
-
-
-  console.log(ProductList)
+  ])
 
   /* categorie's */
 
@@ -223,33 +208,14 @@ const [allData, setData] = useState(ProductList)
 const generateBrandDropdown = () => {
 return [...new Set(ProductList.map((item) => item.data.category))]
 }
-
-
-console.log(allData)
-
 /* categorie's */
 
   useEffect(() => {
-   const q = query(collection(db, 'products'))
-   onSnapshot(q, (querySnapshot) => {
-    setProductList(querySnapshot.docs.map(doc => ({
-      id: doc.id, 
-      data: doc.data()
-     })))
-   })
+    fetch('http://localhost:8080/product-list/').then(data => data.json()).then(products => setProductList(products));
   }, []); 
-
-
   useEffect(() => {
-    const q = query(collection(db, 'products'))
-    onSnapshot(q, (querySnapshot) => {
-      setData(querySnapshot.docs.map(doc => ({
-       id: doc.id, 
-       data: doc.data()
-      })))
-    })
+    fetch('http://localhost:8080/product-list/').then(data => data.json()).then(products => setData(products));
    }, []); 
-
 
    const handleFilterBrand = (category) => {
     const filteredData = ProductList.filter((item) => {
@@ -265,7 +231,11 @@ console.log(allData)
      return (
 
         <div class="wrapper">
-            <Navbar currentUser={currentUser}/>
+            <Navbar 
+            currentUser={currentUser} 
+            itemsQuantity={itemsQuantity} 
+            setItemsQuantity={setItemsQuantity}
+            />
             <div className={`${MobileMenu}`}>
             <ul>
                     <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>
@@ -294,6 +264,7 @@ currentUser={currentUser}
 LoginU={LoginU}
 generateBrandDropdown={generateBrandDropdown}
 handleFilterBrand={handleFilterBrand}
+toast={toast}
 />
 
 </AnimatePresence>

@@ -53,6 +53,7 @@
     line-height: 25.6px;
     letter-spacing: -0.9px;
     margin: 10px .5em;
+    text-align: center;
 }
 
 .address-form .site-btn {
@@ -69,15 +70,47 @@
 .input-form-address {
     margin: 5px 1em;
     padding: 7.5px 20px;
+    width: 90%;
+    align-self: center;
 }
 
 /* address form */
 
 /* checkout */
 
+.checkout-itself h3 {
+    text-align: center;
+}
+
 .checkout-itself ul {
     display: flex;
     flex-direction: column;
+    padding: .75em;
+}
+
+.checkout-itself span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1em;
+}
+
+.review-card {
+    width: 100%;
+    padding: .2em;
+    margin: 1em;
+}
+
+.items-review {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.items-review ul {
+    background: white;
+    padding: 2em;
+    margin: 1em;
 }
 
 .checkout-btn-container {

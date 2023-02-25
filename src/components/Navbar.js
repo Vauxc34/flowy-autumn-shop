@@ -18,14 +18,19 @@ import ArrowMenu from '../images/ChevronDown.svg'
 import ProfileIcon from '../images/Profile.svg'
 import CartIcon from '../images/Cart.svg'
 
-export const Navbar = ({ totalItems, OpenMobileMenu, currentUser }) => {
+export const Navbar = ({ 
+    itemsQuantity,
+    setItemsQuantity,
+    OpenMobileMenu, 
+    currentUser }) => {
     
     const location = useLocation()
     const navigate = useNavigate()    
 
+    let idUser = 'qcC6uukDcp0yS7BkK0bf'
+
     const [HamburgerOpen, isHamburgerOpen] = useState(1)
     const [Hamburger, setHamburger] = useState('unactive-pop')
-
     const [UserName, setUserName] = useState(currentUser)
     const [ProfileUser, setProfileUser] = useState(currentUser)
 
@@ -38,7 +43,6 @@ export const Navbar = ({ totalItems, OpenMobileMenu, currentUser }) => {
             setHamburger('unactive-pop')
         }
     }
-
     function GoToMainPage() {
         navigate('/')
     }
@@ -62,9 +66,7 @@ export const Navbar = ({ totalItems, OpenMobileMenu, currentUser }) => {
             setUserName('Nie zalogowano')
         }
     })
-
-    console.log(ProfileUser)
-
+    //console.log(ProfileUser)
     return (
         <>
         
@@ -87,7 +89,7 @@ export const Navbar = ({ totalItems, OpenMobileMenu, currentUser }) => {
                         <div className='popup-navbar second_bar'>
                         <img className='profile-pic' src='' />
                         <h4>Anthony Barbara</h4> </div>
-                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: totalItems}}></div>
+                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: itemsQuantity}}></div>
                 </ul>
         </div>
         <div className={`header-mobile ${Hamburger}`}>

@@ -2,13 +2,9 @@ import React, {useState, useEffect} from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-/* image's */
-
-import ProfilePic from '../images/profile-pic.webp'
-
-/* */
-
 const ProfilePage = ({ currentUser }) => {
+
+    /* Profile things */
 
     const [ProfilePic, setProfilePic]= useState('')
     const [userName, setUserName]= useState('')
@@ -23,11 +19,26 @@ const ProfilePage = ({ currentUser }) => {
     setRegistrationMethod(currentUser?.providerData[0].providerId)
     }
 
-    console.log(currentUser)
+    //console.log(currentUser)
 
     useEffect(() => {userSetter()}, [userSetter])
 
-    console.log(userName)
+    //console.log(userName)
+
+    /* Profile things */
+
+    /* Order's things */
+
+    const [TransactionList, setTransactionList] = useState([
+        {test: 'test'}, 
+        {test: 'test'}
+    ])
+
+    useEffect(() => {
+    fetch('http://localhost:8080/orders/transaction-list', {method: 'POST'}).then(data => data.json()).then(data => setTransactionList(data))
+    }, [TransactionList])
+
+    /* Order's things */
 
 return (
     <>
@@ -94,7 +105,6 @@ return (
 </div>
 
     </div>
-   
 
     <div className='container-for-etc-product'>
 
@@ -109,6 +119,28 @@ return (
 
     <div className='product-parameters'>
         <h1>Historia zakupów</h1>
+
+        <div className="orders-list">
+        {TransactionList.map(item => <>
+            <div className="container-for-etc">
+    
+            <div className='row-for-etc'>
+            <img className="product-image-cart" src='https://static.vecteezy.com/packs/media/vectors/term-bg-1-3d6355ab.jpg' />
+            </div>
+            
+            <div className='row-for-etc'>
+    
+            <div className="container-for-item-name-h4">
+            <h4>Lorem ipsum item</h4>
+            <span>Cena: 9.99</span>  
+            <h3>Ilość: 1</h3>
+            </div>
+    
+            </div>
+            </div>
+        </>)}
+        </div>
+
     </div>
 
     </div>

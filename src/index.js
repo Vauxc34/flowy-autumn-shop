@@ -10,9 +10,4 @@ ReactDOM.render(
       <Shop/>
       </React.StrictMode>
     </BrowserRouter>
-
-
-,
-
-
-document.getElementById('root'))
+,document.getElementById('root'))

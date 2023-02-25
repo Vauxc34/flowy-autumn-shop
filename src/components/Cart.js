@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -8,27 +8,23 @@ import CartItem from './CartItem'
 
 export const Cart = () => {
 
+    let idUser = 'qcC6uukDcp0yS7BkK0bf'
+    let idItem = '2gAxrck3XnTpZv0cZLbV'
+
     const navigate = useNavigate()
 
-    const EmptyCart = () => (
-        <></>
-    )
-
-    const FilledCart = () => (
-        <></>
-    )
+    const [CartArray, setCartArray] = useState([])
 
     function GoPay() {
         navigate('/sposoby-dostawy-i-platnosci')
     }
-        
+    
+    useEffect(() => {
+    fetch('http://localhost:8080/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setCartArray(some))
+    }, [CartArray])
+
     return (
-        <motion.div className="cart-itself"
-        initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-        >
-            
+        <motion.div className="cart-itself" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <div className='cart-mess'>
             <h1>Twój koszyk z zakupami</h1>
             <h2>Wróć do <Link to='/'>produktów</Link></h2>
@@ -40,27 +36,27 @@ export const Cart = () => {
             </div>
             <hr className='product-line'></hr>
 
-            <div className="cart-item-itself">
+            {CartArray.map(item => <div className="cart-item-itself">
         <div className="container-for-etc">
 
         <div className='row-for-etc'>
-        <img className="product-image-cart" src="https://images.unsplash.com/photo-1676056583299-f9aa9300b9db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" />
+        <img className="product-image-cart" src={item._fieldsProto.ImageProd.stringValue} />
         </div>
         
         <div className='row-for-etc'>
 
         <div className="container-for-item-name-h4">
-        <h4>Lorem ipsum thing</h4>
-        <span>9.99 zł</span>  
+        <h4>{item._fieldsProto.NameProduct.stringValue}</h4>
+        <span>{item._fieldsProto.ProdQuantity.stringValue}</span>  
         </div>
         <div className="container-for-item-name-h4">
         <a className='site-btn'>usuń</a>      
         <div className='quantity-box-container'>
-        <p>Ilość</p>
+        <p>{item._fieldsProto.PriceProduct.stringValue}</p>
         <div className='quantity-box'>
         <div className='select-item-quantity'>
         <div className='p__'>+</div>
-        <span className='p_quantity-itself'>34</span>
+        <span className='p_quantity-itself'>{item._fieldsProto.ProdQuantity.integerValue}</span>
         <div className='p__'>-</div>
         </div>
         </div>
@@ -69,7 +65,8 @@ export const Cart = () => {
 
         </div>
 
-            </div></div> 
+</div>
+            </div> )}
             
             <div className="container-for-a-cart-options">
             <h1>Całość: 
