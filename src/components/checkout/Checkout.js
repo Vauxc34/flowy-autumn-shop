@@ -15,9 +15,11 @@ const steps = ['Adres dostawy', 'Szczegóły płatności']
 
 export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
 
+    const [userBillingInfo, setUserBillingInfo] = useState([])
+    const [PurchaseMethod, setPurchaseMethod] = useState([])
+
     const [activeStep, setActiveStep] = useState(0)
     const [checkoutToken, setCheckoutToken] = useState(null)
-    const [shippingData, setshippingData] = useState({})
     const navigate = useNavigate()
       
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -32,14 +34,24 @@ export const Checkout = ({cart, order, onCaptureCheckout, error}) => {
     })
 
     const next = (data) => {
-        setshippingData(data)
-
         nextStep()
     }
 
     const Form = () => activeStep == 0
-    ? <AddressForm checkoutToken={checkoutToken} setCheckoutToken={setCheckoutToken} next={next}/>
-    : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken} backStep={backStep} nextStep={nextStep} onCaptureCheckout={onCaptureCheckout}  />
+    ? <AddressForm 
+      checkoutToken={checkoutToken} 
+      setCheckoutToken={setCheckoutToken} 
+      next={next}
+      userBillingInfo={userBillingInfo} 
+      setUserBillingInfo={setUserBillingInfo}
+      />
+    : <PaymentForm 
+    userBillingInfo={userBillingInfo}
+    PurchaseMethod={PurchaseMethod} 
+    checkoutToken={checkoutToken} 
+    backStep={backStep} 
+    nextStep={nextStep} 
+    onCaptureCheckout={onCaptureCheckout}  />
 
     return (
         <>

@@ -35,7 +35,7 @@ const ProfilePage = ({ currentUser }) => {
     ])
 
     useEffect(() => {
-    fetch('http://localhost:8080/orders/transaction-list', {method: 'POST'}).then(data => data.json()).then(data => setTransactionList(data))
+    fetch('http://candle-af-shop.appspot.com/orders/transaction-list', {method: 'POST'}).then(data => data.json()).then(data => setTransactionList(data))
     }, [TransactionList])
 
     /* Order's things */

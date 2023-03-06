@@ -17,7 +17,6 @@ const RegisterPage = ({
     e.preventDefault()
   }
 
-
   return (
     <>
     

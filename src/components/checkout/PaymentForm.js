@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Review from './Review'
 
-const PaymentForm = () => {
+const PaymentForm = ({userBillingInfo}) => {
 
   const location = useLocation()
 
   const [CreditCardNumber, setCreditCardNumber] = useState()
 
   const PayForIt = (e) => {  e.preventDefault()
-     fetch('http://localhost:8080/pay/payment-basic', { method: "POST" }).then(data => console.log(data.json())) }
+     fetch('http://candle-af-shop.appspot.com/pay', { method: "POST" }).then(data => console.log(data.json())) }
   
+     console.log(userBillingInfo)
+
   return (
     <>
     <Review 

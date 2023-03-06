@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-
 import {Link}  from 'react-router-dom'
-
-import CartItem from './CartItem'
 
 export const Cart = () => {
 
@@ -20,7 +17,7 @@ export const Cart = () => {
     }
     
     useEffect(() => {
-    fetch('http://localhost:8080/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setCartArray(some))
+    fetch('http://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setCartArray(some))
     }, [CartArray])
 
     return (

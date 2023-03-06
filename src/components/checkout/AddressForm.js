@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
-
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
-export const AddressForm = ({ setCheckoutToken, checkoutToken, next }) => {
+export const AddressForm = ({ 
+  userBillingInfo,
+  setUserBillingInfo,
+  setCheckoutToken, 
+  checkoutToken, 
+  next
+ }) => {
 
   const InputAreas = [
     {name: "firstName", placeholder: "Imię", label: "First name" },
@@ -25,6 +32,14 @@ export const AddressForm = ({ setCheckoutToken, checkoutToken, next }) => {
     { name: "lubuskie", placeholder: "Lubuskie" },
   ]
 
+    const [InputForm, setInputForm] = useState(InputAreas)
+
+    const HandleInputs = (e) => {
+      setInputForm({...InputForm, [e.target.name]: e.target.value})
+    }
+
+      console.log(InputForm)
+
         const [shippingCountries, setShippingCountries] = useState([]);
         const [shippingCountry, setShippingCountry] = useState('');
         const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -37,6 +52,32 @@ export const AddressForm = ({ setCheckoutToken, checkoutToken, next }) => {
           setCheckoutToken(2)
         }
 
+        const SetUserAddress = () => {
+          setUserBillingInfo({ 
+            address: InputForm.address1,
+            city:InputForm.city, 
+            email: InputForm.email,
+            firstName: InputForm.firstName,
+            lastName: InputForm.lastName, 
+            zip:InputForm.zip
+           })
+        }
+
+        const MultipleFunction = () => {
+
+          if(InputForm.address  === '' ||
+           InputForm.city === '' || 
+           InputForm.email === '' || 
+           InputForm.firstName === '' || 
+           InputForm.lastName === "" || InputForm.zip === "" ) {
+
+            toast.error('Nie uzupełniono wszystkich pól formularza 😩')
+
+          } else {
+          next() 
+          SetUserAddress()
+          }
+        }
 
     return (
         <form className="address-form">
@@ -45,15 +86,31 @@ export const AddressForm = ({ setCheckoutToken, checkoutToken, next }) => {
 
                 <FormProvider {...methods}>
 
-                {InputAreas.map((item, key) => <input className="input-form-address" key={key} required name={item.name} placeholder={item.placeholder} label={item.label} /> )}
+                {InputAreas.map((item, key) => 
+                <input 
+                className="input-form-address" 
+                key={key} 
+                required 
+                name={item.name} 
+                placeholder={item.placeholder} 
+                label={item.label} 
+                onChange={HandleInputs}
+                />
+                )}
 
-                <select className="input-form-address" placeholder="Województwo" fullWidth >
-                {Regions.map(item =>  <option>{item.placeholder}</option>)}
+                <select 
+                className="input-form-address" 
+                placeholder="Województwo" 
+                fullWidth >
+                {Regions.map(item =>  
+                <option>{item.placeholder}</option>
+                )}
                 </select> 
 
-                <button onClick={next} className='site-btn'>przejdź do płatnosci</button>
+                <button onClick={MultipleFunction} className='site-btn'>przejdź do płatnosci</button>
                 <Link to="/cart">Back to cart</Link>
                 </FormProvider>
+                <ToastContainer/>
         </form>
     )
 }

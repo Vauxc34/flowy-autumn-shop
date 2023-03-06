@@ -55,7 +55,7 @@ const Shop = () =>  {
     const auth = getAuth()
 
     const location = useLocation()
-    let idUser = 'qcC6uukDcp0yS7BkK0bf'   
+    let idUser = "qcC6uukDcp0yS7BkK0bf"   
 
     const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
 
@@ -64,10 +64,7 @@ const Shop = () =>  {
     const [MobileMenu, setMobileMenu] = useState('navbar-menu')
     const [Opener, setOpener] = useState(1)
     const [itemsQuantity, setItemsQuantity] = useState(0)
-
-    useEffect(() => {
-      fetch('http://localhost:8080/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setItemsQuantity(some.length))
-  })
+    useEffect(() => { fetch('http://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(dat => setItemsQuantity(dat.length))})
 
     /* mobile menu */
 
@@ -205,21 +202,21 @@ const Shop = () =>  {
 
 const [allData, setData] = useState(ProductList)
 
-const generateBrandDropdown = () => {
-return [...new Set(ProductList.map((item) => item.data.category))]
+const generateCategoryDropdown = () => {
+return [...new Set(ProductList.map((item) => item.main_category))]
 }
 /* categorie's */
 
   useEffect(() => {
-    fetch('http://localhost:8080/product-list/').then(data => data.json()).then(products => setProductList(products));
+    fetch('http://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setProductList(products));
   }, []); 
   useEffect(() => {
-    fetch('http://localhost:8080/product-list/').then(data => data.json()).then(products => setData(products));
+    fetch('http://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setData(products));
    }, []); 
 
-   const handleFilterBrand = (category) => {
+   const handleFilterCategory = (category) => {
     const filteredData = ProductList.filter((item) => {
-      if (item.data.category === category) {
+      if (item.main_category === category) {
         return item;
       }
     });
@@ -262,9 +259,10 @@ RegisterU={RegisterU}
 ToastContainer={ToastContainer}
 currentUser={currentUser}
 LoginU={LoginU}
-generateBrandDropdown={generateBrandDropdown}
-handleFilterBrand={handleFilterBrand}
+categories={generateCategoryDropdown()}
+onFilterCategory={handleFilterCategory}
 toast={toast}
+allData={allData}
 />
 
 </AnimatePresence>

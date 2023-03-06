@@ -42,10 +42,12 @@ ToastContainer,
 currentUser,
 LoginU,
 toast,
-generateBrandDropdown,
-handleFilterBrand,
+categories,
+onFilterCategory,
 itemsQuantity,
 setItemsQuantity,
+onCategoryFilter,
+allData
 }) => {
 
 const location = useLocation()
@@ -71,9 +73,12 @@ ProductList={ProductList}/>}>
 <Route
 exact path="/produkty"
 element={<Allproducts 
-generateBrandDropdown={generateBrandDropdown}
-handleFilterBrand={handleFilterBrand}
-ProductList={ProductList}/>}
+categories={categories}
+onFilterCategory={onFilterCategory}
+ProductList={ProductList}
+onCategoryFilter={onCategoryFilter}
+allData={allData}
+/>}
 >
 </Route>
 

@@ -1,36 +1,22 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion';
 const Allproducts = ({ 
-  ProductList,
-  generateBrandDropdown,
-  handleFilterBrand,
+  categories,
+  onFilterCategory,
+  allData
 }) => {
-
-  let location = useLocation()
   
-  const [filters, setFilters] = useState({ 
-    category: "", from: "", to: "" });
-
-
-  //console.log(filters)
+const [filters, setFilters] = useState({ category: "", from: "", to: "" });
 
 const handleInput = (field) => (event) => {
-
       const { value } = event.target;
-      
-      console.log(event.target)
-
       setFilters({ 
         ...filters, 
         [field]: value,
-         
       });
-
       if(field === "category") {
-        //onBrandFilter(value);
+        onFilterCategory(value);
       }
-      
 };
 
 return (
@@ -53,14 +39,9 @@ id="products-all">
         name="category-list" 
         placeholder='Wybierz markę'  
         onChange={handleInput("category")}>
-           {/* {categories.map(brand => (
-                <option 
-                value={brand} 
-                key={brand}
-                >
-                    {brand}
-                </option>
-           ))}*/}
+             {categories.map(brand => (
+                <option value={brand} key={brand}>{brand}</option>
+              ))}
         </select>
 
     </div>
@@ -76,7 +57,7 @@ id="products-all">
 
             <div class="product-grid">
 
-            {ProductList.map(item => <div class="product-itself">
+            {allData.map(item => <div class="product-itself">
             <div onClick="" class="product-img" style={{ 
               background: `url(${item.image}) 50% 50%`, 
               backgroundSize: '100%', 
