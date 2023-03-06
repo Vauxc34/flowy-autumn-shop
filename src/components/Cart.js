@@ -17,7 +17,7 @@ export const Cart = () => {
     }
     
     useEffect(() => {
-    fetch('http://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setCartArray(some))
+    fetch('https://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setCartArray(some))
     }, [CartArray])
 
     return (

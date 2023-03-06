@@ -12,7 +12,7 @@ const Review = ({
     let idItem = '2gAxrck3XnTpZv0cZLbV'
 
     useEffect(() => {
-        fetch('http://localhost:8080/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setCartArray(some))
+        fetch('https://candle-af-shop.appspot.com/cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(some => setCartArray(some))
         }, [CartArray])
 
     return (

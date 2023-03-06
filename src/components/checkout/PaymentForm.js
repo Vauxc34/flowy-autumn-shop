@@ -9,7 +9,7 @@ const PaymentForm = ({userBillingInfo}) => {
   const [CreditCardNumber, setCreditCardNumber] = useState()
 
   const PayForIt = (e) => {  e.preventDefault()
-     fetch('http://candle-af-shop.appspot.com/pay', { method: "POST" }).then(data => console.log(data.json())) }
+     fetch('https://candle-af-shop.appspot.com/pay', { method: "POST" }).then(data => console.log(data.json())) }
   
      console.log(userBillingInfo)
 

@@ -30,7 +30,7 @@ const ProductPage = ({
     const [Error, setError] = useState()
 
     useEffect(() => {
-    fetch('http://candle-af-shop.appspot.com/product-list/' + ProductLink).then(data => data.json()).then(product =>  {
+    fetch('https://candle-af-shop.appspot.com/product-list/' + ProductLink).then(data => data.json()).then(product =>  {
         setNameProduct(product._fieldsProto.title.stringValue)
         setImageProd(product._fieldsProto.image.stringValue)
         setDescProduct(product._fieldsProto.description.stringValue)
@@ -54,7 +54,7 @@ const ProductPage = ({
     }
 
     const HandleAddToCart = () => {
-    fetch('http://candle-af-shop.appspot.com/cart/add-to/' + idUser, {
+    fetch('https://candle-af-shop.appspot.com/cart/add-to/' + idUser, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

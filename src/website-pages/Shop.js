@@ -64,7 +64,7 @@ const Shop = () =>  {
     const [MobileMenu, setMobileMenu] = useState('navbar-menu')
     const [Opener, setOpener] = useState(1)
     const [itemsQuantity, setItemsQuantity] = useState(0)
-    useEffect(() => { fetch('http://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(dat => setItemsQuantity(dat.length))})
+    useEffect(() => { fetch('https://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(dat => setItemsQuantity(dat.length))})
 
     /* mobile menu */
 
@@ -211,7 +211,7 @@ return [...new Set(ProductList.map((item) => item.main_category))]
     fetch('http://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setProductList(products));
   }, []); 
   useEffect(() => {
-    fetch('http://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setData(products));
+    fetch('https://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setData(products));
    }, []); 
 
    const handleFilterCategory = (category) => {
