@@ -208,7 +208,7 @@ return [...new Set(ProductList.map((item) => item.main_category))]
 /* categorie's */
 
   useEffect(() => {
-    fetch('http://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setProductList(products));
+    fetch('https://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setProductList(products));
   }, []); 
   useEffect(() => {
     fetch('https://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setData(products));
