@@ -30,7 +30,7 @@ const ProductPage = ({
     const [Error, setError] = useState()
 
     useEffect(() => {
-    fetch('https://candle-af-shop.appspot.com/product-list/' + ProductLink).then(data => data.json()).then(product =>  {
+    fetch('https://candle-af-shop.appspot.com/products/' + ProductLink).then(data => data.json()).then(product =>  {
         setNameProduct(product._fieldsProto.title.stringValue)
         setImageProd(product._fieldsProto.image.stringValue)
         setDescProduct(product._fieldsProto.description.stringValue)
