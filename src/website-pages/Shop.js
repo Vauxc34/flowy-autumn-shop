@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Routes, Route, useNavigate, useLocation} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { doc, setDoc, addDoc, collection, getDocs, collectionGroup, query, onSnapshot } from "firebase/firestore"; 
+import { doc, setDoc, addDoc, collection, getDocs, collectionGroup, query, onSnapshot, Firestore } from "firebase/firestore"; 
 import { getDatabase, ref, push, set, orderByChild } from "firebase/database";
 import { AnimatePresence } from 'framer-motion'
 import { db } from '../lib/config'
@@ -14,7 +14,7 @@ import { FacebookAuthProvider } from 'firebase/auth'
 import { onAuthStateChanged } from 'firebase/auth';
 import { AuthThing, AuthSecond } from '../lib/config'
 import Cookies from 'js-cookie'
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import AnimatedPage from './AnimatedPage';
 import { initReactI18next,  useTranslation } from 'react-i18next';
 import I18nextBrowserLanguageDetector from 'i18next-browser-languagedetector';
@@ -52,10 +52,10 @@ import ArrowMenu from '../images/ChevronDown.svg'
 
 const Shop = () =>  {
 
-    const auth = getAuth()
 
-    const location = useLocation()
+    const auth = getAuth()
     let idUser = "qcC6uukDcp0yS7BkK0bf"   
+    
 
     const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
 
@@ -64,6 +64,7 @@ const Shop = () =>  {
     const [MobileMenu, setMobileMenu] = useState('navbar-menu')
     const [Opener, setOpener] = useState(1)
     const [itemsQuantity, setItemsQuantity] = useState(0)
+    
     useEffect(() => { fetch('https://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(dat => setItemsQuantity(dat.length))})
 
     /* mobile menu */
@@ -75,6 +76,41 @@ const Shop = () =>  {
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
   const [currentUser, setCurrentUser] = useState(null)
+
+  const [allTransactions, setAllTransactions] = useState([])
+
+    const FetchTransactions = () => {
+      
+      fetch('https://candle-af-shop.appspot.com/orders/transaction-list', {    
+        method: 'POST',        
+        crossorigin: true,    
+        mode: 'cors',       
+      }).then(data => data.json()).then(data => setAllTransactions(data))
+
+      //._fieldsProto.data.mapValue.fields.receipt_email
+
+    }
+
+    
+    const SetUserCart = async () => {
+
+      const docRef = doc(db, "cities", "SF");
+      const docSnap = await getDocs(docRef);
+      
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+      }
+
+
+    }
+  
+
+    useEffect(() => {
+      FetchTransactions()
+    }, [FetchTransactions])
 
     const validatePassword = () => {
     let isValid = true
@@ -89,8 +125,7 @@ const Shop = () =>  {
     const RegisterU = () => {
         setError('')
         if(validatePassword()) {
-            createUserWithEmailAndPassword(auth, userMail, userPassword)
-            .then((res) => {
+            createUserWithEmailAndPassword(auth, userMail, userPassword).then((res) => {
                 console.log(res.user)
                 setCurrentUser(res.user)
                 toast.success('Pomyślnie zarejestrowano 🥳')
@@ -152,6 +187,15 @@ const Shop = () =>  {
       });
     
     }    
+    const SignOut = () => {
+    signOut(auth).then(() => {
+      toast.info('Wylogowano pomyślnie')
+      setCurrentUser(null)
+    console.log('Sign-out successful.')
+    }).catch((error) => {
+      toast.error('Coś poszło nie tak')
+    });
+    }
     const DatabaseAddUser = async () => { 
       const docRef = await addDoc(collection(db, "users"), {
         UserNickName: userName,
@@ -163,6 +207,7 @@ const Shop = () =>  {
       });
       //console.log("Document written with ID: ", docRef.id);
     }
+
   useEffect(() => {
     const data = localStorage.getItem('currentUser');
     if(data) {
@@ -171,7 +216,6 @@ const Shop = () =>  {
   }, []);
   useEffect(() => {
     localStorage.setItem('currentUser', JSON.stringify(currentUser))
-    //console.log(localStorage)
   })
 /* register thing's */
 
@@ -246,6 +290,7 @@ ProductList={ProductList}
 ToastMessReg={ToastMessReg}
 SignGoogle={SignGoogle}
 SignFB={SignFB}
+SignOut={SignOut}
 userName={userName}
 setUserName={setUserName}
 userMail={userMail}

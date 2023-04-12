@@ -28,6 +28,7 @@ ProductList,
 ToastMessReg,
 SignGoogle,
 SignFB,
+SignOut,
 userName,
 setUserName,
 userMail,
@@ -132,7 +133,7 @@ element={<Login
 exact path="/twoj-profil"
 element={<ProfilePage
 currentUser={currentUser}
-
+SignOut={SignOut}
 />}>
 </Route>
 

@@ -17,6 +17,7 @@ import SomeLogo from '../images/logo-szersze.png'
 import ArrowMenu from '../images/ChevronDown.svg'
 import ProfileIcon from '../images/Profile.svg'
 import CartIcon from '../images/Cart.svg'
+import question_mark from '../images/question_mark.png'
 
 export const Navbar = ({ 
     itemsQuantity,
@@ -26,7 +27,6 @@ export const Navbar = ({
     
     const location = useLocation()
     const navigate = useNavigate()    
-
     let idUser = 'qcC6uukDcp0yS7BkK0bf'
 
     const [HamburgerOpen, isHamburgerOpen] = useState(1)
@@ -65,8 +65,8 @@ export const Navbar = ({
         } else {
             setUserName('Nie zalogowano')
         }
-    })
-    //console.log(ProfileUser)
+        console.log(currentUser)
+    }, [currentUser])
     return (
         <>
         
@@ -83,7 +83,7 @@ export const Navbar = ({
                         <img src={ProfileIcon} alt="navbar ico" class="user_icon"/>
                         </li>
                         <div className='popup-navbar first_bar'>
-                        <img className='profile-pic' src={ProfileUser} />
+                        <img className='profile-pic' src={currentUser ? ProfileUser :  question_mark} />
                         <h4>{UserName}</h4></div>
                     <li class="nav-option" onClick={GoToCart}><img src={CartIcon} alt="navbar ico" class="cart_icon"/></li>
                         <div className='popup-navbar second_bar'>

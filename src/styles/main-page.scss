@@ -115,6 +115,15 @@ form {
     color: var(--white-color-itself);
 }
 
+.centered-text {
+    align-self: center;
+}
+
+#logout h1 {
+    align-self: center !important;
+    margin: .5em;
+}
+
 .copyright-text {
     font: 400 16px 'Roboto', sans-serif;
     color: #5E6E89;
@@ -265,10 +274,6 @@ form {
     visibility: visible;
 }
 
-/*.nav-option:hover~.second_bar {
-    visibility: visible;
-}*/
-
 .arrow-menu {
     margin: 0 .7em;
 }
@@ -307,9 +312,7 @@ form {
 .profile-pic {
     height: 70px;
     width: 70px;
-    border-radius: 25%;
     margin: 1em;
-    box-shadow: 0px 0px 15px -5px #000000;
 }
 
 .first_bar {
