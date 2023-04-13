@@ -88,6 +88,15 @@
     padding: .75em;
 }
 
+.checkout-itself form {
+    width: 100%;
+}
+
+.checkout-itself button {
+    padding: 10px 20px;
+    width: unset;
+}
+
 .checkout-itself span {
     display: flex;
     flex-direction: column;

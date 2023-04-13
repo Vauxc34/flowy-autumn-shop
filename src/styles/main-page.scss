@@ -57,7 +57,7 @@ select {
 }
 
 label {
-    font: 400 1.3rem 'Roboto', sans-serif;
+    font: 400 1rem 'Roboto', sans-serif;
     color: #1D293F;
 }
 
@@ -84,8 +84,13 @@ li a {
 }
 
 input {
-    font: 400 23px 'Roboto', sans-serif;
+    font: 400 1em 'Roboto', sans-serif;
     color: #1D293F;
+    height: 42px;
+    line-height: 32px;
+    outline: none;
+    padding: 0 5px;
+    width: 100%;
 }
 
 section {
@@ -108,6 +113,7 @@ textarea {
 form {
     display: flex;
     flex-direction: column;
+    width: 80%;
 }
 
 .Toastify__toast-container--top-right {
@@ -155,15 +161,21 @@ form {
 }
 
 .site-btn {
-    display: block;
+    display: flex;
     position: relative;
+    justify-content: center;
+    align-items: center;
     padding: 10px 20px;
     background: var(--green-color-itself);
     border: none;
     border-radius: 4px;
-    font: 400 20.65px 'Roboto', sans-serif;
+    font: 400 20.65px "Roboto", sans-serif;
     color: var(--white-color-itself);
     cursor: pointer;
+}
+
+form .site-btn {
+    padding: 0px 20px;
 }
 
 /* header */

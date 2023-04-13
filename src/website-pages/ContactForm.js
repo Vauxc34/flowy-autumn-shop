@@ -72,7 +72,7 @@ const SendingEmail = (e) => {
             <label>Numer telefonu (opcjonalne)</label><input type="phone" value={userPhone}  onChange={(e) => setUserPhone(e.target.value)}></input>
             </div>
 
-            <div className='textarea-container'>
+            <div className='input-container textarea-container'>
             <label>Twoja wiadomość</label><textarea
             value={userMessage}  
             onChange={(e) => setUserMessage(e.target.value)}
