@@ -96,6 +96,10 @@ section {
     width: 100%;
 }
 
+section#product-page, section#profile  {
+    margin-top: 5rem;
+}
+
 textarea {
     font: 400 1.3rem 'Roboto', sans-serif;
     color: #1D293F;
@@ -153,7 +157,7 @@ form {
 .site-btn {
     display: block;
     position: relative;
-    padding: 10px 30px;
+    padding: 10px 20px;
     background: var(--green-color-itself);
     border: none;
     border-radius: 4px;
@@ -698,6 +702,10 @@ form {
 /* media queries */
 
 @media (min-width: 599px) {
+
+    section#product-page, section#profile {
+        margin-top: 2em;
+    }
 
 /* second main widget */
 

@@ -73,7 +73,7 @@
 
 #profile .container-for-item-name-h4 {
     flex-direction: column;
-    height: 50%;
+    justify-content: flex-start;
 }
 
 #profile .container-for-etc {
@@ -133,6 +133,11 @@ margin-bottom: .5em;
     .widget-description h3 {
         margin: 1em 0;
         padding: 0 1.5em;
+    }
+
+    .orders-list {
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 

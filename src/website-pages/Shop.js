@@ -76,41 +76,16 @@ const Shop = () =>  {
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
   const [currentUser, setCurrentUser] = useState(null)
+  const [usersID, setUsersId] = useState([])
+  const [userMailToSet, setUserMailToSet] = useState('test@wp.pl')
+  const [allUserCollection, setUserCollection] = useState([{ 
+    userName: 'fweew234',
+    userMail: 'kaxowy12@gmail.com',
+    Password: 'fweew234'
+  }])
+   
 
-  const [allTransactions, setAllTransactions] = useState([])
-
-    const FetchTransactions = () => {
-      
-      fetch('https://candle-af-shop.appspot.com/orders/transaction-list', {    
-        method: 'POST',        
-        crossorigin: true,    
-        mode: 'cors',       
-      }).then(data => data.json()).then(data => setAllTransactions(data))
-
-      //._fieldsProto.data.mapValue.fields.receipt_email
-
-    }
-
-    
-    const SetUserCart = async () => {
-
-      const docRef = doc(db, "cities", "SF");
-      const docSnap = await getDocs(docRef);
-      
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-      } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-      }
-
-
-    }
-  
-
-    useEffect(() => {
-      FetchTransactions()
-    }, [FetchTransactions])
+    //console.log(allUserCollection)
 
     const validatePassword = () => {
     let isValid = true
@@ -197,17 +172,20 @@ const Shop = () =>  {
     });
     }
     const DatabaseAddUser = async () => { 
-      const docRef = await addDoc(collection(db, "users"), {
-        UserNickName: userName,
-        UserEmail: userMail,
-        Password: userPassword,
-        LoggedTrought: "SitePage",
-        Gender: "Men",
-        Age: 23,
-      });
-      //console.log("Document written with ID: ", docRef.id);
-    }
 
+
+      if(userName == "" || userMail == "" || userPassword == "") {
+        toast.error('Nie uzupełniono wszystkich pól!')
+      } else {
+        const docRef = await addDoc(collection(db, "users"), {
+          UserNickName: userName,
+          UserEmail: userMail,
+          Password: userPassword,
+        });
+      }
+      
+    }
+    
   useEffect(() => {
     const data = localStorage.getItem('currentUser');
     if(data) {
@@ -217,6 +195,8 @@ const Shop = () =>  {
   useEffect(() => {
     localStorage.setItem('currentUser', JSON.stringify(currentUser))
   })
+ 
+
 /* register thing's */
 
 /* product's */
