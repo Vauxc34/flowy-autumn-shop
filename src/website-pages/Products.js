@@ -16,9 +16,44 @@ import StarFilled from '../images/star-filled.svg'
 
 /* Images */
 
-const Products = ({products, onAddToCart, ProductList }) => {
+const Products = ({  onAddToCart  }) => {
+
+    const [ProductList, setProductList] = useState([ 
+        {
+          id: 1,
+          data:{
+            title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
+          }
+        },
+        { 
+          id: 2,
+          data:{
+            title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
+          }
+        },
+        {
+          id: 3,
+          data:{
+            title: 'lorem ipsum', quantity: 34, price: 9.99, category: "rolki"
+          }
+        }
+        ])
+      
 
     const navigate = useNavigate()
+
+    //console.log(process.env.REACT_APP_ACTUAL_LINK_APPLICATION)
+
+    useEffect(() => {
+
+        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
+            method: 'GET',  
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }}).then(res => res.json()).then(data => setProductList(data.prod))
+
+    }, [])
 
     return (
         <>
@@ -51,11 +86,10 @@ const Products = ({products, onAddToCart, ProductList }) => {
                 <p>Order it for you or for your beloved ones</p>
             </div>
 
-
             <div class="product-grid">{ProductList.map(item =>  <div class="product-itself">
             <div onClick="" class="product-img" style={{ background: `url(${item.image})50%`, backgroundSize: '100%' }}></div>
             <div class="description-box-product" onClick={() => window.location.replace('/produkt/' + item.id)}>
-            <h5 class="title-product" onClick={() => navigate(`/produkt/${item.id}`)}>{item.title}</h5>
+            <h5 class="title-product" onClick={() => navigate(`/produkt/${item.id}`)}>{item.name}</h5>
             <span class="price-product">{item.price} zł</span>
             </div>
             </div>

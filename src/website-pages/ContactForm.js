@@ -14,9 +14,7 @@ const ContactForm = ({
   const [userMessage, setUserMessage] = useState('')
 
 const SendingEmail = (e) => {
-
     let MailInfo = () => toast("Jesteśmy w kontakcie!")
-
     if(userName == ""|| 
     userMail == "" || 
     userPhone == "" || 
@@ -40,7 +38,6 @@ const SendingEmail = (e) => {
             
 
         )}
-
 }
 
 

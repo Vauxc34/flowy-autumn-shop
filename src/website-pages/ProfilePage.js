@@ -35,17 +35,8 @@ const ProfilePage = ({ currentUser, SignOut }) => {
    
     /* Profile things */
 
-    /* Order's things */
-
-    const [TransactionList, setTransactionList] = useState([
-        {test: 'test'}, 
-        {test: 'test'}
-    ])
-
-    useEffect(() => {
-    fetch('https://candle-af-shop.appspot.com/orders/transaction-list', {method: 'POST'}).then(data => data.json()).then(data => setTransactionList(data))
-    }, [TransactionList])
-
+    /* Order's things */ 
+ 
     /* Order's things */
 
 return (
@@ -135,7 +126,7 @@ Zarejestrowany przez:
 <h1>Historia zakupów</h1>
 
 <div className="orders-list">
-{TransactionList.map(item => <>
+ {/* */}
    <div className="container-for-etc">
 
    <div className='row-for-etc'>
@@ -152,7 +143,7 @@ Zarejestrowany przez:
 
    </div>
    </div>
-</>)}
+{/* */}
 </div>
 
 </div>

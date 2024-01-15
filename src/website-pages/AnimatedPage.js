@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes, useLocation } from 'react-router-dom'
 
-
 /* page's */
 
 import Allproducts from './Allproducts';
@@ -26,9 +25,6 @@ import { Confirmation } from "../components/checkout/Confirmation";
 const AnimatedPage = ({
 ProductList,
 ToastMessReg,
-SignGoogle,
-SignFB,
-SignOut,
 userName,
 setUserName,
 userMail,
@@ -37,18 +33,17 @@ userPassword,
 setUserPassword,
 userPasswordRepeat,
 setUserPasswordRepeat,
-DatabaseAddUser,
-RegisterU,
+DatabaseAddUser, 
 ToastContainer,
-currentUser,
-LoginU,
+currentUser, 
 toast,
 categories,
 onFilterCategory,
 itemsQuantity,
 setItemsQuantity,
 onCategoryFilter,
-allData
+allData,
+setProductList
 }) => {
 
 const location = useLocation()
@@ -58,7 +53,7 @@ return (
 <Routes key={location.pathname} location={location}>
 <Route 
 exact path='/' 
-element={<Products ProductList={ProductList}/>}>
+element={<Products />}>
 </Route>
 
 <Route 
@@ -97,8 +92,6 @@ element={<Checkout/>}>
 exact path="/rejestracja"
 element={<RegisterPage
 ToastMessReg={ToastMessReg}
-SignGoogle={SignGoogle}
-SignFB={SignFB}
 userName={userName}
 setUserName={setUserName}
 userMail={userMail}
@@ -107,22 +100,18 @@ userPassword={userPassword}
 setUserPassword={setUserPassword}
 userPasswordRepeat={userPasswordRepeat}
 setUserPasswordRepeat={setUserPasswordRepeat}
-DatabaseAddUser={DatabaseAddUser}
-RegisterU={RegisterU}
+DatabaseAddUser={DatabaseAddUser} 
 ToastContainer={ToastContainer}
 />}>
 </Route>
 
 <Route
 exact path="/logowanie"
-element={<Login
-  SignGoogle={SignGoogle}
-  SignFB={SignFB}
+element={<Login 
   userMail={userMail}
   setUserMail={setUserMail}
   userPassword={userPassword}
-  setUserPassword={setUserPassword}
-  LoginU={LoginU}
+  setUserPassword={setUserPassword} 
   ToastContainer={ToastContainer}
 />}
 >
@@ -132,8 +121,7 @@ element={<Login
 <Route 
 exact path="/twoj-profil"
 element={<ProfilePage
-currentUser={currentUser}
-SignOut={SignOut}
+currentUser={currentUser} 
 />}>
 </Route>
 

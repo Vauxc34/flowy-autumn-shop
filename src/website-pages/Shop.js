@@ -3,16 +3,14 @@ import {BrowserRouter as Router, Routes, Route, useNavigate, useLocation} from '
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { doc, setDoc, addDoc, collection, getDocs, collectionGroup, query, onSnapshot, Firestore } from "firebase/firestore"; 
-import { getDatabase, ref, push, set, orderByChild } from "firebase/database";
-import { AnimatePresence } from 'framer-motion'
-import { db } from '../lib/config'
+import { getDatabase, ref, push, set, orderByChild } from "firebase/database"
+import { AnimatePresence } from 'framer-motion' 
 import { Link } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import { signInWithPopup } from 'firebase/auth'
 import { GoogleAuthProvider } from 'firebase/auth'
 import { FacebookAuthProvider } from 'firebase/auth'
-import { onAuthStateChanged } from 'firebase/auth';
-import { AuthThing, AuthSecond } from '../lib/config'
+import { onAuthStateChanged } from 'firebase/auth'; 
 import Cookies from 'js-cookie'
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
 import AnimatedPage from './AnimatedPage';
@@ -50,12 +48,7 @@ import ArrowMenu from '../images/ChevronDown.svg'
 
 /* image's */
 
-const Shop = () =>  {
-
-
-    const auth = getAuth()
-    let idUser = "qcC6uukDcp0yS7BkK0bf"   
-    
+const Shop = () =>  { 
 
     const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
 
@@ -65,11 +58,12 @@ const Shop = () =>  {
     const [Opener, setOpener] = useState(1)
     const [itemsQuantity, setItemsQuantity] = useState(0)
     
-    useEffect(() => { fetch('https://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(dat => setItemsQuantity(dat.length))})
+    //useEffect(() => { fetch('https://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(dat => setItemsQuantity(dat.length))})
 
     /* mobile menu */
 
 /* register thing's */
+
   const [error, setError] = useState('')
   const [userName, setUserName] = useState('')
   const [userMail, setUserMail] = useState('')
@@ -82,10 +76,7 @@ const Shop = () =>  {
     userName: 'fweew234',
     userMail: 'kaxowy12@gmail.com',
     Password: 'fweew234'
-  }])
-   
-
-    //console.log(allUserCollection)
+  }]) 
 
     const validatePassword = () => {
     let isValid = true
@@ -97,94 +88,6 @@ const Shop = () =>  {
     }
     return isValid
     }
-    const RegisterU = () => {
-        setError('')
-        if(validatePassword()) {
-            createUserWithEmailAndPassword(auth, userMail, userPassword).then((res) => {
-                console.log(res.user)
-                setCurrentUser(res.user)
-                toast.success('Pomyślnie zarejestrowano 🥳')
-              })
-            .catch(err => toast.error(err.message))
-        }
-    }
-    const SignGoogle = () => {
-    const auth = getAuth();
-    signInWithPopup(auth, AuthThing)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-        setCurrentUser(result.user)
-        toast.success('Pomyślnie zalogowano 😃')
-
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-    }
-    const SignFB = () => {
-      signInWithPopup(auth, AuthSecond)
-  .then((result) => {
-    const user = result.user;
-    setCurrentUser(result.user)
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken; 
-    toast.success('Pomyślnie zalogowano 😃')
-    
-  })
-  .catch((error) => { 
-    const errorCode = error.code;
-    const errorMessage = error.message; 
-    const email = error.customData.email; 
-    const credential = FacebookAuthProvider.credentialFromError(error); 
-    toast.error(errorMessage + errorCode)
-  });
-    }
-    const LoginU = () => {
-      signInWithEmailAndPassword(auth, userMail, userPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setCurrentUser(user)
-        toast.success('Pomyślnie zalogowano 😃')
-        
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        toast.error(error.message)
-      });
-    
-    }    
-    const SignOut = () => {
-    signOut(auth).then(() => {
-      toast.info('Wylogowano pomyślnie')
-      setCurrentUser(null)
-    console.log('Sign-out successful.')
-    }).catch((error) => {
-      toast.error('Coś poszło nie tak')
-    });
-    }
-    const DatabaseAddUser = async () => { 
-
-
-      if(userName == "" || userMail == "" || userPassword == "") {
-        toast.error('Nie uzupełniono wszystkich pól!')
-      } else {
-        const docRef = await addDoc(collection(db, "users"), {
-          UserNickName: userName,
-          UserEmail: userMail,
-          Password: userPassword,
-        });
-      }
-      
-    }
     
   useEffect(() => {
     const data = localStorage.getItem('currentUser');
@@ -192,59 +95,29 @@ const Shop = () =>  {
       setCurrentUser(JSON.parse(data))
     }
   }, []);
+
   useEffect(() => {
     localStorage.setItem('currentUser', JSON.stringify(currentUser))
-  })
- 
+  }) 
 
 /* register thing's */
-
-/* product's */
-
-  const [ProductList, setProductList] = useState([ 
-  {
-    id: 1,
-    data:{
-      title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
-    }
-  },
-  { 
-    id: 2,
-    data:{
-      title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
-    }
-  },
-  {
-    id: 3,
-    data:{
-      title: 'lorem ipsum', quantity: 34, price: 9.99, category: "rolki"
-    }
-  }
-  ])
-
+  
   /* categorie's */
 
-const [allData, setData] = useState(ProductList)
+//const [allData, setData] = useState(ProductList)
 
 const generateCategoryDropdown = () => {
-return [...new Set(ProductList.map((item) => item.main_category))]
+//return [...new Set(ProductList.map((item) => item.main_category))]
 }
 /* categorie's */
 
-  useEffect(() => {
-    fetch('https://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setProductList(products));
-  }, []); 
-  useEffect(() => {
-    fetch('https://candle-af-shop.appspot.com/products/').then(data => data.json()).then(products => setData(products));
-   }, []); 
-
    const handleFilterCategory = (category) => {
-    const filteredData = ProductList.filter((item) => {
+    /*const filteredData = ProductList.filter((item) => {
       if (item.main_category === category) {
         return item;
       }
     });
-    setData(filteredData);
+    setData(filteredData);*/
 };
 
 /* product's */
@@ -265,12 +138,8 @@ return [...new Set(ProductList.map((item) => item.main_category))]
             </ul>
         </div>
 <AnimatePresence>
-<AnimatedPage
-ProductList={ProductList}
-ToastMessReg={ToastMessReg}
-SignGoogle={SignGoogle}
-SignFB={SignFB}
-SignOut={SignOut}
+<AnimatedPage 
+ToastMessReg={ToastMessReg} 
 userName={userName}
 setUserName={setUserName}
 userMail={userMail}
@@ -279,15 +148,12 @@ userPassword={userPassword}
 setUserPassword={setUserPassword}
 userPasswordRepeat={userPasswordRepeat}
 setUserPasswordRepeat={setUserPasswordRepeat}
-DatabaseAddUser={DatabaseAddUser}
-RegisterU={RegisterU}
 ToastContainer={ToastContainer}
 currentUser={currentUser}
-LoginU={LoginU}
 categories={generateCategoryDropdown()}
 onFilterCategory={handleFilterCategory}
 toast={toast}
-allData={allData}
+//allData={allData}
 />
 
 </AnimatePresence>
