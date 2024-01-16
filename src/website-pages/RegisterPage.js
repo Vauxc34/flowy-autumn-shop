@@ -1,28 +1,67 @@
 import React, { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+/* style stuff */
+
 import { motion } from 'framer-motion'
 
+/* style stuff */
+
 const RegisterPage = ({
-  SignGoogle,
-  SignFB,
-  userName,
-  setUserName,
-  userMail,
-  setUserMail,
-  userPassword,
-  setUserPassword,
-  userPasswordRepeat,
-  setUserPasswordRepeat,
-  DatabaseAddUser,
-  ToastMessReg,
-  RegisterU,
-  ToastContainer
+  ToastContainer,
+  setUser,
+  User
 }) => {
+
+  const navigate =  useNavigate()
+
+  const [userName, setUserName] = useState('')
+  const [userSurname, setUserSurname] = useState('')
+  const [userMail, setUserMail] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+  const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
+  const NewUserId = Math.floor(Math.random() * 999)
+
+  const RegisterNewUser = () => {
+
+    if(userName == '' || userSurname == '' || userMail == '' || userPassword == '' || userPasswordRepeat == '') {
+
+      toast.error('Nie uzupelniles pol')
+ 
+    }if(userPassword != userPasswordRepeat) {
+
+      toast.error('Haslo sie nie zgadza')
+
+    } else {
+
+    fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/`, {
+      method: 'POST',  
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify({
+          id: NewUserId,
+          name: userName,
+          surname: userSurname, 
+          mail: userMail,
+          password: userPassword,
+          role: "client"
+      })
+      }).then(res => res.status >= 400 ? toast.error('Nie mozna sie zalogowac') : res.json() )
+    .then(toast.success('Zarejestrowano')).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId}`, {
+        method: 'GET',  
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }).then(res => res.json()).then(data => setUser(data.content[0][0])).then(navigate('/')))}
+  }
 
   const handleSubmit = async e => {
     e.preventDefault()
   }
-
 
   return (
     <>
@@ -37,46 +76,52 @@ const RegisterPage = ({
 
     <div className='widget-description'>
 
-    <h1>🔑 Rejestracja</h1>
+      {User == null  ? <>
+    
+<h1>🔑 Rejestracja</h1>
 
-    <form onSubmit={handleSubmit}>
-      <div className='input-container'>
-      <label>Nazwa użytkownika</label><input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
-      </div>
+<form onSubmit={handleSubmit}>
+<div className='input-container'>
+<label>Imię</label><input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
+</div>
 
-      <div className='input-container'>
-      <label>Adres e-mail</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>
-      </div>
+<div className='input-container'>
+<label>Nazwisko</label><input type="text" value={userSurname} onChange={(e) => setUserSurname(e.target.value)}></input>
+</div>
 
-      <div className='input-container'>
-      <label>Hasło</label><input type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
-      </div>
+<div className='input-container'>
+<label>Adres e-mail</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>
+</div>
 
-      <div className='input-container'>
-      <label>Powtórz hasło</label><input type="password" value={userPasswordRepeat} onChange={(e) => setUserPasswordRepeat(e.target.value)}></input>
-      </div>
+<div className='input-container'>
+<label>Hasło</label><input type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
+</div>
+
+<div className='input-container'>
+<label>Powtórz hasło</label><input type="password" value={userPasswordRepeat} onChange={(e) => setUserPasswordRepeat(e.target.value)}></input>
+</div>
+
+<input type="submit" className='site-btn' onClick={RegisterNewUser} value={"Zarejestruj się"}></input>
+
+{/*<div className='container-wrapped'>
+<input 
+type="submit" 
+className='site-btn google_col' 
+value={"Zaloguj się z G"} 
+></input>
+<input type="submit" className='site-btn facebook_col' value={"Zaloguj się z FB"}></input>
+<h4>Posiadasz konto? <Link to='/logowanie'>Zaloguj się</Link></h4>
+</div>*/}
+<ToastContainer/>
+</form>
 
 
-      <input type="submit" className='site-btn' onClick={()=>{RegisterU();DatabaseAddUser()}} value={"Zarejestruj się"}></input>
 
-      <div className='container-wrapped'>
-        <input 
-        type="submit" 
-        className='site-btn google_col' 
-        value={"Zaloguj się z G"}
-        onClick={SignGoogle}
-        ></input>
-        <input type="submit" className='site-btn facebook_col' onClick={SignFB} value={"Zaloguj się z FB"}></input>
-        <h4>Posiadasz konto? <Link to='/logowanie'>Zaloguj się</Link></h4>
-        <ToastContainer/>
-      </div>
 
-    </form>
+</> : <h4>Nie znaleziono 404</h4>   }
 
-    </div>
-
-    </div>
-
+</div>
+</div>
     </motion.section>
 
     </>

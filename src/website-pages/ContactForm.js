@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
+
+/* style stuff */
+
 import { motion } from 'framer-motion'
+
+/* style stuff */
 
 const ContactForm = ({
     userName,
@@ -13,7 +18,7 @@ const ContactForm = ({
   const [userPhone, setUserPhone] = useState('')
   const [userMessage, setUserMessage] = useState('')
 
-const SendingEmail = (e) => {
+  const SendingEmail = (e) => {
     let MailInfo = () => toast("Jesteśmy w kontakcie!")
     if(userName == ""|| 
     userMail == "" || 
@@ -27,19 +32,18 @@ const SendingEmail = (e) => {
             e.preventDefault()
             MailInfo = toast?.success('Wysłano pomyślnie wiadomość!');
             window.Email.send({
-                Host : "smtp.elasticemail.com",
-                Username : "amalinowski575@gmail.com",
-                Password : "A544B306F194EE26EB6D6E750942EFD05995",
-                To : 'amalinowski575@gmail.com',
-                From : "amalinowski575@gmail.com",
-                Subject : "This is the subject",
+                Host : process.env.REACT_APP_HOST_MAIL,
+                Username : process.env.REACT_APP_MAIL_MAIL,
+                Password : process.env.REACT_APP_HOST_PASSWORD,
+                To : process.env.REACT_APP_MAIL_MAIL,
+                From : process.env.REACT_APP_MAIL_MAIL,
+                Subject : `New message from the - ${userMail}`,
                 Body : userMessage + userName + userPhone + userMail,
             }).then(message => MailInfo()
             
 
         )}
-}
-
+  }
 
   return (
     <>

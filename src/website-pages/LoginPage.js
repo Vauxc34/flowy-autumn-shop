@@ -1,21 +1,52 @@
-import React, { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useRef, useEffect } from 'react'
+import { Link, redirect,  useNavigate  } from 'react-router-dom' 
+import { toast } from 'react-toastify'
+
+/* style stuff */
+
 import { motion } from 'framer-motion'
 
-const RegisterPage = ({
-  SignGoogle,
-  SignFB,
-  userMail,
-  setUserMail,
-  userPassword,
-  setUserPassword,
-  LoginU,
+/* style stuff */
+
+const LoginPage = ({ 
+  User,
+  setUser,
   ToastContainer
 }) => {
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const [userMail, setUserMail] = useState('')
+  const [userPassword, setUserPassword] = useState('') 
+  const navigate = useNavigate();
+
+  const handleSetUser = (data) => {
+      setUser(data.mess[0])
+      if(data) {
+
+        navigate('/')
+
+      }  
   }
+
+  const LogInNewUser = () => {
+
+    fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/login`, {
+      method: 'POST',  
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify({
+        mail: userMail,
+        password: userPassword
+      })
+      }).then(res => res.json()).then(data =>  setUser(data.mess[0]))
+
+           
+   
+
+  }
+
+
 
   return (
     <>
@@ -30,21 +61,23 @@ const RegisterPage = ({
 
     <div className='widget-description'>
 
+      {User == null ?   <>
+    
     <h1>🔑 Logowanie</h1>
 
-    <form onSubmit={handleSubmit}>
+     
 
-      <div className='input-container'>
+      <div className='input-container' style={{ width: '90%' }} >
       <label>Adres e-mail</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>
       </div>
 
-      <div className='input-container'>
+      <div className='input-container' style={{ width: '90%' }} >
       <label>Hasło</label><input type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
       </div>
 
-      <input type="submit" className='site-btn' onClick={LoginU} value={"Zaloguj się"}></input>
+      <input type="submit" className='site-btn' onClick={LogInNewUser} value={"Zaloguj się"}></input>
 
-      <div className='container-wrapped'>
+      {/*<div className='container-wrapped'>
         <input 
         type="submit" 
         className='site-btn google_col' 
@@ -58,18 +91,27 @@ const RegisterPage = ({
         value={"Zaloguj się z FB"}
         ></input>
         <h4>Powrót do <Link to='/rejestracja'>rejestracji</Link></h4>
-      </div>
-    <ToastContainer/>
-    </form>
+  </div>*/}
+   
+    </> : <>
+
+    <h4>Zostales zalgowany!</h4>
+    <Link to="/"><h5>Przejdz na sklep</h5></Link>
+
+    </>}   
 
     </div>
+    <ToastContainer/>
+
 
     </div>
 
     </motion.section>
 
     </>
+
+ 
   )
 }
 
-export default RegisterPage
+export default LoginPage

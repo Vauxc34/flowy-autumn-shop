@@ -8,11 +8,10 @@ const ProductPage = ({
     ToastContainer,
     toast,
 }) => {
-
     
-    let location = useLocation() 
+    let location = useLocation()
 
-    const [Product, setProduct] = useState({})
+    const [Product, setProduct] = useState('')
     const [ProductList, setProductList] = useState([ 
         {
           id: 1,
@@ -32,7 +31,7 @@ const ProductPage = ({
             title: 'lorem ipsum', quantity: 34, price: 9.99, category: "rolki"
           }
         }
-        ])
+    ])
 
     useEffect(() => {
 
@@ -46,9 +45,6 @@ const ProductPage = ({
     }, [])
 
     const  ProductLink  = location.pathname.split('/', 3)[2]  
-      
-    const [ColorItem, setColorItem] = useState('')
-    const [Error, setError] = useState()
 
     useEffect(() => {
 
@@ -60,7 +56,6 @@ const ProductPage = ({
               }}).then(res => res.json()).then(data => setProduct(data.prod))
 
     }, [])
- 
 
 return (
 <>

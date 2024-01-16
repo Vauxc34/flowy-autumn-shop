@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { connect } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-
 import logo from '../images/logo.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -23,16 +22,15 @@ export const Navbar = ({
     itemsQuantity,
     setItemsQuantity,
     OpenMobileMenu, 
-    currentUser }) => {
-    
-    const location = useLocation()
-    const navigate = useNavigate()    
-    let idUser = 'qcC6uukDcp0yS7BkK0bf'
-
+    User,
+    setUser,
+}) => {
+     
+    const navigate = useNavigate()     
     const [HamburgerOpen, isHamburgerOpen] = useState(1)
     const [Hamburger, setHamburger] = useState('unactive-pop')
-    const [UserName, setUserName] = useState(currentUser)
-    const [ProfileUser, setProfileUser] = useState(currentUser)
+    const [UserName, setUserName] = useState('test')
+    const [ProfileUser, setProfileUser] = useState('test')
 
     const HandleMenuOpen = () => {
         isHamburgerOpen(HamburgerOpen + 1)
@@ -58,15 +56,20 @@ export const Navbar = ({
     function GoToContact() {
         navigate('/kontakt')
     }
+
+    const LogOut = () => {
+        setUser(null)
+    }
+
     useEffect(() => {
-        if(currentUser) {
-            setUserName("Witaj, " + currentUser?.displayName)
-            setProfileUser(currentUser?.photoURL)
+        if(User) {
+            setUserName("Witaj, " + User?.name)
+            setProfileUser(User ? `https://static-00.iconduck.com/assets.00/user-profile-icon-512x512-pdqa839q.png` : question_mark)
         } else {
             setUserName('Nie zalogowano')
         }
-        console.log(currentUser)
-    }, [currentUser])
+    }, [User])
+
     return (
         <>
         
@@ -82,13 +85,14 @@ export const Navbar = ({
                     <li class="nav-option" onClick={GoToProfile}>
                         <img src={ProfileIcon} alt="navbar ico" class="user_icon"/>
                         </li>
-                        <div className='popup-navbar first_bar'>
-                        <img className='profile-pic' src={currentUser ? ProfileUser :  question_mark} />
-                        <h4>{UserName}</h4></div>
+                        {/*<div className='popup-navbar first_bar'>
+                        <img className='profile-pic' src={User ? ProfileUser :  question_mark} />
+                        <h4>{UserName}</h4>
+                        
+                        {User == null ? null : <button onClick={LogOut} style={{maxWidth: '40%', alignSelf: 'center', margin: '1em .5em .5em 0em', fontSize: '10px', padding: '1em' }} class="site-btn">Wyloguj sie</button> }
+
+    </div>*/}
                     <li class="nav-option" onClick={GoToCart}><img src={CartIcon} alt="navbar ico" class="cart_icon"/></li>
-                        <div className='popup-navbar second_bar'>
-                        <img className='profile-pic' src='' />
-                        <h4>Anthony Barbara</h4> </div>
                     <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: itemsQuantity}}></div>
                 </ul>
         </div>

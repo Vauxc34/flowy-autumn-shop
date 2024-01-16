@@ -33,15 +33,15 @@ id="products-all">
 
     <h3>A co tym razem szukamy?</h3>
 
-
     <select required 
         id="category" 
         name="category-list" 
         placeholder='Wybierz markę'  
-        onChange={handleInput("category")}>
-             {categories.map(brand => (
+        //onChange={handleInput("category")}
+        >
+             {/*categories.map(brand => (
                 <option value={brand} key={brand}>{brand}</option>
-              ))}
+             ))*/}
         </select>
 
     </div>
@@ -57,7 +57,7 @@ id="products-all">
 
             <div class="product-grid">
 
-            {allData.map(item => <div class="product-itself">
+            {/*allData.map(item => <div class="product-itself">
             <div onClick="" class="product-img" style={{ 
               background: `url(${item.image}) 50% 50%`, 
               backgroundSize: '100%', 
@@ -67,7 +67,7 @@ id="products-all">
             <span class="price-product">{item.price} zł</span>
             </div>
             </div>
-            )}
+            )*/}
 
             </div>
 

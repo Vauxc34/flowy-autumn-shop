@@ -16,7 +16,7 @@ import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} fro
 import AnimatedPage from './AnimatedPage';
 import { initReactI18next,  useTranslation } from 'react-i18next';
 import I18nextBrowserLanguageDetector from 'i18next-browser-languagedetector';
-import i18n from "i18next"
+import i18n, { use } from "i18next"
 import i18next from 'i18next'
 import HttpApi from 'i18next-http-backend'
 
@@ -57,19 +57,20 @@ const Shop = () =>  {
     const [MobileMenu, setMobileMenu] = useState('navbar-menu')
     const [Opener, setOpener] = useState(1)
     const [itemsQuantity, setItemsQuantity] = useState(0)
-    
-    //useEffect(() => { fetch('https://candle-af-shop.appspot.com/cart/see-cart/' + idUser, {method: 'POST'}).then(data =>  data.json()).then(dat => setItemsQuantity(dat.length))})
 
     /* mobile menu */
 
 /* register thing's */
 
+  const [User, setUser] = useState(null)
+
+  console.log(User)
+
   const [error, setError] = useState('')
   const [userName, setUserName] = useState('')
   const [userMail, setUserMail] = useState('')
   const [userPassword, setUserPassword] = useState('')
-  const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
-  const [currentUser, setCurrentUser] = useState(null)
+  const [userPasswordRepeat, setUserPasswordRepeat] = useState('') 
   const [usersID, setUsersId] = useState([])
   const [userMailToSet, setUserMailToSet] = useState('test@wp.pl')
   const [allUserCollection, setUserCollection] = useState([{ 
@@ -90,35 +91,21 @@ const Shop = () =>  {
     }
     
   useEffect(() => {
-    const data = localStorage.getItem('currentUser');
+    const data = localStorage.getItem('User');
     if(data) {
-      setCurrentUser(JSON.parse(data))
+      setUser(JSON.parse(data))
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('currentUser', JSON.stringify(currentUser))
+    localStorage.setItem('User', JSON.stringify(User))
   }) 
 
 /* register thing's */
   
   /* categorie's */
-
-//const [allData, setData] = useState(ProductList)
-
-const generateCategoryDropdown = () => {
-//return [...new Set(ProductList.map((item) => item.main_category))]
-}
-/* categorie's */
-
-   const handleFilterCategory = (category) => {
-    /*const filteredData = ProductList.filter((item) => {
-      if (item.main_category === category) {
-        return item;
-      }
-    });
-    setData(filteredData);*/
-};
+ 
+ 
 
 /* product's */
 
@@ -126,7 +113,8 @@ const generateCategoryDropdown = () => {
 
         <div class="wrapper">
             <Navbar 
-            currentUser={currentUser} 
+            User={User}
+            setUser={setUser}
             itemsQuantity={itemsQuantity} 
             setItemsQuantity={setItemsQuantity}
             />
@@ -139,6 +127,8 @@ const generateCategoryDropdown = () => {
         </div>
 <AnimatePresence>
 <AnimatedPage 
+User={User}
+setUser={setUser}
 ToastMessReg={ToastMessReg} 
 userName={userName}
 setUserName={setUserName}
@@ -148,12 +138,8 @@ userPassword={userPassword}
 setUserPassword={setUserPassword}
 userPasswordRepeat={userPasswordRepeat}
 setUserPasswordRepeat={setUserPasswordRepeat}
-ToastContainer={ToastContainer}
-currentUser={currentUser}
-categories={generateCategoryDropdown()}
-onFilterCategory={handleFilterCategory}
-toast={toast}
-//allData={allData}
+ToastContainer={ToastContainer}   
+toast={toast} 
 />
 
 </AnimatePresence>
@@ -170,7 +156,7 @@ toast={toast}
                     <ul class="footer-nav-links">
                     <li class="footer-nav-main">Zakładki</li>
                     <li><Link to='/'>Strona główna</Link></li>
-                    <li><Link to='/rejestracja'>Zarejestruj się</Link></li>
+                    {User ? null : <li><Link to='/rejestracja'>Zarejestruj się</Link></li>}
                     <li><Link to='/twoj-profil'>Twój profil</Link></li>
                     </ul>
                     <ul class="footer-nav-links">

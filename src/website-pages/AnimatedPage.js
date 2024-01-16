@@ -23,27 +23,22 @@ import { Confirmation } from "../components/checkout/Confirmation";
 /* component's */
 
 const AnimatedPage = ({
+User,
+setUser,
 ProductList,
 ToastMessReg,
 userName,
 setUserName,
 userMail,
 setUserMail,
-userPassword,
-setUserPassword,
-userPasswordRepeat,
-setUserPasswordRepeat,
-DatabaseAddUser, 
-ToastContainer,
-currentUser, 
+ToastContainer, 
 toast,
 categories,
 onFilterCategory,
 itemsQuantity,
 setItemsQuantity,
 onCategoryFilter,
-allData,
-setProductList
+allData, 
 }) => {
 
 const location = useLocation()
@@ -80,7 +75,7 @@ allData={allData}
 
 <Route 
 exact path='/koszyk' 
-element={<Cart/> }>
+element={<Cart User={User}/> }>
 </Route>
 
 <Route 
@@ -91,27 +86,18 @@ element={<Checkout/>}>
 <Route 
 exact path="/rejestracja"
 element={<RegisterPage
+User={User}
+setUser={setUser}
 ToastMessReg={ToastMessReg}
-userName={userName}
-setUserName={setUserName}
-userMail={userMail}
-setUserMail={setUserMail}
-userPassword={userPassword}
-setUserPassword={setUserPassword}
-userPasswordRepeat={userPasswordRepeat}
-setUserPasswordRepeat={setUserPasswordRepeat}
-DatabaseAddUser={DatabaseAddUser} 
 ToastContainer={ToastContainer}
 />}>
 </Route>
 
 <Route
 exact path="/logowanie"
-element={<Login 
-  userMail={userMail}
-  setUserMail={setUserMail}
-  userPassword={userPassword}
-  setUserPassword={setUserPassword} 
+element={<Login  
+  User={User}
+  setUser={setUser}
   ToastContainer={ToastContainer}
 />}
 >
@@ -120,9 +106,7 @@ element={<Login
 
 <Route 
 exact path="/twoj-profil"
-element={<ProfilePage
-currentUser={currentUser} 
-/>}>
+element={<ProfilePage User={User} setUser={setUser}/>}>
 </Route>
 
 <Route
