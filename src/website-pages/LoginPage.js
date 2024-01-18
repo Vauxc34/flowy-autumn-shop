@@ -39,14 +39,9 @@ const LoginPage = ({
         mail: userMail,
         password: userPassword
       })
-      }).then(res => res.json()).then(data =>  setUser(data.mess[0]))
-
-           
-   
+      }).then(res => res.status >= 401 ? toast.error('Wprowadzono zle dane') : res.json()).then(data =>  setUser(data.mess[0]))
 
   }
-
-
 
   return (
     <>
@@ -63,9 +58,7 @@ const LoginPage = ({
 
       {User == null ?   <>
     
-    <h1>🔑 Logowanie</h1>
-
-     
+      <h1>🔑 Logowanie</h1>
 
       <div className='input-container' style={{ width: '90%' }} >
       <label>Adres e-mail</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>

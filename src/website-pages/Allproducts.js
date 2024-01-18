@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion';
-const Allproducts = ({ 
-  categories,
-  onFilterCategory,
-  allData
-}) => {
-  
-const [filters, setFilters] = useState({ category: "", from: "", to: "" });
 
-const handleInput = (field) => (event) => {
-      const { value } = event.target;
-      setFilters({ 
-        ...filters, 
-        [field]: value,
-      });
-      if(field === "category") {
-        onFilterCategory(value);
-      }
-};
+const Allproducts = () => {
+
+const [ProductList, setProductList] = useState([]) 
+const [ActualSelectedCategory, setActualSelectedCategory] = useState('Nie wybrano')
+
+const Categories = [
+  { name: 'Nie wybrano' }, { name: 'Kremy' }, { name: 'Balsamy' }, { name: 'Kleje' },
+]
+
+useEffect(() => {
+  fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
+    method: 'GET',  
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+}}).then(res => res.json()).then(data => setProductList(data.prod))
+}, [])
 
 return (
     
@@ -33,16 +33,15 @@ id="products-all">
 
     <h3>A co tym razem szukamy?</h3>
 
-    <select required 
+    {/*<select required 
         id="category" 
         name="category-list" 
-        placeholder='Wybierz markę'  
-        //onChange={handleInput("category")}
+        placeholder='Wybierz markę'   
         >
-             {/*categories.map(brand => (
-                <option value={brand} key={brand}>{brand}</option>
-             ))*/}
-        </select>
+             {Categories.map(item => (
+                <option value={item.name}>{item.name}</option>
+             ))}
+             </select>*/}
 
     </div>
 
@@ -57,17 +56,17 @@ id="products-all">
 
             <div class="product-grid">
 
-            {/*allData.map(item => <div class="product-itself">
+            {ProductList.map(item => <div class="product-itself">
             <div onClick="" class="product-img" style={{ 
               background: `url(${item.image}) 50% 50%`, 
               backgroundSize: '100%', 
               }}></div>
             <div class="description-box-product" onClick={() => window.location.replace('/produkt/' + item.id)}>
-            <h5 class="title-product" >{item.title}</h5>
+            <h5 class="title-product" >{item.name}</h5>
             <span class="price-product">{item.price} zł</span>
             </div>
             </div>
-            )*/}
+            )}
 
             </div>
 

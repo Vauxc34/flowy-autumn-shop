@@ -24,6 +24,7 @@ import { Confirmation } from "../components/checkout/Confirmation";
 
 const AnimatedPage = ({
 User,
+UserCart,
 setUser,
 ProductList,
 ToastMessReg,
@@ -55,27 +56,19 @@ element={<Products />}>
 exact path='/produkt/:id' 
 element={<ProductPage 
 ToastContainer={ToastContainer}
-toast={toast}
-itemsQuantity={itemsQuantity}
-setItemsQuantity={setItemsQuantity}
+toast={toast} 
+User={User}
 ProductList={ProductList}/>}>
 </Route>
 
 <Route
 exact path="/produkty"
-element={<Allproducts 
-categories={categories}
-onFilterCategory={onFilterCategory}
-ProductList={ProductList}
-onCategoryFilter={onCategoryFilter}
-allData={allData}
-/>}
->
+element={<Allproducts categories={categories} onFilterCategory={onFilterCategory} ProductList={ProductList} onCategoryFilter={onCategoryFilter} allData={allData} />}>
 </Route>
 
 <Route 
 exact path='/koszyk' 
-element={<Cart User={User}/> }>
+element={<Cart User={User} UserCart={UserCart}/> }>
 </Route>
 
 <Route 

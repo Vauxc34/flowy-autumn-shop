@@ -18,19 +18,11 @@ import ProfileIcon from '../images/Profile.svg'
 import CartIcon from '../images/Cart.svg'
 import question_mark from '../images/question_mark.png'
 
-export const Navbar = ({ 
-    itemsQuantity,
-    setItemsQuantity,
-    OpenMobileMenu, 
-    User,
-    setUser,
-}) => {
+export const Navbar = ({ User, UserCart }) => {
      
     const navigate = useNavigate()     
     const [HamburgerOpen, isHamburgerOpen] = useState(1)
-    const [Hamburger, setHamburger] = useState('unactive-pop')
-    const [UserName, setUserName] = useState('test')
-    const [ProfileUser, setProfileUser] = useState('test')
+    const [Hamburger, setHamburger] = useState('unactive-pop') 
 
     const HandleMenuOpen = () => {
         isHamburgerOpen(HamburgerOpen + 1)
@@ -41,66 +33,31 @@ export const Navbar = ({
             setHamburger('unactive-pop')
         }
     }
-    function GoToMainPage() {
-        navigate('/')
-    }
-    function GoToCart() {
-        navigate('/koszyk')
-    }
-    function GoToProfile() {
-        navigate('/twoj-profil')
-    }
-    function GoToProducts() {
-        navigate('/produkty')
-    }
-    function GoToContact() {
-        navigate('/kontakt')
-    }
-
-    const LogOut = () => {
-        setUser(null)
-    }
-
-    useEffect(() => {
-        if(User) {
-            setUserName("Witaj, " + User?.name)
-            setProfileUser(User ? `https://static-00.iconduck.com/assets.00/user-profile-icon-512x512-pdqa839q.png` : question_mark)
-        } else {
-            setUserName('Nie zalogowano')
-        }
-    }, [User])
-
+    
     return (
         <>
         
         <div className="header">
             <img src={HamburgerMenuSVG} alt="hamburger" class="navbar_icon" onClick={HandleMenuOpen}/>
-            <img src={SomeLogo} alt="logo" class="logo" onClick={GoToMainPage}/>
+            <img src={SomeLogo} alt="logo" class="logo" onClick={() =>  navigate('/')}/>
                 <ul class="desktop-options">
-                    <li onClick={GoToMainPage} class="nav-option">Strona główna {/*<img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>*/}</li>
-                    <li onClick={GoToProducts} class="nav-option">Produkty</li>
-                    <li onClick={GoToContact} class="nav-option">Porozmawiaj z nami</li>
+                    <li onClick={() =>  navigate('/')} class="nav-option">Strona główna {/*<img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>*/}</li>
+                    <li onClick={() => navigate('/produkty')} class="nav-option">Produkty</li>
+                    <li onClick={() => navigate('/kontakt')} class="nav-option">Porozmawiaj z nami</li>
                 </ul>
                 <ul class="navigation-header">
-                    <li class="nav-option" onClick={GoToProfile}>
+                    <li class="nav-option" onClick={() =>  navigate('/twoj-profil')}>
                         <img src={ProfileIcon} alt="navbar ico" class="user_icon"/>
-                        </li>
-                        {/*<div className='popup-navbar first_bar'>
-                        <img className='profile-pic' src={User ? ProfileUser :  question_mark} />
-                        <h4>{UserName}</h4>
-                        
-                        {User == null ? null : <button onClick={LogOut} style={{maxWidth: '40%', alignSelf: 'center', margin: '1em .5em .5em 0em', fontSize: '10px', padding: '1em' }} class="site-btn">Wyloguj sie</button> }
-
-    </div>*/}
-                    <li class="nav-option" onClick={GoToCart}><img src={CartIcon} alt="navbar ico" class="cart_icon"/></li>
-                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: itemsQuantity}}></div>
+                        </li> 
+                    <li class="nav-option" onClick={() =>  navigate('/koszyk')}><img src={CartIcon} alt="navbar ico" class="cart_icon"/></li>
+                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: User ? JSON.parse(UserCart).length : 0 }}></div>
                 </ul>
         </div>
         <div className={`header-mobile ${Hamburger}`}>
         <ul>
-        <li onClick={GoToMainPage} class="nav-option">Strona główna</li>
-        <li onClick={GoToProducts} class="nav-option">Produkty</li>
-        <li onClick={GoToContact} class="nav-option">Porozmawiaj z nami</li>
+        <li onClick={() =>  navigate('/')} class="nav-option">Strona główna</li>
+        <li onClick={() => navigate('/produkty')} class="nav-option">Produkty</li>
+        <li onClick={() => navigate('/kontakt')} class="nav-option">Porozmawiaj z nami</li>
         </ul>
         </div>
 

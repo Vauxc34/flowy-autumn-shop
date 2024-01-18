@@ -2,60 +2,115 @@ import React, {useState, useEffect, useRef} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination } from 'swiper'
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion' 
 
 const ProductPage = ({
+    User,
     ToastContainer,
     toast,
 }) => {
     
     let location = useLocation()
+    const [Product, setProduct] = useState('') 
+    const [ProductList, setProductList] = useState('')
+    const [ActualUserCart, setActualUserCart] = useState('')
+    const [QuantityOfProduct, setQuantityOfProduct] = useState(1) 
+    const [ButtonCartVisible, setButtonCartVisible] = useState(false)
+    const ProductLink = location.pathname.split('/', 3)[2]  
+     
+    const findItemById = (items) => {
+        return items.find(item => item.id == ProductLink);
+    }
 
-    const [Product, setProduct] = useState('')
-    const [ProductList, setProductList] = useState([ 
-        {
-          id: 1,
-          data:{
-            title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
-          }
-        },
-        { 
-          id: 2,
-          data:{
-            title: 'lorem ipsum', quantity: 34, price: 9.99, category: "książki"
-          }
-        },
-        {
-          id: 3,
-          data:{
-            title: 'lorem ipsum', quantity: 34, price: 9.99, category: "rolki"
-          }
-        }
-    ])
+    const GetItemIndex = (items) => {
+        return items.findIndex(item => item.id == ProductLink);
+    }
+
+    const AddProductToAcart = () => {  
+        setButtonCartVisible(true)
+        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/create`, {
+            method: 'POST',  
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                id: User.cartId,
+                idProd: ProductLink,
+                quantity: QuantityOfProduct
+            })
+        }).then(res => res.json()).then(data => toast.success('Dodales produkt'))         
+    }
+
+    const ModifyProductInAcart = () => {      
+        const items = JSON.parse(ActualUserCart.products);
+        const foundIndex = GetItemIndex(items, ProductLink);
+        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
+            method: 'POST',  
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                id: User.cartId,
+                Obj: ProductLink,
+                IndexO: foundIndex,
+                num_prod:  QuantityOfProduct
+            })
+        }).then(res => res.json()).then(data => toast.success('Dodales produkt'))
+    }
 
     useEffect(() => {
-
-            fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
-                method: 'GET',  
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  }}).then(res => res.json()).then(data => setProductList(data.prod))
-    
-    }, [])
-
-    const  ProductLink  = location.pathname.split('/', 3)[2]  
-
-    useEffect(() => {
-
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/${ProductLink}`, {
             method: 'GET',  
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-              }}).then(res => res.json()).then(data => setProduct(data.prod))
+        }}).then(res => res.json()).then(data => setProduct(data.prod))
+    }, [ProductLink])
 
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
+                    method: 'GET',  
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+        }}).then(res => res.json()).then(data => setProductList(data.prod))
     }, [])
+
+    useEffect(() => {
+        if (User != null) {
+            fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                setActualUserCart(data.content[0][0]);
+                return data.content[0][0]; 
+            })
+            .then((actualUserCart) => {
+                if (actualUserCart && actualUserCart.products !== '') {
+                    const items = JSON.parse(actualUserCart.products);
+                    const foundItem = findItemById(items, ProductLink);
+                    
+
+                    if(foundItem) {
+                        setButtonCartVisible(true)
+                    } else {
+                        setButtonCartVisible(false)
+                    }
+
+                } else {
+                    console.log('no item');
+                }
+            })
+            .catch(error => console.error('Error fetching cart:', error));
+        }
+    }, [User, ProductLink]);
 
 return (
 <>
@@ -92,20 +147,26 @@ exit={{ opacity: 0 }}
     
     <span className='price-etc'>{Product.price} zł</span>
 
-    {/*<div className='quantity-box-container'>
-    <p>Quantity</p>
+    {User ?  <div className='quantity-box-container'>
+    <p style={{ alignSelf: 'flex-start' }}>Ilość</p>
     <div className='quantity-box'>
     <div className='select-item-quantity'>
-    <div onClick={HandleChangeUserQuantity} name='plus' className='p__'>
+    <div name='plus' className='p__' onClick={() => setQuantityOfProduct(QuantityOfProduct + 1)}>
         +
     </div>
-    <span className='p_quantity-itself'>{userQuantity}</span>
-    <div onClick={HandleChangeUserQuantity} name='minus' className='p__'>
+    <span className='p_quantity-itself'>{QuantityOfProduct}</span>
+    <div name='minus' className='p__' onClick={() => { 
+        setQuantityOfProduct(QuantityOfProduct - 1)
+        if(QuantityOfProduct == 1 ) { setQuantityOfProduct(1) } }}>
         -
     </div>
     </div>
     </div>
-</div>*/}
+    </div>
+
+    : null}
+
+   
 
 </div>
 <div className='container-for-product-delivery'>    
@@ -121,12 +182,12 @@ exit={{ opacity: 0 }}
     
     </div>
 
-    <button className='site-btn' /*onClick={HandleAddToCart}*/ id="buy_btn">Dodaj do koszyka</button>
+    {User ? <> {ButtonCartVisible ? <button className='site-btn' onClick={ModifyProductInAcart} id="buy_btn">Dodaj do koszyka #232</button> : <button className='site-btn' onClick={AddProductToAcart} id="buy_btn">Dodaj do koszyka</button>} </> : <button className='site-btn' id="buy_btn">Nie jestes zalogowany</button>} 
 
 </div>
 </div>
 
-<div className='product-parameters'>
+{/*<div className='product-parameters'>
 
     <h4>Specyfikacja:</h4>
 
@@ -173,7 +234,7 @@ exit={{ opacity: 0 }}
     </span>
     </div>
 
-</div>
+</div>*/}
 
     <h1>Pozostałe produkty 👇</h1>
 
@@ -193,7 +254,7 @@ exit={{ opacity: 0 }}
         modules={[EffectCoverflow, Pagination]}
         className="mySwiper"
       >
-       {ProductList.map(item => 
+       {ProductList == '' ? null : ProductList.map(item => 
         <SwiperSlide key={item}>
         <div class="product-itself" style={{ position: 'absolute', zIndex: 32 }} onClick={() => window.location.replace('/produkt/' + item.id)}>
             <div onClick="" class="product-img" style={{ background: `url(${item.image}) 50% 50%`, backgroundSize: 'cover' }}></div>

@@ -54,70 +54,69 @@ const Shop = () =>  {
 
     /* mobile menu */
 
-    const [MobileMenu, setMobileMenu] = useState('navbar-menu')
-    const [Opener, setOpener] = useState(1)
-    const [itemsQuantity, setItemsQuantity] = useState(0)
+    const [MobileMenu, setMobileMenu] = useState('navbar-menu') 
 
     /* mobile menu */
 
 /* register thing's */
 
-  const [User, setUser] = useState(null)
-
-  console.log(User)
-
-  const [error, setError] = useState('')
+  const [User, setUser] = useState(null)  
+  const [UserCart, setUserCart] = useState([])
   const [userName, setUserName] = useState('')
   const [userMail, setUserMail] = useState('')
   const [userPassword, setUserPassword] = useState('')
-  const [userPasswordRepeat, setUserPasswordRepeat] = useState('') 
-  const [usersID, setUsersId] = useState([])
-  const [userMailToSet, setUserMailToSet] = useState('test@wp.pl')
-  const [allUserCollection, setUserCollection] = useState([{ 
-    userName: 'fweew234',
-    userMail: 'kaxowy12@gmail.com',
-    Password: 'fweew234'
-  }]) 
-
-    const validatePassword = () => {
-    let isValid = true
-    if (userPassword !== '' && userPasswordRepeat !== ''){
-      if (userPassword !== userPasswordRepeat) {
-        isValid = false
-        setError('Passwords does not match')
-      }
-    }
-    return isValid
-    }
+  const [userPasswordRepeat, setUserPasswordRepeat] = useState('')  
     
   useEffect(() => {
     const data = localStorage.getItem('User');
+    const cart_data = localStorage.getItem('UserCart')
     if(data) {
       setUser(JSON.parse(data))
+      setUserCart(JSON.parse(cart_data))
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('User', JSON.stringify(User))
+    localStorage.setItem('UserCart', JSON.stringify(UserCart))
   }) 
 
 /* register thing's */
   
-  /* categorie's */
- 
- 
+/* cart */
+
+const [QuantityCartUser, setQuantityCartUser] = useState(0)
+
+const FetchCart = () => { 
+  fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
+      method: 'GET',  
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }        
+      }).then(res => res.json()).then(data => setUserCart(data.content[0][0].products))
+     // let RightProdData = JSON.parse(UserCart.products)
+      // setQuantityCartUser(RightProdData.length)
+
+      console.log(JSON.parse(UserCart).length)
+}  
+
+useEffect(() => {
+  if(User) {
+    FetchCart()
+  } else {}
+}, [User])
+
+
+
+/* cart */
 
 /* product's */
 
      return (
 
         <div class="wrapper">
-            <Navbar 
-            User={User}
-            setUser={setUser}
-            itemsQuantity={itemsQuantity} 
-            setItemsQuantity={setItemsQuantity}
-            />
+            <Navbar User={User} QuantityCartUser={QuantityCartUser} UserCart={UserCart}/>
             <div className={`${MobileMenu}`}>
             <ul>
                     <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>

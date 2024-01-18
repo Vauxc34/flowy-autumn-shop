@@ -22,9 +22,9 @@ const RegisterPage = ({
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
   const NewUserId = Math.floor(Math.random() * 999)
+  const NewCartId = Math.floor(Math.random() * 999)
 
   const RegisterNewUser = () => {
-
     if(userName == '' || userSurname == '' || userMail == '' || userPassword == '' || userPasswordRepeat == '') {
 
       toast.error('Nie uzupelniles pol')
@@ -47,7 +47,8 @@ const RegisterPage = ({
           surname: userSurname, 
           mail: userMail,
           password: userPassword,
-          role: "client"
+          role: "client",
+          cartId: NewCartId
       })
       }).then(res => res.status >= 400 ? toast.error('Nie mozna sie zalogowac') : res.json() )
     .then(toast.success('Zarejestrowano')).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId}`, {
@@ -56,7 +57,18 @@ const RegisterPage = ({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
-        }).then(res => res.json()).then(data => setUser(data.content[0][0])).then(navigate('/')))}
+        }).then(res => res.json()).then(data => setUser(data.content[0][0])).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${NewCartId}`, {
+          method: 'POST',  
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+          body: JSON.stringify({
+            id: NewCartId,
+            products: [], 
+            payment_method: "not_selected",
+            amount_of_money: 0
+          })})).then(navigate('/')))}
   }
 
   const handleSubmit = async e => {

@@ -37,12 +37,9 @@ const Products = ({  onAddToCart  }) => {
             title: 'lorem ipsum', quantity: 34, price: 9.99, category: "rolki"
           }
         }
-        ])
-      
+    ])
 
     const navigate = useNavigate()
-
-    //console.log(process.env.REACT_APP_ACTUAL_LINK_APPLICATION)
 
     useEffect(() => {
 
