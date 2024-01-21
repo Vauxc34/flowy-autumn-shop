@@ -8,6 +8,8 @@ const ProductPage = ({
     User,
     ToastContainer,
     toast,
+    UserCart,
+    setQuantityCartUser,
 }) => {
     
     let location = useLocation()
@@ -28,6 +30,8 @@ const ProductPage = ({
 
     const AddProductToAcart = () => {  
         setButtonCartVisible(true)
+        let RightData = JSON.parse(UserCart)
+        setQuantityCartUser(RightData.length)
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/create`, {
             method: 'POST',  
             headers: {
@@ -37,14 +41,18 @@ const ProductPage = ({
             body: JSON.stringify({
                 id: User.cartId,
                 idProd: ProductLink,
-                quantity: QuantityOfProduct
+                quantity: QuantityOfProduct,
+                price: Product.price
             })
-        }).then(res => res.json()).then(data => toast.success('Dodales produkt'))         
+        }).then(res => res.json()).then(data => toast.success('Dodales produkt')) 
+        //window.location.reload()
     }
 
     const ModifyProductInAcart = () => {      
         const items = JSON.parse(ActualUserCart.products);
         const foundIndex = GetItemIndex(items, ProductLink);
+        let RightData = JSON.parse(UserCart)
+        setQuantityCartUser(RightData.length)
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
             method: 'POST',  
             headers: {
@@ -55,9 +63,11 @@ const ProductPage = ({
                 id: User.cartId,
                 Obj: ProductLink,
                 IndexO: foundIndex,
-                num_prod:  QuantityOfProduct
+                num_prod:  QuantityOfProduct,
+                price: Product.price
             })
         }).then(res => res.json()).then(data => toast.success('Dodales produkt'))
+        //window.location.reload()
     }
 
     useEffect(() => {
@@ -82,10 +92,7 @@ const ProductPage = ({
         if (User != null) {
             fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
                 method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
             })
             .then(res => res.json())
             .then(data => {
@@ -96,14 +103,11 @@ const ProductPage = ({
                 if (actualUserCart && actualUserCart.products !== '') {
                     const items = JSON.parse(actualUserCart.products);
                     const foundItem = findItemById(items, ProductLink);
-                    
-
                     if(foundItem) {
                         setButtonCartVisible(true)
                     } else {
                         setButtonCartVisible(false)
                     }
-
                 } else {
                     console.log('no item');
                 }
@@ -121,7 +125,7 @@ animate={{ opacity: 1 }}
 exit={{ opacity: 0 }}
 >
 
-<div className="wrapper-product ">
+<div className="wrapper-product">
 
 <div className='row-product'>
 
@@ -144,9 +148,7 @@ exit={{ opacity: 0 }}
 
 <div className='row-for-smaller-containers'>
 <div className='container-for-product-option'>
-    
     <span className='price-etc'>{Product.price} zł</span>
-
     {User ?  <div className='quantity-box-container'>
     <p style={{ alignSelf: 'flex-start' }}>Ilość</p>
     <div className='quantity-box'>
@@ -155,19 +157,14 @@ exit={{ opacity: 0 }}
         +
     </div>
     <span className='p_quantity-itself'>{QuantityOfProduct}</span>
-    <div name='minus' className='p__' onClick={() => { 
-        setQuantityOfProduct(QuantityOfProduct - 1)
+    <div name='minus' className='p__' onClick={() => { setQuantityOfProduct(QuantityOfProduct - 1)
         if(QuantityOfProduct == 1 ) { setQuantityOfProduct(1) } }}>
         -
     </div>
     </div>
     </div>
     </div>
-
     : null}
-
-   
-
 </div>
 <div className='container-for-product-delivery'>    
 
@@ -182,7 +179,7 @@ exit={{ opacity: 0 }}
     
     </div>
 
-    {User ? <> {ButtonCartVisible ? <button className='site-btn' onClick={ModifyProductInAcart} id="buy_btn">Dodaj do koszyka #232</button> : <button className='site-btn' onClick={AddProductToAcart} id="buy_btn">Dodaj do koszyka</button>} </> : <button className='site-btn' id="buy_btn">Nie jestes zalogowany</button>} 
+    {User ? <> {ButtonCartVisible ? <button className='site-btn' onClick={ModifyProductInAcart} id="buy_btn">Dodaj do koszyka</button> : <button className='site-btn' onClick={AddProductToAcart} id="buy_btn">Dodaj do koszyka</button>} </> : <button className='site-btn' id="buy_btn">Nie jestes zalogowany</button>} 
 
 </div>
 </div>

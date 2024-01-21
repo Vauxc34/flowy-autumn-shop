@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { EffectCoverflow, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from 'react-router-dom' 
 import "swiper/css";
 import "swiper/css/pagination";
 import { motion } from 'framer-motion';
@@ -54,11 +52,7 @@ const Products = ({  onAddToCart  }) => {
 
     return (
         <>
-        <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        id="product_page">
+        <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} id="product_page">
 
         <div class="startup-screen">
 
@@ -69,7 +63,7 @@ const Products = ({  onAddToCart  }) => {
                         Perfumeria, biżuteria ogólnodostępna dostępna w niskich cenach 
                     </p>
                 </div>
-                <button class="site-btn">
+                <button onClick={() => navigate('/produkty')} class="site-btn">
                    Odkryj nasz katalog
                 </button>
             </div>
@@ -92,9 +86,9 @@ const Products = ({  onAddToCart  }) => {
             </div>
             )}</div>
 
-            <button class="site-btn">
+            {/*<button class="site-btn">
                 Zobacz więcej
-            </button>
+    </button>*/}
 
         </div>
 
@@ -116,9 +110,7 @@ const Products = ({  onAddToCart  }) => {
                     <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Długowieczne:</b> No more waste. Created for last long.</li>
                 </ul>
     
-                <button class="site-btn">
-                    Zobacz więcej
-                </button>
+                {/*<button class="site-btn">Zobacz więcej</button>*/}
 
             </div>
 

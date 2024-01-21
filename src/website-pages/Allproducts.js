@@ -6,9 +6,7 @@ const Allproducts = () => {
 const [ProductList, setProductList] = useState([]) 
 const [ActualSelectedCategory, setActualSelectedCategory] = useState('Nie wybrano')
 
-const Categories = [
-  { name: 'Nie wybrano' }, { name: 'Kremy' }, { name: 'Balsamy' }, { name: 'Kleje' },
-]
+const Categories = [{ name: 'Nie wybrano' }, { name: 'Kremy' }, { name: 'Balsamy' }, { name: 'Kleje' }]
 
 useEffect(() => {
   fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
@@ -33,15 +31,9 @@ id="products-all">
 
     <h3>A co tym razem szukamy?</h3>
 
-    {/*<select required 
-        id="category" 
-        name="category-list" 
-        placeholder='Wybierz markę'   
-        >
-             {Categories.map(item => (
-                <option value={item.name}>{item.name}</option>
-             ))}
-             </select>*/}
+    {/*<select required  id="category" name="category-list" placeholder='Wybierz markę'>
+    {Categories.map(item => ( <option value={item.name}>{item.name}</option>))}
+      </select>*/}
 
     </div>
 

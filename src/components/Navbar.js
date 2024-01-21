@@ -18,7 +18,7 @@ import ProfileIcon from '../images/Profile.svg'
 import CartIcon from '../images/Cart.svg'
 import question_mark from '../images/question_mark.png'
 
-export const Navbar = ({ User, UserCart }) => {
+export const Navbar = ({ User, UserCart, QuantityCartUser }) => {
      
     const navigate = useNavigate()     
     const [HamburgerOpen, isHamburgerOpen] = useState(1)
@@ -50,7 +50,7 @@ export const Navbar = ({ User, UserCart }) => {
                         <img src={ProfileIcon} alt="navbar ico" class="user_icon"/>
                         </li> 
                     <li class="nav-option" onClick={() =>  navigate('/koszyk')}><img src={CartIcon} alt="navbar ico" class="cart_icon"/></li>
-                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: User ? JSON.parse(UserCart).length : 0 }}></div>
+                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: User != '' || UserCart != [] ? QuantityCartUser : 0 }}></div>
                 </ul>
         </div>
         <div className={`header-mobile ${Hamburger}`}>

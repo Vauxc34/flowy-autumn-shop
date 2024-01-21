@@ -10,17 +10,14 @@ import { motion } from 'framer-motion'
 /* style stuff */
 
 const ProfilePage = ({ User, setUser }) => {
-    
-    let navigate = useNavigate()
 
-    /* Profile things */
+    let navigate = useNavigate()
 
     const [ProfilePic, setProfilePic]= useState('https://static-00.iconduck.com/assets.00/user-profile-icon-512x512-pdqa839q.png') 
 
     const LogOut = () => {
       setUser(null)
   }
-
  
 return (
     <>

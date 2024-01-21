@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom' 
 import {Link}  from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
+import axios from 'axios'
 
 /* style stuff */
 
@@ -9,26 +10,34 @@ import { motion } from 'framer-motion'
 
 /* style stuff */
 
-export const Cart = ({ User, UserCart }) => {
+export const Cart = ({ User, UserCart, setQuantityCartUser, QuantityCartUser }) => {
 
-    const navigate = useNavigate()
-    const [CartArray, setCartArray] = useState('')  
+    const navigate = useNavigate() 
     const [HideContent, setHideContent] = useState(false)
     const [newUserQuantity, setNewUserQuantity] = useState(1)
+    const [OverallPrice, setOverallPrice] = useState(0) 
+    const [CartArray, setCartArray] = useState('')
 
     useEffect(() => {
-        if(User) {
-            fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json()).then(data => setCartArray(data.content[0][0].products))
-        } else {
-            console.log('no user')
-        }
-    }, [])
+        if(UserCart) { 
+          let Arr = JSON.parse(UserCart).map(item => { return { overall_price_for_item: item.price * item.quantity }})
+          setOverallPrice((Arr.reduce((a,v) =>  a = a + v.overall_price_for_item , 0 ))) 
+        } else {  }
+    }, [UserCart])
+
+    useEffect(() => {
+        if(UserCart) {
+         
+          fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
+            method: 'GET',  
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }        
+            }).then(res => res.json()).then(data => setCartArray(data.content[0][0].products)) 
+          
+        } else {  }
+    }, [UserCart])
 
     const CleaningCart = () => {
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/cartU/${User.cartId}`, {
@@ -36,68 +45,70 @@ export const Cart = ({ User, UserCart }) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-              }
-              
-              
-            }).then(res => res.json()).then(toast.info('Czysto'))
-            setHideContent(true)
+              }}).then(res => res.json()).then(toast.info('Czysto'))
+              setQuantityCartUser(0)
+              setOverallPrice(0)
+              setHideContent(true)
     }
    
-    const Item = ({idProd, quantityU}) => {
+    const Item = ({idProd, quantityU, PPrice}) => {
         
-        const [singleProdDetails, setSingleProdDetails] = useState({});
+        const [singleProdDetails, setSingleProdDetails] = useState({}); 
 
-        const RemovingProductInAcart = () => {    
-        const items = JSON.parse(CartArray)
-        let IndexActual = items.findIndex(x => x.id)
-        setNewUserQuantity(newUserQuantity - 1) 
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
-                method: 'POST',  
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-                body: JSON.stringify({
-                    id: User.cartId,
-                    Obj: idProd,
-                    IndexO: IndexActual,
-                    num_prod: quantityU - newUserQuantity 
-                })
-        }).then(res => res.json()).then(toast.success('Zmieniono stan w koszyk'))
+        const RemovingProductInAcart = async () => {   
+          
+          try {
+            
+            const items = JSON.parse(UserCart)
+            let IndexActual = items.findIndex(x => x.id == idProd)   
+    
+            setNewUserQuantity(newUserQuantity - 1)   
+            await axios.post(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
+              id: User.cartId,
+              Obj: idProd,
+              IndexO: IndexActual,
+              num_prod: quantityU - 1,
+              price: PPrice
+            })
+            .then((response) => {
+              toast.success('Zmieniono stan w koszyku')
+              window.location.reload()
+            }, (error) => {
+              toast.log(error);
+            });
+
+            
+
+          } catch (e) {  toast.error(e) } 
         }
 
-        const AdddingProductInAcart = () => {      
-        const items = JSON.parse(CartArray)
-        let IndexActual = items.findIndex(x => x.id) 
+        const AdddingProductInAcart = async () => {      
+        const items = JSON.parse(UserCart)
+        let IndexActual = items.findIndex(x => x.id == idProd) 
+        let ItemActual = items.find(x => x.id == idProd)
+        
         setNewUserQuantity(newUserQuantity + 1)     
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
-                method: 'POST',  
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-                body: JSON.stringify({
-                    id: User.cartId,
-                    Obj: idProd,
-                    IndexO: IndexActual,
-                    num_prod: quantityU + newUserQuantity 
-                })
-        }).then(res => res.json()).then(toast.success('Zmieniono stan w koszyk'))
+        await axios.post(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
+          id: User.cartId,
+          Obj: idProd,
+          IndexO: IndexActual,
+          num_prod: quantityU + 1,
+          price: PPrice
+        })
+        .then((response) => {
+          toast.success('Zmieniono stan w koszyku')
+          window.location.reload()
+        }, (error) => {
+          toast.log(error);
+        });
         }  
 
         useEffect(() => {
           const fetchData = async () => {
             try {
-              const response = await fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/${idProd}`, {
-                method: 'GET',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                }
-              });
-              const data = await response.json();
-              setSingleProdDetails(data.prod);
-             
+              const response = await axios.get(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/${idProd}`).then
+              (response => setSingleProdDetails(response.data.prod))
+               
             } catch (error) {
               console.error('Error fetching product details:', error);
             }
@@ -111,7 +122,7 @@ export const Cart = ({ User, UserCart }) => {
             <div className="cart-item-itself">
             <div className="container-for-etc">
             <div className='row-for-etc'>
-            <img className="product-image-cart" src={singleProdDetails.image} />
+            <div className="product-image-cart" style={{ backgroundImage: `url(${singleProdDetails.image})` }}></div>
             </div>
             <div className='row-for-etc'>
             <div className="container-for-item-name-h4">
@@ -120,20 +131,17 @@ export const Cart = ({ User, UserCart }) => {
             </div>
             <div className="container-for-item-name-h4">
 
-            {/* 
-            
-            <a className='site-btn'>usuń</a>      
-
-            */}
-
+            {/* <a className='site-btn'>usuń</a> */}
             
             <div className='quantity-box-container'>
             <p>{singleProdDetails.price} zl</p>
             <div className='quantity-box'>
             <div className='select-item-quantity'>
-            <div onClick={AdddingProductInAcart} className='p__'>+</div>
-            <span className='p_quantity-itself'>{quantityU + newUserQuantity - 1}</span>
-            <div onClick={RemovingProductInAcart} className='p__'>-</div>
+               
+              <div onClick={AdddingProductInAcart} value="+" className='p__'>+</div>
+              <span className='p_quantity-itself' >{quantityU}</span> 
+              <div onClick={RemovingProductInAcart} value="-" className='p__' >-</div>
+               
             </div>
             </div>
             </div>
@@ -145,7 +153,7 @@ export const Cart = ({ User, UserCart }) => {
         )
  
 
-    }
+    } 
 
     return (
         <motion.div className="cart-itself" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -163,13 +171,13 @@ export const Cart = ({ User, UserCart }) => {
             </div>
             <hr className='product-line'></hr>
 
-            {CartArray == '' || HideContent ?  null : JSON.parse(CartArray).map(item => <Item idProd={item.id} quantityU={item.quantity}/>)}
+            {UserCart == '' || HideContent ?  null : JSON.parse(UserCart).map(item => <Item idProd={item.id} quantityU={item.quantity} PPrice={item.price}/>)}
             
             <div className="container-for-a-cart-options">
-            <h1>Całość: <span>Każde zamówienie, VAT i inne podatki będzie miało doliczone</span></h1>
+            <h1>Całość: {UserCart != '' ? OverallPrice : 0} zl<span>Każde zamówienie, VAT i inne podatki będzie miało doliczone</span></h1>
 
-            {CartArray == '' ? <button className="site-btn" onClick={() => navigate('/')} >Wroc na sklep</button> : <>
-            <button className="site-btn">Przejście do kasy</button>
+            {QuantityCartUser == 0 ? <button className="site-btn" onClick={() => navigate('/')} >Wroc na sklep</button> : <>
+            <button className="site-btn" onClick={() => navigate('/sposoby-dostawy-i-platnosci')}>Przejście do kasy</button>
             <button className="site-btn" onClick={CleaningCart}>Opróżnij koszyk ❌</button>
             </> }
             

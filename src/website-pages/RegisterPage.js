@@ -36,12 +36,12 @@ const RegisterPage = ({
     } else {
 
     fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/`, {
-      method: 'POST',  
-      headers: {
+    method: 'POST',  
+    headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-        },
-      body: JSON.stringify({
+    },
+    body: JSON.stringify({
           id: NewUserId,
           name: userName,
           surname: userSurname, 
@@ -49,8 +49,8 @@ const RegisterPage = ({
           password: userPassword,
           role: "client",
           cartId: NewCartId
-      })
-      }).then(res => res.status >= 400 ? toast.error('Nie mozna sie zalogowac') : res.json() )
+    })
+    }).then(res => res.status >= 400 ? toast.error('Nie mozna sie zalogowac') : res.json() )
     .then(toast.success('Zarejestrowano')).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId}`, {
         method: 'GET',  
         headers: {
@@ -68,7 +68,7 @@ const RegisterPage = ({
             products: [], 
             payment_method: "not_selected",
             amount_of_money: 0
-          })})).then(navigate('/')))}
+    })})).then(navigate('/')))}
   }
 
   const handleSubmit = async e => {

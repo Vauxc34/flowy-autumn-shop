@@ -1,43 +1,16 @@
-import React, {useState, useEffect} from 'react'
-import {BrowserRouter as Router, Routes, Route, useNavigate, useLocation} from 'react-router-dom'
+import React, {useState, useEffect} from 'react' 
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { doc, setDoc, addDoc, collection, getDocs, collectionGroup, query, onSnapshot, Firestore } from "firebase/firestore"; 
-import { getDatabase, ref, push, set, orderByChild } from "firebase/database"
+import 'react-toastify/dist/ReactToastify.css'; 
 import { AnimatePresence } from 'framer-motion' 
-import { Link } from 'react-router-dom'
-import { getAuth } from 'firebase/auth'
-import { signInWithPopup } from 'firebase/auth'
-import { GoogleAuthProvider } from 'firebase/auth'
-import { FacebookAuthProvider } from 'firebase/auth'
-import { onAuthStateChanged } from 'firebase/auth'; 
-import Cookies from 'js-cookie'
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
-import AnimatedPage from './AnimatedPage';
-import { initReactI18next,  useTranslation } from 'react-i18next';
-import I18nextBrowserLanguageDetector from 'i18next-browser-languagedetector';
-import i18n, { use } from "i18next"
-import i18next from 'i18next'
-import HttpApi from 'i18next-http-backend'
+import { Link } from 'react-router-dom' 
 
-/* page's */
+/* pages */
 
-import Allproducts from './Allproducts';
-import Products from './Products'
-import ProductPage from './ProductPage'
-import RegisterPage from './RegisterPage'
-import ProfilePage from './ProfilePage'
-import ContactForm from './ContactForm';
-import Login from './LoginPage'
-import PrivacyAndPolicy from './PrivacyAndPolicy'
-
-/* page's */
-
+import AnimatedPage from './AnimatedPage'; 
+ 
 /* component's */
 
-import { Navbar } from "../components/Navbar"
-import { Cart } from "../components/Cart"
-import { Checkout  } from "../components/checkout/Checkout"
+import Navbar from "../components/Navbar" 
 
 /* component's */
 
@@ -45,23 +18,19 @@ import { Checkout  } from "../components/checkout/Checkout"
 
 import logoFlowyAutumn from '../images/logo-szersze-biale.png'
 import ArrowMenu from '../images/ChevronDown.svg'
+import axios from 'axios';
 
 /* image's */
 
 const Shop = () =>  { 
 
-    const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
-
-    /* mobile menu */
-
-    const [MobileMenu, setMobileMenu] = useState('navbar-menu') 
-
-    /* mobile menu */
+  const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
+  const [MobileMenu, setMobileMenu] = useState('navbar-menu') 
 
 /* register thing's */
 
   const [User, setUser] = useState(null)  
-  const [UserCart, setUserCart] = useState([])
+  const [UserCart, setUserCart] = useState('')
   const [userName, setUserName] = useState('')
   const [userMail, setUserMail] = useState('')
   const [userPassword, setUserPassword] = useState('')
@@ -69,10 +38,10 @@ const Shop = () =>  {
     
   useEffect(() => {
     const data = localStorage.getItem('User');
-    const cart_data = localStorage.getItem('UserCart')
+    const data_cart = localStorage.getItem('UserCart');
     if(data) {
       setUser(JSON.parse(data))
-      setUserCart(JSON.parse(cart_data))
+      setUserCart(JSON.parse(data_cart))
     }
   }, []);
 
@@ -80,25 +49,15 @@ const Shop = () =>  {
     localStorage.setItem('User', JSON.stringify(User))
     localStorage.setItem('UserCart', JSON.stringify(UserCart))
   }) 
-
-/* register thing's */
   
 /* cart */
 
-const [QuantityCartUser, setQuantityCartUser] = useState(0)
+const [QuantityCartUser, setQuantityCartUser] = useState(0) 
 
-const FetchCart = () => { 
-  fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
-      method: 'GET',  
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }        
-      }).then(res => res.json()).then(data => setUserCart(data.content[0][0].products))
-     // let RightProdData = JSON.parse(UserCart.products)
-      // setQuantityCartUser(RightProdData.length)
-
-      console.log(JSON.parse(UserCart).length)
+const FetchCart = async () => { 
+  await axios.get(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`).then(res => setUserCart(res.data.content[0][0].products))
+  let RightProdData = JSON.parse(UserCart)
+  setQuantityCartUser(RightProdData.length) 
 }  
 
 useEffect(() => {
@@ -106,8 +65,6 @@ useEffect(() => {
     FetchCart()
   } else {}
 }, [User])
-
-
 
 /* cart */
 
@@ -119,15 +76,16 @@ useEffect(() => {
             <Navbar User={User} QuantityCartUser={QuantityCartUser} UserCart={UserCart}/>
             <div className={`${MobileMenu}`}>
             <ul>
-                    <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>
-                    <li class="nav-option">About</li>
-                    <li class="nav-option">Contact us</li>
+            <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>
+            <li class="nav-option">About</li>
+            <li class="nav-option">Contact us</li>
             </ul>
         </div>
 <AnimatePresence>
 <AnimatedPage 
 User={User}
 setUser={setUser}
+UserCart={UserCart}
 ToastMessReg={ToastMessReg} 
 userName={userName}
 setUserName={setUserName}
@@ -137,10 +95,10 @@ userPassword={userPassword}
 setUserPassword={setUserPassword}
 userPasswordRepeat={userPasswordRepeat}
 setUserPasswordRepeat={setUserPasswordRepeat}
+QuantityCartUser={QuantityCartUser}
+setQuantityCartUser={setQuantityCartUser}
 ToastContainer={ToastContainer}   
-toast={toast} 
-/>
-
+toast={toast}/>
 </AnimatePresence>
         <div class="footer">
 
@@ -179,7 +137,7 @@ toast={toast}
         </div>
         <div class="footer-credits">
             <span class="copyright-text">
-                <a id="company_name">STJÄRNFLOCKA®</a> Wszelkie prawa zastrzeżone dla <a id="creator_1">@fox45</a> i <a id="creator_2">@dawid-karolczak</a>.
+                <a id="company_name">STJÄRNFLOCKA®</a> Wszelkie prawa zastrzeżone dla <a id="creator_1">@fox45</a>
             </span>
         </div>
 

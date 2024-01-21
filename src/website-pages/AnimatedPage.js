@@ -35,10 +35,10 @@ setUserMail,
 ToastContainer, 
 toast,
 categories,
-onFilterCategory,
-itemsQuantity,
-setItemsQuantity,
+onFilterCategory, 
 onCategoryFilter,
+QuantityCartUser,
+setQuantityCartUser,
 allData, 
 }) => {
 
@@ -58,7 +58,10 @@ element={<ProductPage
 ToastContainer={ToastContainer}
 toast={toast} 
 User={User}
-ProductList={ProductList}/>}>
+ProductList={ProductList}
+UserCart={UserCart}
+setQuantityCartUser={setQuantityCartUser}
+/>}>
 </Route>
 
 <Route
@@ -68,12 +71,12 @@ element={<Allproducts categories={categories} onFilterCategory={onFilterCategory
 
 <Route 
 exact path='/koszyk' 
-element={<Cart User={User} UserCart={UserCart}/> }>
+element={<Cart User={User} UserCart={UserCart} QuantityCartUser={QuantityCartUser} setQuantityCartUser={setQuantityCartUser}/> }>
 </Route>
 
 <Route 
 exact path='/sposoby-dostawy-i-platnosci'
-element={<Checkout/>}>
+element={<Checkout User={User} UserCar={UserCart}/>}>
 </Route>
 
 <Route 
