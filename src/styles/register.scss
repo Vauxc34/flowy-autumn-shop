@@ -91,13 +91,11 @@
     margin: .5em .3em;
     background: #e9e8e8;
     border-radius: 5px;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: auto;
 }
 
-.orders-list {
-    display: grid;
-    grid-template-columns: auto auto;
+.orders-list {  
 }
 
 .user-profile-- {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'; 
 
+import { PaymentGate } from './PaymentGate';
+
 /* */
 
 import Card from '@mui/joy/Card';
@@ -41,45 +43,12 @@ const PaymentForm = ({
   }, []) 
 
   {/**
-
    - TEST DATA -
-
      creditCardDetailsCardholderName:  "Andrzej Moskiewicz",
       creditCardDetailsNumber: "4111 1111 1111 1111",
       creditCardDetailsExpirationDate: "09/23",
       creditCardDetailsCvv: "123"
-
-*/}
-
-  const PayForIt = (e) => {  e.preventDefault()
-     fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}/pay/payment`, { 
-      method: "POST",
-      body: JSON.stringify({
-      orderId: Math.floor(Math.random() * 999),
-      amount: OverallPrice,
-      idUser:  User.id,
-      firstName: userBillingInfo.firstName,
-      lastName: userBillingInfo.lastName,
-      company:  "FlowyAutumn",
-      email: userBillingInfo.email,
-      website: "www.flowyshopy.net",
-      phone: userBillingInfo.phone,
-      fax: "",
-      creditCardDetailsCardholderName:  NameLastName,
-      creditCardDetailsNumber: CreditCardNumber,
-      creditCardDetailsExpirationDate: ExpireDate,
-      creditCardDetailsCvv: CVV,
-      billingDetailsFirstName: userBillingInfo.firstName,
-      billingDetailsLastName: userBillingInfo.lastName,
-      billingDetailsStreetAddress: userBillingInfo.address1,
-      billingDetailsLocality: "Poland",
-      billingDetailsRegion:  SelectedRegions,
-      billingDetailsPostalCode: userBillingInfo.zip
-    })
-    }).then(data => console.log(data.json()))}
-
-
-    //window.location.href= "/confirmation-order"
+*/}   
 
   return (
     <> 
@@ -122,43 +91,14 @@ const PaymentForm = ({
           gap: 1.5,
         }}
       >
-        <FormControl sx={{ gridColumn: '1/-1' }}>
-          <FormLabel>Imie i nazwisko wlasciciela karty</FormLabel>
-          <Input placeholder="Wypelnij pola" value={NameLastName} onChange={(e) => setNameLastName(e.target.value)} />
-        </FormControl>
-        <FormControl sx={{ gridColumn: '1/-1' }}>
-          <FormLabel>Numer karty kredytowej</FormLabel>
-          <Input endDecorator={<CreditCardIcon />} value={CreditCardNumber} onChange={(e) => setCreditCardNumber(e.target.value)} />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Data wygasniecia</FormLabel>
-          <Input endDecorator={<CreditCardIcon />} value={ExpireDate} onChange={(e) => setExpireDate(e.target.value)} />
-        </FormControl>
-        <FormControl>
-          <FormLabel>CVC/CVV</FormLabel>
-          <Input endDecorator={<InfoOutlined />} value={CVV} onChange={(e) => setCVV(e.target.value)} />
-        </FormControl>
+
+<PaymentGate 
+OverallPrice={OverallPrice}
+userBillingInfo={userBillingInfo}
+setActiveStep={setActiveStep}
+/>
+
         <CardActions sx={{ gridColumn: '1/-1' }} style={{ flexWrap: 'wrap', display: 'flex', justifyContent: 'space-between' }}>
-
-          {NameLastName == '' || CreditCardNumber == '' || ExpireDate == '' || CVV == '' ? 
-          <button style={{ 
-          padding: "10px 20px", 
-          margin: 'unset',
-            backgroundColor: "#7a7a7a" }} onClick={(e) => e.preventDefault()} className='site-btn'>Nie wprowadzono danych</button>
-                      : <div style={{ display: 'flex' }}>
-                       <button onClick={PayForIt} style={{ padding: "10px 20px", margin: 'unset' }} className='site-btn'>Zapłać</button>
-                       <button onClick={() => setActiveStep(0)} style={{ 
-                      padding: "10px 20px", 
-                      margin: '0px 10px', 
-                      textAlign: 'center' }} className='site-btn'>Cofnij</button>
-            
-                        </div>}
-     
-
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0px 0px' }}>
-            <h1>Całość: {OverallPrice} zł</h1>
-            </div>
-
         </CardActions>
       </CardContent>
             </Card>

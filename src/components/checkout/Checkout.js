@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import { AddressForm } from './AddressForm'
 import { Confirmation } from './Confirmation'
 import PaymentForm from './PaymentForm'
+import { ShipingForm } from './ShipingForm'
 
 import ArrowSteps from '../../images/arrow-steps.svg'
 import CartImg from '../../images/Cart.svg'
@@ -37,39 +38,38 @@ export const Checkout = ({ User }) => {
     }, [CartDetails]) 
 
     const [userBillingInfo, setUserBillingInfo] = useState([])
-    const [SelectedRegions, setSelectedRegions] = useState('')
     const [PurchaseMethod, setPurchaseMethod] = useState([])
-
     const [activeStep, setActiveStep] = useState(0)
     const [checkoutToken, setCheckoutToken] = useState(null)
     const navigate = useNavigate()
-      
+
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
-
-    const setter = () => { setCheckoutToken(1) }
-
-    useEffect(() => { setter() })
-
+ 
     const next = (data) => { nextStep() }
 
-    const Form = () => activeStep == 0
-    ? <AddressForm checkoutToken={checkoutToken} setCheckoutToken={setCheckoutToken} 
+    const Form = () => activeStep == 0 ? <AddressForm 
+      checkoutToken={checkoutToken} 
+      setCheckoutToken={setCheckoutToken} 
+      nextStep={nextStep}
       next={next}
       userBillingInfo={userBillingInfo} 
       setUserBillingInfo={setUserBillingInfo}
-      SelectedRegions={SelectedRegions}
-      setSelectedRegions={setSelectedRegions}
+      /> : activeStep == 1 ? <ShipingForm 
+      next={next}
+      nextStep={nextStep}
+      setActiveStep={setActiveStep} 
+      userBillingInfo={userBillingInfo} 
+      setUserBillingInfo={setUserBillingInfo} 
       /> : <PaymentForm 
       userBillingInfo={userBillingInfo} 
       PurchaseMethod={PurchaseMethod} 
       checkoutToken={checkoutToken} 
-      setActiveStep={setActiveStep}
-      SelectedRegions={SelectedRegions}
-      setSelectedRegions={setSelectedRegions}
+      setActiveStep={setActiveStep} 
       backStep={backStep} 
       nextStep={nextStep}
-      OverallPrice={OverallPrice} User={User}/>
+      OverallPrice={OverallPrice} 
+      User={User}/>
 
     return (
         <>
@@ -83,15 +83,15 @@ export const Checkout = ({ User }) => {
            </div>
              <div className="container-for-payment-steps">  
              <div className="Container-for-h4" style={{ width: '230px' }}>
-                 <h4>Koszyk</h4>
+                 <h4 style={{ fontWeight: activeStep == 0 ? 600 : 400 }}>Koszyk</h4>
                  <img src={ArrowSteps}></img>
-                 <h4>Wysyłka</h4>
+                 <h4 style={{ fontWeight: activeStep == 1 ? 600 : 400 }}>Wysyłka</h4>
                  <img src={ArrowSteps}></img>
-                 <h4>Płatność</h4>
+                 <h4 style={{ fontWeight: activeStep == 2 ? 600 : 400 }} >Płatność</h4>
               </div>
             <div className="payment-form-container"></div>
              </div>
-             {activeStep == steps.length ? <Confirmation /> : checkoutToken && <Form />}
+             {activeStep == 3 ? <Confirmation /> : <Form />}
          </div>   
         </>
     )
