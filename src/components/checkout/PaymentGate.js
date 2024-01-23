@@ -5,13 +5,69 @@ import $ from 'jquery';
 
 import CheckIcon from '@mui/icons-material/Check';
 
-export const PaymentGate = ({ props, OverallPrice, userBillingInfo, setActiveStep }) => {
+export const PaymentGate = ({ props, OverallPrice, userBillingInfo, setActiveStep, User, CartArray }) => {
  
     const paymentContext = useContext(PaymentContext);
     const {tokenObject, paymentTransaction, isPaymentMade, setIsPaymentMade, transactionData, setTransactionData} = paymentContext;
-    
+    const [OverallProducts, setOverallProducts] = useState([])
+
     useEffect(()=> { renderPayment() });
 
+    const [ArrayQueries, setArrayQueries] = useState([{ query: ", (2, 40 - 4)" }])
+
+    useEffect(() => {
+        if(User) {
+            fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
+                method: 'GET',  
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  }        
+                }).then(res => res.json()).then(data => setArrayQueries(JSON.parse(data.content[0][0].products))) 
+        } else {}
+    }, [])
+
+    useEffect(() => {
+        if(User) {
+            fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
+                method: 'GET',  
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  }        
+                }).then(res => res.json()).then(data => setOverallProducts(data.prod)) 
+        } else {}
+    }, [])
+
+    let QuantityArray = OverallProducts.map(item => { return item.quantity })
+    let NewQueryArray = ArrayQueries.slice(0).map((item, index) => { return `${index === 0 ? '' : ','} (${item.id}, ${QuantityArray[index]} - ${item.quantity})` })
+    let resultString = NewQueryArray.join('')
+    resultString = resultString.substring(1)
+
+    const DeletionExistedProducts = () => {
+        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}pay/deletion`, {
+            method: 'POST',  
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                FirstProdId: ArrayQueries[0].id, 
+                QuantityFirstProd: ArrayQueries[0].quantity, 
+                NextQuery: resultString,
+            })  
+            }).then(res => res.json())
+    }
+
+    const RemovingItems = () => {
+        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/cartU/${User.cartId}`, {
+            method: 'POST',  
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }}).then(res => res.json())
+    }
+ 
     const renderPayment = ()=> {
         let token = tokenObject;
         let authorization = token;
@@ -25,7 +81,6 @@ export const PaymentGate = ({ props, OverallPrice, userBillingInfo, setActiveSte
         }
         createHostedFields(clientInstance, form);
         });
-
         const createHostedFields = (clientInstance, form) => {
         window.braintree.hostedFields.create({
             client: clientInstance,
@@ -61,28 +116,21 @@ export const PaymentGate = ({ props, OverallPrice, userBillingInfo, setActiveSte
                 var teardown = function (event) {
 
                     event.preventDefault();
-
                     var formIsInvalid = false;
 
-                    if (formIsInvalid) {
-                        toast.error("Card input is not valid");
-                        return;
-                    }
+                    if (formIsInvalid) { toast.error("Card input is not valid"); return }
 
                     hostedFieldsInstance.tokenize({ 
                         cardholderName: $('#cc-name').val()
                         }, 
-                        function(err, payload) {
-
-                            console.log(payload.nonce);
+                        function(err, payload) {  
                             paymentTransaction({
                                 orderId: Math.floor(Math.random() * 9999),
-                                idCart: 842,
+                                products: ArrayQueries,
                                 amount: OverallPrice,
-                                idUser: 323,
+                                idUser: User.id,
                                 payment_method: 'credit_card',
-                                finalized: 'success', 
-                                idUser: 351,
+                                finalized: 'success',  
                                 firstName: userBillingInfo.firstName,
                                 lastName: userBillingInfo.lastName,
                                 company: 'FlowyAutumn',
@@ -105,32 +153,18 @@ export const PaymentGate = ({ props, OverallPrice, userBillingInfo, setActiveSte
         })}
     }
 
-    const onCancelPayment = ()=>{
-
-    }
-
-    const gotoPayment = ()=>{
+    const gotoPayment = ()=> {
         setIsPaymentMade(false);
         setTransactionData({});
     }
-    
+
+   
     return(
         <>
             {isPaymentMade? 
             <div className="demo-frame" style={{ width: '200%' }}>
-                {/*<h3>Zaplacono</h3>
-                <div>
-                    Amount: {transactionData.transaction !== undefined ? transactionData.transaction.amount: 'N/A'} <br></br>
-                    PaymentInstrumentType = {transactionData.transaction !== undefined ? transactionData.transaction.paymentInstrumentType: 'N/A'} <br></br>
-                    Status                = {transactionData.transaction !== undefined ? transactionData.transaction.status: 'N/A'} <br></br>
-                    Transaction id        = {transactionData.transaction !== undefined ? transactionData.transaction.id: 'N/A'} <br></br>
-                </div>
-                <div>
-                    <a className="btn btn-primary" onClick={gotoPayment}>Go back to payment page</a>
-            </div>*/}
-
-<div style={{ height: '100vh' }} className="startup-screen">
-            <div className="widget-description">
+            <div style={{ height: '100vh' }} className="startup-screen">
+            <div className="widget-description" style={{ height: 'unset' }}>
 
             <CheckIcon style={{
                 height: '50px',
@@ -155,12 +189,7 @@ export const PaymentGate = ({ props, OverallPrice, userBillingInfo, setActiveSte
             </div>
           </div>
 
-            </div> 
-            
-            
-            :
-            
-                <div className="demo-frame" style={{ width: '200%' }}>  
+            </div> : <div className="demo-frame" style={{ width: '200%' }}>  
                     <form submit="/" method="post" id="cardForm" >
  
 
@@ -175,13 +204,18 @@ export const PaymentGate = ({ props, OverallPrice, userBillingInfo, setActiveSte
 
 
                         <h1 style={{ textAlign: 'left', margin: '0 10px' }} >Calosc: {OverallPrice} zł</h1>
-
-                            <input style={{ width: '150px' }} type="submit" className="site-btn" value={"Zaplac"} id="submit"/>
+                             
+                            <a onClick={() => {DeletionExistedProducts()
+                            RemovingItems()}}>
+                            <input style={{ width: '150px' }} 
+                            type="submit" 
+                            className="site-btn" 
+                            value={"Zaplac"} id="submit" />
+                            </a>
+                             
                     </form>
 
-                   
-
-                    <button className="site-btn" style={{ position: 'absolute', left: '180px', bottom: '38.5px' }} onClick={() => setActiveStep(2)}>Cofnij</button>
+                    <button className="site-btn" style={{ position: 'absolute', left: '180px', bottom: '78.5px' }} onClick={() => setActiveStep(2)}>Cofnij</button>
 
                 </div>
             }

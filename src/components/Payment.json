@@ -234,5 +234,8 @@
         "masterpassCard": {},
         "samsungPayCard": {}
     },
-    "success": true
+    "success": true,
+ "html": "<h3>Zaplacono</h3><div>Amount: {transactionData.transaction !== undefined ? transactionData.transaction.amount: 'N/A'} <br></br>PaymentInstrumentType = {transactionData.transaction !== undefined ? transactionData.transaction.paymentInstrumentType: 'N/A'} <br></br>Status                = {transactionData.transaction !== undefined ? transactionData.transaction.status: 'N/A'} <br></br>Transaction id        = {transactionData.transaction !== undefined ? transactionData.transaction.id: 'N/A'} <br></br></div><div><a className='btn btn-primary' onClick={gotoPayment}>Go back to payment page</a></div>"
+
+
 }

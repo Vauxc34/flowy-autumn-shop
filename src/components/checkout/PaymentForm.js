@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'; 
 
+/* parts */
+
 import { PaymentGate } from './PaymentGate';
 
 /* */
@@ -23,17 +25,13 @@ const PaymentForm = ({
   SelectedRegions,
   setSelectedRegions,
   setActiveStep, 
-  OverallPrice, 
+  OverallPrice,  
   User }) => {
 
-  const [CartArray, setCartArray] = useState([])
-  const [NameLastName, setNameLastName] = useState('')
-  const [CreditCardNumber, setCreditCardNumber] = useState('')
-  const [ExpireDate, setExpireDate] = useState('')
-  const [CVV, setCVV] = useState('')
+  const [CartArray, setCartArray] = useState([]) 
    
   useEffect(() => {
-      fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/812`, {
+      fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
         method: 'GET',  
         headers: {
             'Accept': 'application/json',
@@ -96,6 +94,8 @@ const PaymentForm = ({
 OverallPrice={OverallPrice}
 userBillingInfo={userBillingInfo}
 setActiveStep={setActiveStep}
+User={User}
+CartArray={CartArray}
 />
 
         <CardActions sx={{ gridColumn: '1/-1' }} style={{ flexWrap: 'wrap', display: 'flex', justifyContent: 'space-between' }}>

@@ -26,7 +26,7 @@ export const Cart = ({ User, UserCart, setQuantityCartUser, QuantityCartUser }) 
     }, [UserCart])
 
     useEffect(() => {
-        if(UserCart) {
+        if(User) {
          
           fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
             method: 'GET',  

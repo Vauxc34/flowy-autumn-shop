@@ -32,7 +32,7 @@ const ProfilePage = ({ User, setUser }) => {
 
     const TransactionTile = ({ item, idTrans }) => {
 
-      let IndexItem = UserTransactions.findIndex(item => item.idTransaction == idTrans )
+      let IndexItem = UserTransactions.findIndex(item => item.idTransaction == idTrans)
 
       const [AdditionalData, setAdditionalData] = useState([])
       const [OverallSingleDatas, setOverallSingleDatas] = useState('')
