@@ -86,6 +86,7 @@ useEffect(() => {
 User={User}
 setUser={setUser}
 UserCart={UserCart}
+setUserCart={setUserCart}
 ToastMessReg={ToastMessReg} 
 userName={userName}
 setUserName={setUserName}

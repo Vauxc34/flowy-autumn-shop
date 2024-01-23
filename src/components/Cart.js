@@ -27,7 +27,6 @@ export const Cart = ({ User, UserCart, setQuantityCartUser, QuantityCartUser }) 
 
     useEffect(() => {
         if(User) {
-         
           fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
             method: 'GET',  
             headers: {
@@ -35,7 +34,6 @@ export const Cart = ({ User, UserCart, setQuantityCartUser, QuantityCartUser }) 
                 'Content-Type': 'application/json'
               }        
             }).then(res => res.json()).then(data => setCartArray(data.content[0][0].products)) 
-          
         } else {  }
     }, [UserCart])
 
@@ -176,7 +174,7 @@ export const Cart = ({ User, UserCart, setQuantityCartUser, QuantityCartUser }) 
             <div className="container-for-a-cart-options">
             <h1>Całość: {UserCart != '' ? OverallPrice : 0} zl<span>Każde zamówienie, VAT i inne podatki będzie miało doliczone</span></h1>
 
-            {QuantityCartUser == 0 ? <button className="site-btn" onClick={() => navigate('/')} >Wroc na sklep</button> : <>
+            {UserCart == '' ? <button className="site-btn" onClick={() => navigate('/')} >Wroc na sklep</button> : <>
             <button className="site-btn" onClick={() => navigate('/sposoby-dostawy-i-platnosci')}>Przejście do kasy</button>
             <button className="site-btn" onClick={CleaningCart}>Opróżnij koszyk ❌</button>
             </> }

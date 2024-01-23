@@ -43,11 +43,11 @@ export const ShipingForm = ({
     }
 
     return (
-        <form className="address-form">
+<form className="address-form">
 
-                <h1 style={{ textAlign: 'left', margin: '0px 5vw 15px' }}>Forma wysylki</h1>
+<h1 style={{ textAlign: 'left', margin: '0px 3vw 15px' }}>Forma wysylki</h1>
 
-                <div className='product-parameters' style={{ width: '90%', justifyContent: 'center', alignSelf: 'center' }}>
+<div className='product-parameters' style={{ width: '90%', justifyContent: 'center', alignSelf: 'center' }}>
 
        <span className='parameter-itself' style={{ display: 'flex', alignSelf: 'flex-start', alignItems: 'flex-start' }}>
         <h3 style={{ display: 'flex' , margin: '5px 0' }}><span style={{ margin: '-4px -7.5px 5px' }}><EditNoteIcon style={{ fontSize: '32px' }}/></span> Adres do wysylki</h3>
@@ -78,11 +78,9 @@ export const ShipingForm = ({
         type="radio"
         required></input><h4>{item.desc} {item.company}: {item.price} zl | Sredni czas oczekiwania: {item.no_days} dni</h4></div>
       </>)}
-      </span>
-
-   
+      </span>   
 </span>
-<button style={{ background: "#407ff5" }} className='site-btn'>Zmien dane do wysylki</button> 
+<button style={{ background: "#407ff5" }} onClick={(e) => {e.preventDefault(); setActiveStep(0) }} className='site-btn'>Zmien dane do wysylki</button> 
 </div>
 <input style={{ width: '90%', alignSelf: 'center' }} type='submit' className='site-btn' value={"Przejdź do płatnosci"} onClick={(e) => {
   e.preventDefault()
@@ -91,7 +89,7 @@ export const ShipingForm = ({
   } else if(ShipmentForm == 0 || ShipmentForm == 1) {
     next()
   }}}></input>
-<Link to="/koszyk">Powrot do koszyka</Link>
+  <Link to="/koszyk">Powrot do koszyka</Link>
 <ToastContainer/>
     </form>
     )

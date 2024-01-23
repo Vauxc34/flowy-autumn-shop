@@ -25,6 +25,7 @@ import { Confirmation } from "../components/checkout/Confirmation";
 const AnimatedPage = ({
 User,
 UserCart,
+setUserCart,
 setUser,
 ProductList,
 ToastMessReg,
@@ -60,6 +61,7 @@ toast={toast}
 User={User}
 ProductList={ProductList}
 UserCart={UserCart}
+setUserCart={setUserCart}
 setQuantityCartUser={setQuantityCartUser}
 />}>
 </Route>

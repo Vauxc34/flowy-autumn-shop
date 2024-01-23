@@ -19,10 +19,11 @@ import CartIcon from '../images/Cart.svg'
 import question_mark from '../images/question_mark.png'
 
 export const Navbar = ({ User, UserCart, QuantityCartUser }) => {
+   
      
     const navigate = useNavigate()     
     const [HamburgerOpen, isHamburgerOpen] = useState(1)
-    const [Hamburger, setHamburger] = useState('unactive-pop') 
+    const [Hamburger, setHamburger] = useState('unactive-pop')
 
     const HandleMenuOpen = () => {
         isHamburgerOpen(HamburgerOpen + 1)

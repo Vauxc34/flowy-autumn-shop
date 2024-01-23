@@ -3,12 +3,14 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination } from 'swiper'
 import { motion } from 'framer-motion' 
+import axios from 'axios'
 
 const ProductPage = ({
     User,
     ToastContainer,
     toast,
     UserCart,
+    setUserCart,
     setQuantityCartUser,
 }) => {
     
@@ -18,7 +20,9 @@ const ProductPage = ({
     const [ActualUserCart, setActualUserCart] = useState('')
     const [QuantityOfProduct, setQuantityOfProduct] = useState(1) 
     const [ButtonCartVisible, setButtonCartVisible] = useState(false)
-    const ProductLink = location.pathname.split('/', 3)[2]  
+    const ProductLink = location.pathname.split('/', 3)[2] 
+    
+    console.log(UserCart)
      
     const findItemById = (items) => {
         return items.find(item => item.id == ProductLink);

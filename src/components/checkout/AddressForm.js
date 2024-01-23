@@ -64,7 +64,7 @@ export const AddressForm = ({
     return (
         <form className="address-form">
 
-                <h1 style={{ textAlign: 'left', margin: '0px 5vw 15px' }}>Adres wysyłki</h1>                
+                <h1 style={{ textAlign: 'left', margin: '0px 3vw 15px' }}>Adres wysyłki</h1>                
 
                 {InputAreas.map((item, key) => 
                 <input 

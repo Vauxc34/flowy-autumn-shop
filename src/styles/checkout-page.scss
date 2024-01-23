@@ -148,4 +148,33 @@
     border: 1px solid #000;
 }
 
+.checkout-splash-screen {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-coupon {
+    background: #e9e8e8;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.coupon-area {
+    margin-top: -100px;
+    min-height: 100vh;
+}
+
+@media (max-width:949px) {
+
+    .checkout-splash-screen {
+        flex-direction: column;
+        
+    }
+
+    .coupon-area {
+        margin-top: 0px;
+    }
+
+}
+
 /* checkout */

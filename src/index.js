@@ -7,7 +7,7 @@ import { PaymentProvider } from './PaymentProvider'
 
 ReactDOM.render(
   <PaymentProvider>
-<BrowserRouter>
+      <BrowserRouter>
       <React.StrictMode>
       <Shop/>
       </React.StrictMode>
