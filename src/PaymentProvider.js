@@ -15,16 +15,13 @@ export const PaymentProvider = props => {
        }).then(res => res.json()).then(data => setTokenObject(data.data))
     }
 
-    useEffect(()=> {
-        getToken();
-    }, []);
-
     const paymentTransaction = async (data) => { 
         let result = await axios.post(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}pay/payment`, data);
         setTransactionData(result.data.data);
-        console.log(result.data.data)
         setIsPaymentMade(true);
     }
+
+    useEffect(()=> { getToken()}, []);
 
     return(
         <PaymentContext.Provider value={{tokenObject, paymentTransaction, isPaymentMade, setIsPaymentMade, transactionData, setTransactionData}}>

@@ -10,60 +10,22 @@ import { PaymentGate } from './PaymentGate';
 import Card from '@mui/joy/Card';
 import CardActions from '@mui/joy/CardActions';
 import CardContent from '@mui/joy/CardContent'; 
-import Divider from '@mui/joy/Divider';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
+import Divider from '@mui/joy/Divider'; 
 import Typography from '@mui/joy/Typography';  
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 /* */
 
 const PaymentForm = ({ 
-  userBillingInfo, 
-  SelectedRegions,
-  setSelectedRegions,
+  userBillingInfo,  
   setActiveStep, 
   OverallPrice,  
   User }) => {
-
-  const [CartArray, setCartArray] = useState([]) 
-   
-  useEffect(() => {
-      fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
-        method: 'GET',  
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }        
-        }).then(res => res.json()).then(data => setCartArray(data.content[0][0].products)) 
-  }, []) 
-
-  {/**
-   - TEST DATA -
-     creditCardDetailsCardholderName:  "Andrzej Moskiewicz",
-      creditCardDetailsNumber: "4111 1111 1111 1111",
-      creditCardDetailsExpirationDate: "09/23",
-      creditCardDetailsCvv: "123"
-*/}   
 
   return (
     <> 
         
             <ul>
-                {/* <h3>Zamówione przedmioty</h3>
-
-            <div className='items-review' style={{ margin: '15px' }}>
-               CartArray != [] ? null : JSON.parse(CartArray).map(item =>  
-                  <ul>
-                  <li>{item.id}</li>
-                  <li>ilość towaru:{item.quantity}</li>
-                  <li>Łączna cena: 0</li>
-                  </ul>
-                )
-            </div>
-            */}
             <span>
             <form className="address-form">
 
@@ -94,9 +56,7 @@ const PaymentForm = ({
 OverallPrice={OverallPrice}
 userBillingInfo={userBillingInfo}
 setActiveStep={setActiveStep}
-User={User}
-CartArray={CartArray}
-/>
+User={User}/>
 
         <CardActions sx={{ gridColumn: '1/-1' }} style={{ flexWrap: 'wrap', display: 'flex', justifyContent: 'space-between' }}>
         </CardActions>

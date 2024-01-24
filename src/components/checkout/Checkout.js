@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import React from 'react'
 import {useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -7,6 +7,7 @@ import { AddressForm } from './AddressForm'
 import { Confirmation } from './Confirmation'
 import PaymentForm from './PaymentForm'
 import { ShipingForm } from './ShipingForm'
+import { CartContext } from '../../CartProvider';
 
 import ArrowSteps from '../../images/arrow-steps.svg'
 import CartImg from '../../images/Cart.svg'
@@ -16,44 +17,29 @@ const steps = ['Adres dostawy', 'Szczegóły płatności']
 
 export const Checkout = ({ User }) => {
 
-  const [CartDetails, setCartDetails] = useState([])
+  let OrderActualId =  Math.floor(Math.random() * 9999)
+
   const [OverallPrice, setOverallPrice] = useState(0)
+  const cartContext = useContext(CartContext);
+  const { FetchCart, userCartContent, ApplyingCouponFunction, GettingInfoAboutCart, isCouponApplied } = cartContext;
 
     useEffect(() => {
       if(User) {
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
-          method: 'GET',  
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }        
-          }).then(res => res.json()).then(data => setCartDetails(JSON.parse(data.content[0][0].products))) 
+        FetchCart(User.cartId) 
       } else { }
     }, [])
 
     useEffect(() => {
-      if(CartDetails) {
-      let Test = CartDetails.map(item => { return { overall_price_for_item: item.price * item.quantity }})
+      if(userCartContent) {
+      let Test = userCartContent.map(item => { return { overall_price_for_item: item.price * item.quantity }})
       setOverallPrice((Test.reduce((a,v) =>  a = a + v.overall_price_for_item , 0 )))
       } else {  }
-    }, [CartDetails]) 
+    }, [userCartContent]) 
 
     const [userBillingInfo, setUserBillingInfo] = useState([])
     const [PurchaseMethod, setPurchaseMethod] = useState([])
     const [activeStep, setActiveStep] = useState(0)
     const [checkoutToken, setCheckoutToken] = useState(null)
-    const [isPromoCodeAdded, setIsPromoCodeAdded] = useState(false)
-
-    useEffect(() => {
-        const isPassed = localStorage.getItem('isPromoCodeAdded');
-        if(isPassed) {
-          setIsPromoCodeAdded(JSON.parse(isPassed))
-        }
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('isPromoCodeAdded', isPromoCodeAdded)
-    }) 
 
     const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -94,76 +80,54 @@ export const Checkout = ({ User }) => {
    <h2  style={{ margin: '5px 0', padding: '5px' }}>Ilość: {Quantity}</h2>
    </div>
    </div>
-                  </div>  
+        </div>  
           </div>
         )
 
       }
 
-      const ApplyCoupon = () => {         
-      if(PromoCode == 'CUT50' && isPromoCodeAdded == false) {
-
-        setIsPromoCodeAdded(true)
-
-        function replaceValues(object) {
-          return {
-            id: object.id,
-            quantity: object.quantity, 
-            price: Math.floor(object.price /2)
-          };
+      useEffect(() => {
+        if(User) {
+          GettingInfoAboutCart(User.cartId)
         }
+      }, [User])
 
-        let newArray = CartDetails.map(replaceValues);   
-        let Query = `UPDATE carts SET products = '${JSON.stringify(newArray)}' WHERE idUser = ${User.id}`
+      const ApplyCoupon = () => {   
+        if(PromoCode == 'CUT50' && isCouponApplied == 0) {
 
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}pay/coupon`, {
-          method: 'POST',  
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-          body: JSON.stringify({
-            Query: Query
-          })})
+          function replaceValues(object) {
+            return {
+              id: object.id,
+              quantity: object.quantity, 
+              price: Math.floor(object.price /2)
+            };
+          }
+  
+          let newArray = userCartContent.map(replaceValues);   
+          let Query = `UPDATE carts SET products = '${JSON.stringify(newArray)}', coupon_applied= 1 WHERE idUser = ${User.id}`
+          ApplyingCouponFunction(Query)
 
-          
-          toast.success('Zanizono cene')
+          toast.success('Uzyto kodu')
+          window.location.reload()
 
-      } else if (PromoCode == 'CUT75' && isPromoCodeAdded == false) {
+        } else if (PromoCode == 'CUT75' && isCouponApplied == 0) {
 
-        function replaceValues(object) {
-          return {
-            id: object.id,
-            quantity: object.quantity, 
-            price: Math.floor(object.price /3)
-          };
-        }
+          function replaceValues(object) {
+            return {
+              id: object.id,
+              quantity: object.quantity, 
+              price: Math.floor(object.price /3)
+            };
+          }
+  
+          let newArray = userCartContent.map(replaceValues);   
+          let Query = `UPDATE carts SET products = '${JSON.stringify(newArray)}', coupon_applied= 1 WHERE idUser = ${User.id}`
+          ApplyingCouponFunction(Query)
 
-        let newArray = CartDetails.map(replaceValues);   
-        let Query = `UPDATE carts SET products = '${JSON.stringify(newArray)}' WHERE idUser = ${User.id}`
+          toast.success('Uzyto kodu')
+          window.location.reload()
 
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}pay/coupon`, {
-          method: 'POST',  
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-          body: JSON.stringify({
-            Query: Query
-          })})
-
-          setIsPromoCodeAdded(true)
-          toast.success('Zanizono cene')
-
-      } else if (isPromoCodeAdded == true) {
-
-        toast.error('Juz wykorzystano kod')
-
-      } else {
-
-        toast.error('Nie wpisano kodu')
-
-      }
+        } else if (PromoCode != 'CUT50' || PromoCode != 'CUT75' && isCouponApplied == 0) { toast.error('Wprowadzono zly kod')} else if (isCouponApplied == 1) { toast.error('Kod zostal uzyty')}
       }
 
       return (
@@ -179,7 +143,7 @@ export const Checkout = ({ User }) => {
                 width: '110%', 
                 margin: '20px' }}>
 
-                  {CartDetails.map(item => <SingleItem idProd={item.id} Price={item.price} Quantity={item.quantity} item={item} /> )} 
+                  {userCartContent.map(item => <SingleItem idProd={item.id} Price={item.price} Quantity={item.quantity} item={item} /> )} 
 
                   <hr></hr>
 
@@ -196,8 +160,7 @@ export const Checkout = ({ User }) => {
                   <input 
                   placeholder='PROMO15' 
                   maxLength={8} 
-                  onChange={(e) => { setPromoCode(e.target.value)
-                  }}
+                  onChange={(e) => { setPromoCode(e.target.value) }}
                   value={PromoCode}
                   className="input-form-address" style={{ margin: '0', height: '100%', textTransform: 'uppercase' }} required />
                   <button onClick={ApplyCoupon} class="site-btn" style={{ fontSize: '14px', height: '40px' }}>Dodaj kod</button>
@@ -218,7 +181,9 @@ export const Checkout = ({ User }) => {
 
     }
 
-    const Form = () => <div className="checkout-splash-screen"> {activeStep == 0 ? <AddressForm 
+    const Form = () => <div className="checkout-splash-screen" 
+    style={{ flexDirection: `${activeStep == 3 ? 'column' : 'row'}` }}
+    > {activeStep == 0 ? <AddressForm 
       checkoutToken={checkoutToken} 
       setCheckoutToken={setCheckoutToken} 
       nextStep={nextStep}
@@ -232,6 +197,7 @@ export const Checkout = ({ User }) => {
       userBillingInfo={userBillingInfo} 
       setUserBillingInfo={setUserBillingInfo} 
       /> : <PaymentForm 
+      OrderActualId={OrderActualId}
       userBillingInfo={userBillingInfo} 
       PurchaseMethod={PurchaseMethod} 
       checkoutToken={checkoutToken} 
@@ -240,12 +206,11 @@ export const Checkout = ({ User }) => {
       nextStep={nextStep}
       OverallPrice={OverallPrice} 
       User={User}/>}
-      <div style={{ width: '100vw' }}>
-
+      <div style={{ width: '100vw', display: `${activeStep == 3 ? 'none' : 'flex'}` }}>
       <CouponCode/>
 
       </div>
-      </div>
+    </div>
 
     return (
         <>
@@ -266,7 +231,7 @@ export const Checkout = ({ User }) => {
               </div>
             <div className="payment-form-container"></div>
              </div>
-             {activeStep == 3 ? <Confirmation /> : <Form />}
+             {<Form />}
          </div>   
         </>
     )

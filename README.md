@@ -6,6 +6,17 @@ Internet shop designed for your favourite accesories aka ROSSMAN like
 
 In the project directory, you can run:
 
+### Demo credit card data 
+
+**TEST DATA**
+
+creditCardDetailsCardholderName:  "Andrzej Moskiewicz",
+creditCardDetailsNumber: "4111 1111 1111 1111",
+creditCardDetailsExpirationDate: "09/23",
+creditCardDetailsCvv: "123"
+
+For the payment in application by looking, at the sandbox gateway mode - you only need to use data above
+
 ### Releases
 
 **Note: you can expected in future more addon's and any other relatable stuff**

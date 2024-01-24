@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom' 
 import {Link}  from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
@@ -10,95 +10,59 @@ import { motion } from 'framer-motion'
 
 /* style stuff */
 
-export const Cart = ({ User, UserCart, setQuantityCartUser, QuantityCartUser }) => {
+import { CartContext } from '../CartProvider'
+
+export const Cart = ({ User }) => {
 
     const navigate = useNavigate() 
     const [HideContent, setHideContent] = useState(false)
-    const [newUserQuantity, setNewUserQuantity] = useState(1)
     const [OverallPrice, setOverallPrice] = useState(0) 
-    const [CartArray, setCartArray] = useState('')
+
+    const cartContext = useContext(CartContext);
+    const { FetchCart, 
+      userCartContent, 
+      RemovingProductInAcartFunction,
+      AdddingProductInAcartFunction,
+      CleaningCartFunction,
+    } = cartContext;
 
     useEffect(() => {
-        if(UserCart) { 
-          let Arr = JSON.parse(UserCart).map(item => { return { overall_price_for_item: item.price * item.quantity }})
+      if(User) { FetchCart(User.cartId) } else {}
+    }, [User]) 
+
+    useEffect(() => {
+        if(userCartContent != []) { 
+          let Arr = userCartContent.map(item => { return { overall_price_for_item: item.price * item.quantity }})
           setOverallPrice((Arr.reduce((a,v) =>  a = a + v.overall_price_for_item , 0 ))) 
         } else {  }
-    }, [UserCart])
-
-    useEffect(() => {
-        if(User) {
-          fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
-            method: 'GET',  
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              }        
-            }).then(res => res.json()).then(data => setCartArray(data.content[0][0].products)) 
-        } else {  }
-    }, [UserCart])
+    }, [userCartContent])
 
     const CleaningCart = () => {
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/cartU/${User.cartId}`, {
-            method: 'POST',  
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              }}).then(res => res.json()).then(toast.info('Czysto'))
-              setQuantityCartUser(0)
-              setOverallPrice(0)
-              setHideContent(true)
+      CleaningCartFunction(User.cartId)
+      setHideContent(true)
+      setOverallPrice(0)
     }
    
     const Item = ({idProd, quantityU, PPrice}) => {
         
         const [singleProdDetails, setSingleProdDetails] = useState({}); 
 
-        const RemovingProductInAcart = async () => {   
-          
-          try {
-            
-            const items = JSON.parse(UserCart)
-            let IndexActual = items.findIndex(x => x.id == idProd)   
-    
-            setNewUserQuantity(newUserQuantity - 1)   
-            await axios.post(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
-              id: User.cartId,
-              Obj: idProd,
-              IndexO: IndexActual,
-              num_prod: quantityU - 1,
-              price: PPrice
-            })
-            .then((response) => {
-              toast.success('Zmieniono stan w koszyku')
-              window.location.reload()
-            }, (error) => {
-              toast.log(error);
-            });
-
-            
-
-          } catch (e) {  toast.error(e) } 
+        const RemovingProductInAcart = () => {   
+          let CartId = User.cartId
+          let IdProduct = idProd
+          let foundIndex = userCartContent.findIndex(x => x.id == idProd)   
+          let QuantityUserProd = quantityU
+          let ProductPrice = PPrice
+          RemovingProductInAcartFunction(CartId, IdProduct, foundIndex, QuantityUserProd, ProductPrice)
         }
 
-        const AdddingProductInAcart = async () => {      
-        const items = JSON.parse(UserCart)
-        let IndexActual = items.findIndex(x => x.id == idProd) 
-        let ItemActual = items.find(x => x.id == idProd)
-        
-        setNewUserQuantity(newUserQuantity + 1)     
-        await axios.post(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
-          id: User.cartId,
-          Obj: idProd,
-          IndexO: IndexActual,
-          num_prod: quantityU + 1,
-          price: PPrice
-        })
-        .then((response) => {
-          toast.success('Zmieniono stan w koszyku')
-          window.location.reload()
-        }, (error) => {
-          toast.log(error);
-        });
+        const AdddingProductInAcart = async () => { 
+          let CartId = User.cartId
+          let IdProduct = idProd
+          let foundIndex = userCartContent.findIndex(x => x.id == idProd)   
+          let QuantityUserProd = quantityU
+          let ProductPrice = PPrice
+          AdddingProductInAcartFunction(CartId, IdProduct, foundIndex, QuantityUserProd, ProductPrice)
         }  
 
         useEffect(() => {
@@ -169,12 +133,12 @@ export const Cart = ({ User, UserCart, setQuantityCartUser, QuantityCartUser }) 
             </div>
             <hr className='product-line'></hr>
 
-            {UserCart == '' || HideContent ?  null : JSON.parse(UserCart).map(item => <Item idProd={item.id} quantityU={item.quantity} PPrice={item.price}/>)}
+            {HideContent ? null : userCartContent.map(item => <Item idProd={item.id} quantityU={item.quantity} PPrice={item.price}/>)}
             
             <div className="container-for-a-cart-options">
-            <h1>Całość: {UserCart != '' ? OverallPrice : 0} zl<span>Każde zamówienie, VAT i inne podatki będzie miało doliczone</span></h1>
+            <h1>Całość: {User ? OverallPrice : 0} zl<span>Każde zamówienie, VAT i inne podatki będzie miało doliczone</span></h1>
 
-            {UserCart == '' ? <button className="site-btn" onClick={() => navigate('/')} >Wroc na sklep</button> : <>
+            {HideContent || userCartContent.length == 0 ? <button className="site-btn" onClick={() => navigate('/')} >Wroc na sklep</button> : <>
             <button className="site-btn" onClick={() => navigate('/sposoby-dostawy-i-platnosci')}>Przejście do kasy</button>
             <button className="site-btn" onClick={CleaningCart}>Opróżnij koszyk ❌</button>
             </> }

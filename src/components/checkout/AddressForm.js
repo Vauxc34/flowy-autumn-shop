@@ -4,11 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
-export const AddressForm = ({  
-  setUserBillingInfo,
-  setCheckoutToken,   
-  next
- }) => {
+export const AddressForm = ({ setUserBillingInfo, next }) => {
 
         const InputAreas = [
       {name: "firstName", placeholder: "Imię", label: "First name" },
@@ -17,6 +13,7 @@ export const AddressForm = ({
       {name: "email", placeholder: "Adres e-mail", label: "Email" },
       {name: "city", placeholder: "Miasto", label: "City" },
       {name: "zip", placeholder: "Kod pocztowy", label: "Zip / Postal code" },
+      {name: "phone_number", placeholder: "Numer telefonu", label: "Phone number" },
         ]
 
         const [SelectedRegions, setSelectedRegions] = useState('Małopolskie')
@@ -44,6 +41,7 @@ export const AddressForm = ({
             firstName: InputForm.firstName,
             lastName: InputForm.lastName, 
             zip:InputForm.zip,
+            phone_number: InputForm.phone_number,
             region: SelectedRegions
            })
         }
@@ -54,7 +52,8 @@ export const AddressForm = ({
            InputForm.email ==  undefined || 
            InputForm.firstName == undefined || 
            InputForm.lastName == undefined || 
-           InputForm.zip == undefined ) {
+           InputForm.zip == undefined ||
+           InputForm.phone_number == undefined) {
             toast.error('Nie uzupełniono wszystkich pól')
           } else {  
             next()  

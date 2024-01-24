@@ -1,77 +1,37 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination } from 'swiper'
 import { motion } from 'framer-motion' 
 import axios from 'axios'
 
-const ProductPage = ({
-    User,
-    ToastContainer,
-    toast,
-    UserCart,
-    setUserCart,
-    setQuantityCartUser,
-}) => {
+import { CartContext } from '../CartProvider'
+
+const ProductPage = ({ User, ToastContainer }) => {
     
     let location = useLocation()
     const [Product, setProduct] = useState('') 
     const [ProductList, setProductList] = useState('')
-    const [ActualUserCart, setActualUserCart] = useState('')
     const [QuantityOfProduct, setQuantityOfProduct] = useState(1) 
     const [ButtonCartVisible, setButtonCartVisible] = useState(false)
     const ProductLink = location.pathname.split('/', 3)[2] 
     
-    console.log(UserCart)
-     
+    const cartContext = useContext(CartContext);
+    const { FetchCart, 
+        AddProductToAcartFunction, 
+        ModifyProductInAcartFunction, 
+        userCartContent, 
+        OrderIdCart,
+        ApplyingCouponFunction } = cartContext;
+    
+    useEffect(() => { if(User) { FetchCart(User.cartId) } else { } }, [User]) 
+
     const findItemById = (items) => {
         return items.find(item => item.id == ProductLink);
     }
 
     const GetItemIndex = (items) => {
-        return items.findIndex(item => item.id == ProductLink);
-    }
-
-    const AddProductToAcart = () => {  
-        setButtonCartVisible(true)
-        let RightData = JSON.parse(UserCart)
-        setQuantityCartUser(RightData.length)
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/create`, {
-            method: 'POST',  
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({
-                id: User.cartId,
-                idProd: ProductLink,
-                quantity: QuantityOfProduct,
-                price: Product.price
-            })
-        }).then(res => res.json()).then(data => toast.success('Dodales produkt')) 
-        //window.location.reload()
-    }
-
-    const ModifyProductInAcart = () => {      
-        const items = JSON.parse(ActualUserCart.products);
-        const foundIndex = GetItemIndex(items, ProductLink);
-        let RightData = JSON.parse(UserCart)
-        setQuantityCartUser(RightData.length)
-        fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/product`, {
-            method: 'POST',  
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({
-                id: User.cartId,
-                Obj: ProductLink,
-                IndexO: foundIndex,
-                num_prod:  QuantityOfProduct,
-                price: Product.price
-            })
-        }).then(res => res.json()).then(data => toast.success('Dodales produkt'))
-        //window.location.reload()
+        return userCartContent.findIndex(item => item.id == ProductLink);
     }
 
     useEffect(() => {
@@ -83,6 +43,25 @@ const ProductPage = ({
         }}).then(res => res.json()).then(data => setProduct(data.prod))
     }, [ProductLink])
 
+    const AddProductToAcart = () => {  
+    let CartId = User.cartId
+    let ProductPrice_ = Product.price
+    setButtonCartVisible(true) 
+    let Query = `UPDATE carts SET coupon_applied = 0 WHERE idUser = ${User.id}` 
+    ApplyingCouponFunction(Query)
+    AddProductToAcartFunction(CartId, ProductLink, QuantityOfProduct, ProductPrice_)
+    }
+
+    const ModifyProductInAcart = () => {  
+    let CartId = User.cartId
+    let ProductPrice_ = Product.price
+    const items = userCartContent
+    const foundIndex = GetItemIndex(items, ProductLink);
+    if(foundIndex != -1) {
+        ModifyProductInAcartFunction(CartId, ProductLink, foundIndex, QuantityOfProduct, ProductPrice_)
+    } else { window.location.reload() }
+    }
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
                     method: 'GET',  
@@ -93,32 +72,15 @@ const ProductPage = ({
     }, [])
 
     useEffect(() => {
-        if (User != null) {
-            fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
-                method: 'GET',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-            })
-            .then(res => res.json())
-            .then(data => {
-                setActualUserCart(data.content[0][0]);
-                return data.content[0][0]; 
-            })
-            .then((actualUserCart) => {
-                if (actualUserCart && actualUserCart.products !== '') {
-                    const items = JSON.parse(actualUserCart.products);
-                    const foundItem = findItemById(items, ProductLink);
-                    if(foundItem) {
-                        setButtonCartVisible(true)
-                    } else {
-                        setButtonCartVisible(false)
-                    }
-                } else {
-                    console.log('no item');
-                }
-            })
-            .catch(error => console.error('Error fetching cart:', error));
+        if(User) {
+            const foundIndex = GetItemIndex(userCartContent, ProductLink);
+            if(foundIndex > -1) {
+                setButtonCartVisible(true)
+            } else {
+                setButtonCartVisible(false)
+            }
         }
-    }, [User, ProductLink]);
+    }, [User, ProductLink, userCartContent]);
 
 return (
 <>
@@ -182,6 +144,7 @@ exit={{ opacity: 0 }}
     </p>
     
     </div>
+ 
 
     {User ? <> {ButtonCartVisible ? <button className='site-btn' onClick={ModifyProductInAcart} id="buy_btn">Dodaj do koszyka</button> : <button className='site-btn' onClick={AddProductToAcart} id="buy_btn">Dodaj do koszyka</button>} </> : <button className='site-btn' id="buy_btn">Nie jestes zalogowany</button>} 
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react' 
+import React, {useState, useEffect, useContext } from 'react' 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { AnimatePresence } from 'framer-motion' 
@@ -18,14 +18,12 @@ import Navbar from "../components/Navbar"
 
 import logoFlowyAutumn from '../images/logo-szersze-biale.png'
 import ArrowMenu from '../images/ChevronDown.svg'
-import axios from 'axios';
 
 /* image's */
 
-const Shop = () =>  { 
+import { CartContext } from '../CartProvider'
 
-  const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
-  const [MobileMenu, setMobileMenu] = useState('navbar-menu') 
+const Shop = () =>  { 
 
 /* register thing's */
 
@@ -35,36 +33,27 @@ const Shop = () =>  {
   const [userMail, setUserMail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')  
+  const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
     
   useEffect(() => {
     const data = localStorage.getItem('User');
-    const data_cart = localStorage.getItem('UserCart');
     if(data) {
       setUser(JSON.parse(data))
-      setUserCart(JSON.parse(data_cart))
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('User', JSON.stringify(User))
-    localStorage.setItem('UserCart', JSON.stringify(UserCart))
   }) 
   
 /* cart */
 
-const [QuantityCartUser, setQuantityCartUser] = useState(0) 
+  const cartContext = useContext(CartContext);
+  const { FetchCart } = cartContext;
 
-const FetchCart = async () => { 
-  await axios.get(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`).then(res => setUserCart(res.data.content[0][0].products))
-  let RightProdData = JSON.parse(UserCart)
-  setQuantityCartUser(RightProdData.length) 
-}  
-
-useEffect(() => {
-  if(User) {
-    FetchCart()
-  } else {}
-}, [User])
+  useEffect(() => {
+  if(User) { FetchCart(User.cartId) } else {}
+  }, [User])
 
 /* cart */
 
@@ -73,8 +62,8 @@ useEffect(() => {
      return (
 
         <div class="wrapper">
-            <Navbar User={User} QuantityCartUser={QuantityCartUser} UserCart={UserCart}/>
-            <div className={`${MobileMenu}`}>
+            <Navbar User={User}/>
+            <div className='navbar-menu'>
             <ul>
             <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>
             <li class="nav-option">About</li>
@@ -96,8 +85,6 @@ userPassword={userPassword}
 setUserPassword={setUserPassword}
 userPasswordRepeat={userPasswordRepeat}
 setUserPasswordRepeat={setUserPasswordRepeat}
-QuantityCartUser={QuantityCartUser}
-setQuantityCartUser={setQuantityCartUser}
 ToastContainer={ToastContainer}   
 toast={toast}/>
 </AnimatePresence>

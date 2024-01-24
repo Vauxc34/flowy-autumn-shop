@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import { connect } from 'react-redux'
+import React, {useEffect, useState, useContext} from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import logo from '../images/logo.svg'
+import { connect } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStore } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import logo from '../images/logo.svg'
 
 /* image's */
 
@@ -18,8 +18,18 @@ import ProfileIcon from '../images/Profile.svg'
 import CartIcon from '../images/Cart.svg'
 import question_mark from '../images/question_mark.png'
 
-export const Navbar = ({ User, UserCart, QuantityCartUser }) => {
+import { CartContext } from '../CartProvider'
+
+export const Navbar = ({ User, UserCart }) => {
    
+    const cartContext = useContext(CartContext);
+    const { FetchCart, SetActualQuantityCart, cartQuantity } = cartContext;
+
+    useEffect(() => {
+        if(User) { FetchCart(User.cartId)
+          SetActualQuantityCart(User.cartId)
+        } else {}
+      }, [User])
      
     const navigate = useNavigate()     
     const [HamburgerOpen, isHamburgerOpen] = useState(1)
@@ -51,7 +61,7 @@ export const Navbar = ({ User, UserCart, QuantityCartUser }) => {
                         <img src={ProfileIcon} alt="navbar ico" class="user_icon"/>
                         </li> 
                     <li class="nav-option" onClick={() =>  navigate('/koszyk')}><img src={CartIcon} alt="navbar ico" class="cart_icon"/></li>
-                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: User != '' || UserCart != [] ? QuantityCartUser : 0 }}></div>
+                    <div className='quantity-navbar' dangerouslySetInnerHTML={{ __html: User ? cartQuantity : 0 }}></div>
                 </ul>
         </div>
         <div className={`header-mobile ${Hamburger}`}>
