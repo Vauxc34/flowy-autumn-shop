@@ -52,7 +52,7 @@ export const PaymentGate = ({
             Username : process.env.REACT_APP_MAIL_MAIL,
             Password : process.env.REACT_APP_PASSWORD_MAIL,
             To : `${userBillingInfo.email}`,
-            From : 'amalinowski575@gmail.com',
+            From : 'sklep@flowyshop.pl',
             Subject : `Dziekujemy za zakupy w naszym sklepie - ${userBillingInfo.email}`,
             Body : `<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width">
