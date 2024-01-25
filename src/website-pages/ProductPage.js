@@ -24,7 +24,7 @@ const ProductPage = ({ User, ToastContainer }) => {
         OrderIdCart,
         ApplyingCouponFunction } = cartContext;
     
-    useEffect(() => { if(User) { FetchCart(User.cartId) } else { } }, [User]) 
+    useEffect(() => { if(User) { FetchCart(User.cartId) } else {  } }, [User]) 
 
     const findItemById = (items) => {
         return items.find(item => item.id == ProductLink);

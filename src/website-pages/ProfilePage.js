@@ -38,7 +38,6 @@ const ProfilePage = ({ User, setUser }) => {
       const [OverallSingleDatas, setOverallSingleDatas] = useState('')
 
       useEffect(() => {
-
         if(User) {
           
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${User.cartId}`, {
@@ -49,9 +48,7 @@ const ProfilePage = ({ User, setUser }) => {
             }        
           }).then(res => res.json()).then(data => setAdditionalData(JSON.parse(data.content[0][0].products))) 
 
-        } else { }
-
-
+        } else {  }
       }, [User])
 
       useEffect(() => {

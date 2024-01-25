@@ -21,8 +21,8 @@ const RegisterPage = ({
   const [userMail, setUserMail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')
-  const NewUserId = Math.floor(Math.random() * 999)
-  const NewCartId = Math.floor(Math.random() * 999)
+  const NewUserId = useRef(Math.floor(Math.random() * 999))
+  const NewCartId = useRef(Math.floor(Math.random() * 999))
 
   const RegisterNewUser = () => {
     if(userName == '' || userSurname == '' || userMail == '' || userPassword == '' || userPasswordRepeat == '') {
@@ -42,29 +42,29 @@ const RegisterPage = ({
           'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-          id: NewUserId,
+          id: NewUserId.current,
           name: userName,
           surname: userSurname, 
           mail: userMail,
           password: userPassword,
           role: "client",
-          cartId: NewCartId
+          cartId: NewCartId.current
     })
     }).then(res => res.status >= 400 ? toast.error('Nie mozna sie zalogowac') : res.json() )
-    .then(toast.success('Zarejestrowano')).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId}`, {
+    .then(toast.success('Zarejestrowano')).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId.current}`, {
         method: 'GET',  
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
-        }).then(res => res.json()).then(data => setUser(data.content[0][0])).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${NewCartId}`, {
+        }).then(res => res.json()).then(data => setUser(data.content[0][0])).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${NewUserId.current}`, {
           method: 'POST',  
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
           body: JSON.stringify({
-            id: NewCartId,
+            id: NewCartId.current,
             products: [], 
             payment_method: "not_selected",
             amount_of_money: 0

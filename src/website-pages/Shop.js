@@ -34,7 +34,7 @@ const Shop = () =>  {
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')  
   const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
-    
+ 
   useEffect(() => {
     const data = localStorage.getItem('User');
     if(data) {
@@ -44,7 +44,7 @@ const Shop = () =>  {
 
   useEffect(() => {
     localStorage.setItem('User', JSON.stringify(User))
-  }) 
+  })   
   
 /* cart */
 
