@@ -1,0 +1,134 @@
+{
+    "app_lang": "pl",
+
+    "navbar_option1": "Strona główna",
+    "navbar_option2": "Produkty",
+    "navbar_option3": "Porozmawiaj z nami",
+
+    "product_header": "Produkty",
+    "product_paragraph": "Zamów dla siebie lub dla swoich bliskich",
+    "product_button": "Odkryj nasz katalog",
+
+    "subheader_2": "Znajdz najlepsze", 
+
+    "advertisment_header": "Czysto i elegancko",
+    "advertisment_paragraph": "Dobór produktów pod ciebie i twoje potrzeby",
+
+    "advertisment_head_1": "Ekologiczne",
+    "advertisment_paragraph_1": "Wszystkie materiały nadające się do recyklingu, 0% emisji CO2",
+    "advertisment_head_2": "Sprawdzone",
+    "advertisment_paragraph_2": "W 100% naturalne, przyjazne dla człowieka składniki",
+    "advertisment_head_3": "Ręcznie wytwarzane",
+    "advertisment_paragraph_3": "Wszystkie świece są ręcznie wykonane z miłością",
+    "advertisment_head_4": "Długowieczne",
+    "advertisment_paragraph_4": "Nigdy więcej odpadów. Stworzony na długo",
+
+    "opinion_header": "Opinie o nas",
+    "opinion_paragraph": "Parę zdań od klientów dla nas",
+
+    "product_page_main_title": "A co tym razem szukamy?",
+    "product_page_main_subtitle": "Przebieraj w tym co najlepsze",
+    
+    "contact_form_header": "Potrzebujesz pomocy?",
+
+    "input_form_text_1": "Adres e-mail",
+    "input_form_text_2": "Twoje imię i nazwisko",
+
+    "input_form_text_2_1": "Imię",
+    "input_form_text_2_2": "Nazwisko",
+
+    "input_form_text_3": "Numer telefonu (opcjonalne)",
+    "input_form_text_4": "Twoja wiadomość",
+    "input_form_text_5": "Wyślij wiadomość",
+
+    "input_form_text_6_1": "Hasło",
+    "input_form_text_6_2": "Powtórz hasło",
+
+    "input_form_text_7": "Adres zamieszkania",
+    "input_form_text_8": "Miasto",
+    "input_form_text_9": "Kod pocztowy",
+    "input_form_text_10": "Numer telefonu",
+    "input_form_text_11": "Województwo",
+
+    "login_unlogged": "Nie zalogowano",
+    "login_unlogged_paragraph": "Zaloguj się aby podejrzeć transakcję i reszte ciekawych dla ciebie rzeczy",
+    "login_button_1": "Logowanie",
+    "logout_button_1": "Wyloguj się",
+
+    "your_address_mail": "Twój adres email",
+
+    "fun_fact": "Ciekawostka dnia",
+
+    "story": "Historia zakupow",
+
+    "login_confirmation_1": "Zostales zalogowany!",
+    "login_confirmation_subtitle_1": "Przejdz na sklep",
+
+    "register_button_1": "Rejestracja",
+    "register_button_2": "Zarejestruj się",
+
+    "registration_screen_info": "Nie masz konta?",
+
+    "quantity": "Ilość",
+
+    "specification": "Specyfikacja",
+    "shipment_to_detail": "Wysylka do",
+    "form_of_shipment": "Forma wysylki",
+    "button_shipment": "Przejdź do wysylki",
+    "button_shipment_2": "Powrot do koszyka",
+
+    "change_btn_shippment": "Zmien dane do wysylki",
+
+    "buy_now_btn_1": "Nie jestes zalogowany",
+    "buy_now_btn_2": "Dodaj do koszyka",
+
+    "subtitle_products": "Pozostałe produkty",
+    "subtitle_products_1": "Darmowa wysylka",
+
+    "cart_details_big_heading": "Twój koszyk z zakupami",
+    "cart_details_heading_1": "Produkt i jego szczegóły",
+    "cart_details_subheading_1": "Wróć do produktów",
+    "price": "Cena",
+    "overall": "Całość",
+    "overall_subheader": "Każde zamówienie, VAT i inne podatki będzie miało doliczone",
+    "cart_go_into_btn": "Przejście do kasy",
+    "check_pay_go_into_btn": "Przejdź do płatnosci",
+    "checkout_go_into_btn": "Powrot do koszyka",
+    "deletion_cart": "Opróżnij koszyk",
+
+    "cart": "Koszyk",
+    "shipment": "Wysyłka",
+    "payment": "Płatność",
+
+    "address_shipment": "Adres wysyłki",
+
+    "discount_header": "Masz znike?",
+    "discount_btn": "Dodaj kupon",
+    "payment_header": "Zaplac za zakupy",
+
+    "success_transaction_header": "Dziękujemy za zakupy w naszym sklepie!",
+    "success_transaction_subheader": "Zostalo oplacone i przyjete do realizacji",
+    "order": "Zamowienie",
+
+    "pay_btn": "Zaplac",
+    "back_btn": "Cofnij",
+
+    "credit_card_number": "Numer karty kredytowej",
+    "expiration_date": "Data wygasniecia",
+
+    "slogan_text": "Wszystkie niezbędne akcesoria w niskich cenach.",
+
+    "footer_heading_1": "Zakładki",
+    "footer_list_1_1": "Strona główna",
+    "footer_list_1_2": "Zarejestruj się",
+    "footer_list_1_3": "Twój profil",
+
+    "footer_heading_2": "Informacje",
+    "footer_list_2_1": "Kontakt z nami",
+    "footer_list_2_2": "Polityka prywatności",
+
+    "footer_heading_3": "Język strony",
+
+    "rights_reserved_text": " Wszelkie prawa zastrzeżone dla"
+}
+    

@@ -14,7 +14,7 @@ import StarFilled from '../images/star-filled.svg'
 
 /* Images */
 
-const Products = ({  onAddToCart  }) => {
+const Products = ({  onAddToCart, Language, Polish, English }) => {
 
     const [ProductList, setProductList] = useState([ 
         {
@@ -58,13 +58,13 @@ const Products = ({  onAddToCart  }) => {
 
             <div class="widget-description">
                 <div class="description-box">
-                    <h1>Drogeria Flowy</h1>
+                    <h1>{Language == 'PL' ? Polish.product_header : Language == 'EN' ? English.product_header : 'Produkty' }</h1>
                     <p>
-                        Perfumeria, biżuteria ogólnodostępna dostępna w niskich cenach 
+                    {Language == 'PL' ? Polish.product_paragraph : Language == 'EN' ? English.product_paragraph : 'Zamów dla siebie lub dla swoich bliskich' } 
                     </p>
                 </div>
                 <button onClick={() => navigate('/produkty')} class="site-btn">
-                   Odkryj nasz katalog
+                {Language == 'PL' ? Polish.product_button : Language == 'EN' ? English.product_button : 'Odkryj nasz katalog' } 
                 </button>
             </div>
 
@@ -73,8 +73,11 @@ const Products = ({  onAddToCart  }) => {
         <div class="products-list">
 
             <div class="description-box">
-                <h1>Produkty</h1>
-                <p>Order it for you or for your beloved ones</p>
+                <h1>
+
+                {Language == 'PL' ? Polish.subheader_2 : Language == 'EN' ? English.subheader_2 : 'Znajdz najlepsze' }
+                </h1>
+                {/*<p>Order it for you or for your beloved ones</p>*/}
             </div>
 
             <div class="product-grid">{ProductList.map(item =>  <div class="product-itself">
@@ -97,17 +100,17 @@ const Products = ({  onAddToCart  }) => {
             <div class="another-information-container">
 
                 <div class="description-box">
-                    <h1>Czysto i <br/> elegancko</h1>
-                    <p class="description-green">Dobór produktów pod ciebie i twoje potrzeby</p>
+                    <h1>{Language == 'PL' ? Polish.advertisment_header : Language == 'EN' ? English.advertisment_header : 'Czysto i elegancko' }</h1>
+                    <p class="description-green">{Language == 'PL' ? Polish.advertisment_paragraph : Language == 'EN' ? English.advertisment_paragraph : 'Dobór produktów pod ciebie i twoje potrzeby' }</p>
                 </div>
 
                 <img src={ImageFeatures} alt="" class="another-information-img-mobile"/>
                 
                 <ul class="features-list">
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Ekologiczne:</b>All recyclable materials, 0% CO2 emissions</li>
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Sprawdzone:</b> 100% natural, human friendly ingredients </li>
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Ręcznie wytwarzane:</b> All candles are craftly made with love.</li>
-                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>Długowieczne:</b> No more waste. Created for last long.</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>{Language == 'PL' ? Polish.advertisment_head_1 : Language == 'EN' ? English.advertisment_head_1 : 'Ekologiczne' }: </b> {Language == 'PL' ? Polish.advertisment_paragraph_1 : Language == 'EN' ? English.advertisment_paragraph_1 : 'Wszystkie materiały nadające się do recyklingu, 0% emisji CO2' }</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>{Language == 'PL' ? Polish.advertisment_head_2 : Language == 'EN' ? English.advertisment_head_2 : 'Sprawdzone' }: </b> {Language == 'PL' ? Polish.advertisment_paragraph_2 : Language == 'EN' ? English.advertisment_paragraph_2 : 'W 100% naturalne, przyjazne dla człowieka składniki' }</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>{Language == 'PL' ? Polish.advertisment_head_3 : Language == 'EN' ? English.advertisment_head_3 : 'Ręcznie wytwarzane' }: </b> {Language == 'PL' ? Polish.advertisment_paragraph_3 : Language == 'EN' ? English.advertisment_paragraph_3 : 'Wszystkie świece są ręcznie wykonane z miłością' }</li>
+                    <li class="feature"> <img src={CheckmarkFeatures} alt="" class="checkmark"/><b>{Language == 'PL' ? Polish.advertisment_head_4 : Language == 'EN' ? English.advertisment_head_4 : 'Długowieczne' }: </b> {Language == 'PL' ? Polish.advertisment_paragraph_4 : Language == 'EN' ? English.advertisment_paragraph_4 : 'Nigdy więcej odpadów. Stworzony na długo' }</li>
                 </ul>
     
                 {/*<button class="site-btn">Zobacz więcej</button>*/}
@@ -127,8 +130,8 @@ const Products = ({  onAddToCart  }) => {
         <div class="testimonials">
 
             <div class="description-box">
-                <h1>Opinie o nas</h1>
-                <p>Some quotes from our happy customers</p>
+                <h1>{Language == 'PL' ? Polish.opinion_header : Language == 'EN' ? English.opinion_header : 'Opinie o nas' }</h1>
+                <p>{Language == 'PL' ? Polish.opinion_paragraph : Language == 'EN' ? English.opinion_paragraph : 'Parę zdań od klientów dla nas' }</p>
             </div>
 
             <div class="testimonials-carousel">

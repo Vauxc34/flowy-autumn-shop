@@ -15,7 +15,7 @@ import ArrowGreen from '../../images/ChevronDowngreen.svg'
 
 const steps = ['Adres dostawy', 'Szczegóły płatności']
 
-export const Checkout = ({ User }) => {
+export const Checkout = ({ User, Language, English, Polish }) => {
 
   let OrderActualId =  Math.floor(Math.random() * 9999)
 
@@ -68,7 +68,7 @@ export const Checkout = ({ User }) => {
 
         return (
           <div className='item-coupon'>
-                  <div className="container-for-etc" style={{ flexWrap: 'no-wrap', display: 'grid', gridTemplateColumns: 'auto auto' }}>
+   <div className="container-for-etc" style={{ flexWrap: 'no-wrap', display: 'grid', gridTemplateColumns: 'auto auto' }}>
    <div className='row-for-etc'>
    <div className="product-image-cart" style={{ backgroundImage: `url(${SingleData.image})` }}></div>
    </div>
@@ -76,8 +76,8 @@ export const Checkout = ({ User }) => {
    <div className='row-for-etc' style={{ flexWrap: 'no-wrap' }}>
    <div className="container-for-item-name-h4" style={{ justifyContent: 'flex-start' }}>
    <h4>{SingleData.name}</h4>   
-   <h3  style={{ margin: '0px 0', padding: '0' }}>Cena: {Price}</h3>
-   <h2  style={{ margin: '5px 0', padding: '5px' }}>Ilość: {Quantity}</h2>
+   <h3  style={{ margin: '0px 0', padding: '0' }}>{Language == 'PL' ? Polish.price : Language == 'EN' ? English.price : 'Cena' }: {Price}</h3>
+   <h2  style={{ margin: '5px 0', padding: '5px' }}>{Language == 'PL' ? Polish.quantity : Language == 'EN' ? English.quantity : 'Ilość' }: {Quantity}</h2>
    </div>
    </div>
         </div>  
@@ -136,7 +136,7 @@ export const Checkout = ({ User }) => {
 
         <div class="widget-description" style={{ margin: '-4em 0px 0em', padding: '20px 0em' }}>
             <div class="description-box">
-                <h1 style={{ margin: '20px 0 0px' }}>Masz znizke?</h1>
+                <h1 style={{ margin: '20px 0 0px' }}> {Language == 'PL' ? Polish.discount_header : Language == 'EN' ? English.discount_header : 'Masz znizke?' }</h1>
 
                 <div style={{ display: 'flex', 
                 flexDirection: 'column',
@@ -152,7 +152,8 @@ export const Checkout = ({ User }) => {
                     margin: '.5em 0em',
                     justifyContent: 'space-between',
                     padding: 0
-                     }}>Calosc: <h4>{OverallPrice}</h4></h3>
+                     }}>{Language == 'PL' ? Polish.overall : Language == 'EN' ? English.overall : 'Calosc' }
+                     : <h4>{OverallPrice}</h4></h3>
 
                   <hr></hr>
 
@@ -163,7 +164,8 @@ export const Checkout = ({ User }) => {
                   onChange={(e) => { setPromoCode(e.target.value) }}
                   value={PromoCode}
                   className="input-form-address" style={{ margin: '0', height: '100%', textTransform: 'uppercase' }} required />
-                  <button onClick={ApplyCoupon} class="site-btn" style={{ fontSize: '14px', height: '40px' }}>Dodaj kod</button>
+                  <button onClick={ApplyCoupon} class="site-btn" style={{ fontSize: '14px', height: '40px' }}>
+                  {Language == 'PL' ? Polish.discount_btn : Language == 'EN' ? English.discount_btn : 'Dodaj kod' }</button>
                   </div>
                   
 
@@ -182,8 +184,11 @@ export const Checkout = ({ User }) => {
     }
 
     const Form = () => <div className="checkout-splash-screen" 
-    style={{ flexDirection: `${activeStep == 3 ? 'column' : 'row'}` }}
+    style={{ flexDirection: `${window.innerWidth < 599 ? 'column' : activeStep == 3 ? 'column' : 'row'}` }}
     > {activeStep == 0 ? <AddressForm 
+      Language={Language}
+      English={English}
+      Polish={Polish}
       checkoutToken={checkoutToken} 
       setCheckoutToken={setCheckoutToken} 
       nextStep={nextStep}
@@ -191,12 +196,18 @@ export const Checkout = ({ User }) => {
       userBillingInfo={userBillingInfo} 
       setUserBillingInfo={setUserBillingInfo}
       /> : activeStep == 1 ? <ShipingForm 
+      Language={Language}
+      English={English}
+      Polish={Polish}
       next={next}
       nextStep={nextStep}
       setActiveStep={setActiveStep} 
       userBillingInfo={userBillingInfo} 
       setUserBillingInfo={setUserBillingInfo} 
       /> : <PaymentForm 
+      Language={Language}
+      English={English}
+      Polish={Polish}
       OrderActualId={OrderActualId}
       userBillingInfo={userBillingInfo} 
       PurchaseMethod={PurchaseMethod} 
@@ -223,11 +234,11 @@ export const Checkout = ({ User }) => {
            </div>
              <div className="container-for-payment-steps">  
              <div className="Container-for-h4" style={{ width: '230px' }}>
-                 <h4 style={{ fontWeight: activeStep == 0 ? 600 : 400 }}>Koszyk</h4>
+                 <h4 style={{ fontWeight: activeStep == 0 ? 600 : 400 }}>{Language == 'PL' ? Polish.cart : Language == 'EN' ? English.cart : "Koszyk"}</h4>
                  <img src={ArrowSteps}></img>
-                 <h4 style={{ fontWeight: activeStep == 1 ? 600 : 400 }}>Wysyłka</h4>
+                 <h4 style={{ fontWeight: activeStep == 1 ? 600 : 400 }}>{Language == 'PL' ? Polish.shipment : Language == 'EN' ? English.shipment : "Wysyłka"}</h4>
                  <img src={ArrowSteps}></img>
-                 <h4 style={{ fontWeight: activeStep == 2 ? 600 : 400 }} >Płatność</h4>
+                 <h4 style={{ fontWeight: activeStep == 2 ? 600 : 400 }} >{Language == 'PL' ? Polish.payment : Language == 'EN' ? English.payment : "Płatność"}</h4>
               </div>
             <div className="payment-form-container"></div>
              </div>

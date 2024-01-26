@@ -17,6 +17,9 @@ import InfoOutlined from '@mui/icons-material/InfoOutlined';
 /* */
 
 const PaymentForm = ({ 
+  Language, 
+  English,
+  Polish,
   userBillingInfo,  
   setActiveStep, 
   OverallPrice,  
@@ -41,7 +44,7 @@ const PaymentForm = ({
       }}
     >
       <Typography level="title-lg" startDecorator={<InfoOutlined />}>
-        Zaplac za zakupy
+      {Language == 'PL' ? Polish.payment_header : Language == 'EN' ? English.payment_header : "Zaplac za zakupy" }
       </Typography>
       <Divider inset="none" />
       <CardContent
@@ -53,6 +56,9 @@ const PaymentForm = ({
       >
 
 <PaymentGate 
+Language={Language}
+English={English}
+Polish={Polish}
 OverallPrice={OverallPrice}
 userBillingInfo={userBillingInfo}
 setActiveStep={setActiveStep}

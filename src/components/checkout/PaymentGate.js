@@ -10,6 +10,9 @@ import $ from 'jquery';
 import CheckIcon from '@mui/icons-material/Check';
 
 export const PaymentGate = ({ 
+    Language, 
+    English,
+    Polish,
     props, 
     OverallPrice, 
     userBillingInfo, 
@@ -531,9 +534,9 @@ export const PaymentGate = ({
                 border: '2px solid green',
                 color: 'green'
             }}/>
-            <h1>Dziękujemy za zakupy w naszym sklepie!</h1>
-                <h3 style={{ display: 'flex' }}>Zamowienie: &nbsp;<h4>#{transactionData.transaction !== undefined ? transactionData.transaction.id: 'N/A'}</h4></h3>
-                <h2 style={{ display: 'flex' }}>Zostalo oplacone i przyjete do realizacji</h2>
+            <h1>{Language == 'PL' ? Polish.success_transaction_header : Language == 'EN' ? English.success_transaction_header : "Dziękujemy za zakupy w naszym sklepie!" }</h1>
+                <h3 style={{ display: 'flex' }}>{Language == 'PL' ? Polish.order : Language == 'EN' ? English.order : "Zamowienie" }: &nbsp;<h4>#{transactionData.transaction !== undefined ? transactionData.transaction.id: 'N/A'}</h4></h3>
+                <h2 style={{ display: 'flex' }}>{Language == 'PL' ? Polish.success_transaction_subheader : Language == 'EN' ? English.success_transaction_subheader : "Zostalo oplacone i przyjete do realizacji" }</h2>
 
               <button style={{ 
                 display: 'flex',
@@ -543,7 +546,7 @@ export const PaymentGate = ({
                 padding: '10px 5px' }} className="site-btn" id="submit" onClick={() => {
                     setIsPaymentMade(false);
                     setTransactionData({});
-                    navigate('/')}}>Cofnij</button>
+                    navigate('/')}}>{Language == 'PL' ? Polish.back_btn : Language == 'EN' ? English.back_btn : "Cofnij" }</button>
 
             </div>
           </div>
@@ -551,26 +554,28 @@ export const PaymentGate = ({
             </div> : <div className="demo-frame" style={{ width: '200%' }}>  
                     <form submit="/" method="post" id="cardForm" >
 
-                        <label className="hosted-fields--label" for="card-number">Numer karty kredytowej</label>
+                        <label className="hosted-fields--label" for="card-number">{Language == 'PL' ? Polish.credit_card_number : Language == 'EN' ? English.credit_card_number : "Numer karty kredytowej" }</label>
                         <div id="card-number" className="hosted-field payment-gate-input"></div>
 
-                        <label className="hosted-fields--label" for="expiration-date">Data wygasniecia</label>
+                        <label className="hosted-fields--label" for="expiration-date">{Language == 'PL' ? Polish.expiration_date : Language == 'EN' ? English.expiration_date : "Data wygasniecia" }</label>
                         <div id="expiration-date" className="hosted-field payment-gate-input"></div>
 
                         <label className="hosted-fields--label" for="cvv">CVV</label>
                         <div id="cvv" className="hosted-field payment-gate-input"></div>
 
-                        <h1 style={{ textAlign: 'left', margin: '0 10px' }} >Calosc: {OverallPrice} zł</h1>
+                        <h1 style={{ textAlign: 'left', margin: '0 10px' }} >{Language == 'PL' ? Polish.overall : Language == 'EN' ? English.overall : "Calosc" }: {OverallPrice} zł</h1>
                              
                             <input style={{ width: '150px' }} 
                             type="submit" 
                             className="site-btn" 
-                            value={"Zaplac"} id="submit" />
+                            value={Language == 'PL' ? Polish.pay_btn : Language == 'EN' ? English.pay_btn : "Zaplac" } id="submit" />
                              
                     </form>
 
                 
-                    <button className="site-btn" style={{ position: 'absolute', left: '180px', bottom: '39.5px' }} onClick={() => setActiveStep(2)}>Cofnij</button>
+                    <button className="site-btn" style={{ position: 'absolute', left: '180px', bottom: '39.5px' }} onClick={() => setActiveStep(2)}>
+                    {Language == 'PL' ? Polish.back_btn : Language == 'EN' ? English.back_btn : "Cofnij" }
+                    </button>
 
                 </div>
             }

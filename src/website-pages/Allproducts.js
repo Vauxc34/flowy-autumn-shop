@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion';
 
-const Allproducts = () => {
+const Allproducts = ({ Language, English, Polish }) => {
 
 const [ProductList, setProductList] = useState([]) 
 const [ActualSelectedCategory, setActualSelectedCategory] = useState('Nie wybrano')
@@ -29,7 +29,7 @@ id="products-all">
 
     <div class="widget-description">
 
-    <h3>A co tym razem szukamy?</h3>
+    <h3>{Language == 'PL' ? Polish.product_page_main_title : Language == 'EN' ? English.product_page_main_title : 'A co tym razem szukamy?' }</h3>
 
     {/*<select required  id="category" name="category-list" placeholder='Wybierz markę'>
     {Categories.map(item => ( <option value={item.name}>{item.name}</option>))}
@@ -41,8 +41,7 @@ id="products-all">
 <div class="products-list">
 
             <div class="description-box">
-                <h1>Produkty</h1>
-                <p>Przebieraj w tym co lepsze</p>
+                <p>{Language == 'PL' ? Polish.product_page_main_subtitle: Language == 'EN' ? English.product_page_main_subtitle : 'Przebieraj w tym co najlepsze' }</p>
             </div>
 
 

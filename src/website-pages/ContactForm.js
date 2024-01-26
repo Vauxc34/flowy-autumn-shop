@@ -7,6 +7,9 @@ import { motion } from 'framer-motion'
 /* style stuff */
 
 const ContactForm = ({
+    Language, 
+    English, 
+    Polish,
     userName,
     setUserName,
     userMail,
@@ -26,9 +29,7 @@ const ContactForm = ({
     userMessage == "") {
             e.preventDefault()
             MailInfo = toast.error('Nie uzupełniono wszystkich pól formularza');
-
         } else {
-
             e.preventDefault()
             MailInfo = toast?.success('Wysłano pomyślnie wiadomość!');
             window.Email.send({
@@ -40,8 +41,6 @@ const ContactForm = ({
                 Subject : `New message from the - ${userMail}`,
                 Body : userMessage + userName + userPhone + userMail,
             }).then(message => MailInfo()
-            
-
         )}
   }
 
@@ -59,29 +58,29 @@ const ContactForm = ({
             
             <form>
                 
-            <h1>🙋‍♂️ Potrzebujesz pomocy?</h1>
+            <h1>🙋‍♂️ {Language == 'PL' ? Polish.contact_form_header : Language == 'EN' ? English.contact_form_header : 'Potrzebujesz pomocy?' }</h1>
 
             <div className='input-container'>
-            <label>Twój adres e-mail</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>
+            <label>{Language == 'PL' ? Polish.input_form_text_1 : Language == 'EN' ? English.input_form_text_1 : 'Twój adres e-mail' }</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>
             </div>
 
             <div className='input-container'>
-            <label>Twoje imię i nazwisko</label><input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
+            <label>{Language == 'PL' ? Polish.input_form_text_2 : Language == 'EN' ? English.input_form_text_2 : 'Twoje imię i nazwisko' }</label><input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
             </div>
 
             <div className='input-container'>
-            <label>Numer telefonu (opcjonalne)</label><input type="phone" value={userPhone}  onChange={(e) => setUserPhone(e.target.value)}></input>
+            <label>{Language == 'PL' ? Polish.input_form_text_3 : Language == 'EN' ? English.input_form_text_3 : 'Numer telefonu (opcjonalnie)' }</label><input type="phone" value={userPhone}  onChange={(e) => setUserPhone(e.target.value)}></input>
             </div>
 
             <div className='input-container textarea-container'>
-            <label>Twoja wiadomość</label><textarea
+            <label>{Language == 'PL' ? Polish.input_form_text_4 : Language == 'EN' ? English.input_form_text_4 : 'Twoja wiadomość' }</label><textarea
             value={userMessage}  
             onChange={(e) => setUserMessage(e.target.value)}
             rows="15"
             ></textarea>
             </div>
 
-            <input className='site-btn' type="submit" onClick={(e) => {SendingEmail(e)}} value="Wyślij wiadomość"></input>
+            <input className='site-btn' type="submit" onClick={(e) => {SendingEmail(e)}} value={Language == 'PL' ? Polish.input_form_text_5 : Language == 'EN' ? English.input_form_text_5 : 'Wyślij wiadomość' }></input>
                 
             </form>
             <ToastContainer/>

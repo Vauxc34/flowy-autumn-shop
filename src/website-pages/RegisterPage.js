@@ -9,6 +9,9 @@ import { motion } from 'framer-motion'
 /* style stuff */
 
 const RegisterPage = ({
+  Language,
+  Polish,
+  English,
   ToastContainer,
   setUser,
   User
@@ -90,30 +93,30 @@ const RegisterPage = ({
 
       {User == null  ? <>
     
-<h1>🔑 Rejestracja</h1>
+<h1>🔑 {Language == 'PL' ? Polish.register_button_1 : Language == 'EN' ? English.register_button_1 : 'Rejestracja' }</h1>
 
 <form onSubmit={handleSubmit}>
 <div className='input-container'>
-<label>Imię</label><input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_2_1 : Language == 'EN' ? English.input_form_text_2_1 : 'Imię' }</label><input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
 </div>
 
 <div className='input-container'>
-<label>Nazwisko</label><input type="text" value={userSurname} onChange={(e) => setUserSurname(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_2_2 : Language == 'EN' ? English.input_form_text_2_2 : 'Nazwisko' }</label><input type="text" value={userSurname} onChange={(e) => setUserSurname(e.target.value)}></input>
 </div>
 
 <div className='input-container'>
-<label>Adres e-mail</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_1 : Language == 'EN' ? English.input_form_text_1 : 'Adres e-mail' }</label><input type="email" value={userMail} onChange={(e) => setUserMail(e.target.value)}></input>
 </div>
 
 <div className='input-container'>
-<label>Hasło</label><input type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_6_1 : Language == 'EN' ? English.input_form_text_6_1 : 'Hasło' }</label><input type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
 </div>
 
 <div className='input-container'>
-<label>Powtórz hasło</label><input type="password" value={userPasswordRepeat} onChange={(e) => setUserPasswordRepeat(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_6_2 : Language == 'EN' ? English.input_form_text_6_2 : 'Powtórz hasło' }</label><input type="password" value={userPasswordRepeat} onChange={(e) => setUserPasswordRepeat(e.target.value)}></input>
 </div>
 
-<input type="submit" className='site-btn' onClick={RegisterNewUser} value={"Zarejestruj się"}></input>
+<input type="submit" className='site-btn' onClick={RegisterNewUser} value={Language == 'PL' ? Polish.register_button_2 : Language == 'EN' ? English.register_button_2 : 'Zarejestruj się' }></input>
 
 {/*<div className='container-wrapped'>
 <input 

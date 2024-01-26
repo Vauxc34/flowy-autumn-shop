@@ -6,14 +6,19 @@ import { motion } from 'framer-motion'
 import axios from 'axios'
 
 import { CartContext } from '../CartProvider'
+import { toast } from 'react-toastify'
 
-const ProductPage = ({ User, ToastContainer }) => {
+const ProductPage = ({ User, ToastContainer, Language, Polish ,English }) => {
+
+    let navigate = useNavigate()
     
     let location = useLocation()
     const [Product, setProduct] = useState('') 
     const [ProductList, setProductList] = useState('')
     const [QuantityOfProduct, setQuantityOfProduct] = useState(1) 
     const [ButtonCartVisible, setButtonCartVisible] = useState(false)
+    const [Shipmment, setShippment] = useState([])
+
     const ProductLink = location.pathname.split('/', 3)[2] 
     
     const cartContext = useContext(CartContext);
@@ -33,6 +38,13 @@ const ProductPage = ({ User, ToastContainer }) => {
     const GetItemIndex = (items) => {
         return userCartContent.findIndex(item => item.id == ProductLink);
     }
+
+    useEffect(() => {
+    if(Product != '') {
+        let ArrayShipment = JSON.parse(Product.shipment_option)
+        setShippment(ArrayShipment)
+    }   
+    }, [Product])
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/${ProductLink}`, {
@@ -103,7 +115,7 @@ exit={{ opacity: 0 }}
 
 <h3>Tu będzie jakiś inny tekst promocyjny</h3>
 
-<h2>🚚 Darmowa dostawa</h2>
+<h2>🚚 {Language == 'PL' ? Polish.subtitle_products_1 : Language == 'EN' ? English.subtitle_products_1 : 'Darmowa wysylka' }</h2>
 
 </div>
 
@@ -116,7 +128,7 @@ exit={{ opacity: 0 }}
 <div className='container-for-product-option'>
     <span className='price-etc'>{Product.price} zł</span>
     {User ?  <div className='quantity-box-container'>
-    <p style={{ alignSelf: 'flex-start' }}>Ilość</p>
+    <p style={{ alignSelf: 'flex-start' }}>{Language == 'PL' ? Polish.quantity : Language == 'EN' ? English.quantity : 'Ilość' }</p>
     <div className='quantity-box'>
     <div className='select-item-quantity'>
     <div name='plus' className='p__' onClick={() => setQuantityOfProduct(QuantityOfProduct + 1)}>
@@ -130,7 +142,20 @@ exit={{ opacity: 0 }}
     </div>
     </div>
     </div>
-    : null}
+    : <div className='quantity-box-container'>
+    <p style={{ alignSelf: 'flex-start' }}>{Language == 'PL' ? Polish.quantity : Language == 'EN' ? English.quantity : 'Ilość' }</p>
+    <div className='quantity-box'>
+    <div className='select-item-quantity'>
+    <div name='plus' className='p__' onClick={() => navigate('/logowanie')}>
+        +
+    </div>
+    <span className='p_quantity-itself'>{QuantityOfProduct}</span>
+    <div name='minus' className='p__'  onClick={() => navigate('/logowanie')}>
+        -
+    </div>
+    </div>
+    </div>
+    </div>}
 </div>
 <div className='container-for-product-delivery'>    
 
@@ -146,61 +171,55 @@ exit={{ opacity: 0 }}
     </div>
  
 
-    {User ? <> {ButtonCartVisible ? <button className='site-btn' onClick={ModifyProductInAcart} id="buy_btn">Dodaj do koszyka</button> : <button className='site-btn' onClick={AddProductToAcart} id="buy_btn">Dodaj do koszyka</button>} </> : <button className='site-btn' id="buy_btn">Nie jestes zalogowany</button>} 
+    {User ? <> {ButtonCartVisible ? 
+     <button className='site-btn' onClick={ModifyProductInAcart} id="buy_btn">{Language == 'PL' ? Polish.buy_now_btn_2 : Language == 'EN' ? English.buy_now_btn_2 : 'Dodaj do koszyka' }</button> :
+     <button className='site-btn' onClick={AddProductToAcart} id="buy_btn">{Language == 'PL' ? Polish.buy_now_btn_2 : Language == 'EN' ? English.buy_now_btn_2 : 'Dodaj do koszyka' }</button>} </> : 
+     <button className='site-btn' onClick={() => navigate('/logowanie')} id="buy_btn">{Language == 'PL' ? Polish.buy_now_btn_1 : Language == 'EN' ? English.buy_now_btn_1 : 'Nie jestes zalogowany' }</button>} 
 
 </div>
 </div>
 
-{/*<div className='product-parameters'>
+<div className='product-parameters'>
 
-    <h4>Specyfikacja:</h4>
+    <span>{Language == 'PL' ? Polish.specification : Language == 'EN' ? English.specification : 'Specyfikacja' }:</span>
+    <br></br>
 
     <span className='parameter-itself'>
-        <p>Kolor: </p>
-        <p>czerwony</p>
+        <p>SKU: </p>
+        <p>{Product.SKU}</p>
     </span>
 
     <span className='parameter-itself'>
         <p>
-            Dodatki:
+            EAN:
         </p>
         <p>
-           Premium quality ingredients with natural essential oils
-        </p>
-    </span>
-
-    <div className='container-for-a-parameters'>
-    <span className='parameter-itself'>
-        <p>
-            Burning Time:
-        </p>
-        <p>
-           70 - 75 hours
+        {Product.EAN}
         </p>
     </span>
 
+
     <span className='parameter-itself'>
         <p>
-            Dimension:
+        {Language == 'PL' ? Polish.shipment_to_detail : Language == 'EN' ? English.shipment_to_detail : 'Wysylka do' }:
         </p>
         <p>
-           10cm - 5cm
+        {Shipmment.country == null ? null : Shipmment.country.map((item, index) => index == 0 ? `${item.name}, ` : `${item.name}` )}
         </p>
     </span>
 
     <span className='parameter-itself'>
         <p>
-            Weight:
+        {Language == 'PL' ? Polish.form_of_shipment : Language == 'EN' ? English.form_of_shipment : 'Opcje wysylki' }:
         </p>
         <p>
-           400g
+        {Shipmment.to_address == null ? null : Shipmment.to_address.map((item, index) => index == 0 ? `${item.name}, ` : `${item.name}` )}
         </p>
     </span>
-    </div>
 
-</div>*/}
+</div>
 
-    <h1>Pozostałe produkty 👇</h1>
+    <h1>{Language == 'PL' ? Polish.subtitle_products : Language == 'EN' ? English.subtitle_products : 'Pozostałe produkty' } 👇</h1>
 
 <Swiper
         effect={"coverflow"}

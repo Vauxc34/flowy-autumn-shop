@@ -22,6 +22,7 @@ import ArrowMenu from '../images/ChevronDown.svg'
 /* image's */
 
 import { CartContext } from '../CartProvider'
+import { LanguageContext } from '../LanguageProvider';
 
 const Shop = () =>  { 
 
@@ -51,6 +52,9 @@ const Shop = () =>  {
   const cartContext = useContext(CartContext);
   const { FetchCart } = cartContext;
 
+  const languageContext = useContext(LanguageContext);
+  const {  Language, Polish, English, SetterActualLanguage  } = languageContext;
+
   useEffect(() => {
   if(User) { FetchCart(User.cartId) } else {}
   }, [User])
@@ -63,13 +67,6 @@ const Shop = () =>  {
 
         <div class="wrapper">
             <Navbar User={User}/>
-            <div className='navbar-menu'>
-            <ul>
-            <li class="nav-option"><img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>Discovery</li>
-            <li class="nav-option">About</li>
-            <li class="nav-option">Contact us</li>
-            </ul>
-        </div>
 <AnimatePresence>
 <AnimatedPage 
 User={User}
@@ -95,27 +92,25 @@ toast={toast}/>
 
                 <div class="footer-container">
                     <img src={logoFlowyAutumn} alt="" class="logo-footer"/>
-                    <span class="footer-text" >Your natural candle made for your home and for your wellness.</span>    
+                    <span class="footer-text" >{Language == 'PL' ? Polish.slogan_text : Language == 'EN' ? English.slogan_text : "Wszystkie niezbędne akcesoria w niskich cenach."}</span>    
                 </div>
                 <div class="footer-container-second">
                     <ul class="footer-nav-links">
-                    <li class="footer-nav-main">Zakładki</li>
-                    <li><Link to='/'>Strona główna</Link></li>
-                    {User ? null : <li><Link to='/rejestracja'>Zarejestruj się</Link></li>}
-                    <li><Link to='/twoj-profil'>Twój profil</Link></li>
+                    <li class="footer-nav-main">{Language == 'PL' ? Polish.footer_heading_1 : Language == 'EN' ? English.footer_heading_1 : 'Zakładki' }</li>
+                    <li><Link to='/'>{Language == 'PL' ? Polish.footer_list_1_1 : Language == 'EN' ? English.footer_list_1_1 : 'Strona główna' }</Link></li>
+                    {User ? null : <li><Link to='/rejestracja'>{Language == 'PL' ? Polish.footer_list_1_2 : Language == 'EN' ? English.footer_list_1_2 : 'Zarejestruj się' }</Link></li>}
+                    <li><Link to='/twoj-profil'>{Language == 'PL' ? Polish.footer_list_1_3 : Language == 'EN' ? English.footer_list_1_3 : 'Twój profil' }</Link></li>
                     </ul>
                     <ul class="footer-nav-links">
-                    <li class="footer-nav-main">Informacje</li>
-                    <li><Link to='/kontakt'>Kontakt z nami</Link></li>
-                    <li><Link to='/polityka-prywatnosci'>Polityka prywatności</Link></li>
+                    <li class="footer-nav-main">{Language == 'PL' ? Polish.footer_heading_2 : Language == 'EN' ? English.footer_heading_2 : 'Informacje' }</li>
+                    <li><Link to='/kontakt'>{Language == 'PL' ? Polish.footer_list_2_1 : Language == 'EN' ? English.footer_list_2_1 : 'Kontakt z nami' }</Link></li>
+                    <li><Link to='/polityka-prywatnosci'>{Language == 'PL' ? Polish.footer_list_2_2 : Language == 'EN' ? English.footer_list_2_2 : 'Polityka prywatności' }</Link></li>
                     </ul>
                     <ul class="footer-nav-links">
-                    <li class="footer-nav-main">Język strony</li>
-                    <select name="langugage_change" id="langugage_change">
-                     
-                        <option>Polski (Słowiański)</option>
-                        <option>Angielski (Brytyjski)</option>
-                      
+                    <li class="footer-nav-main">{Language == 'PL' ? Polish.footer_heading_3 : Language == 'EN' ? English.footer_heading_3 : 'Język strony' }</li>
+                    <select name="langugage_change" id="langugage_change" onChange={(e) => SetterActualLanguage(e)} value={Language}>
+                        <option value={"PL"}>Polski (Słowiański)</option>
+                        <option value={"EN"}>English (Brytyjski)</option>
                     </select>
                     </ul>    
                 </div>
@@ -125,7 +120,7 @@ toast={toast}/>
         </div>
         <div class="footer-credits">
             <span class="copyright-text">
-                <a id="company_name">STJÄRNFLOCKA®</a> Wszelkie prawa zastrzeżone dla <a id="creator_1">@fox45</a>
+                <a id="company_name">STJÄRNFLOCKA®</a>{Language == 'PL' ? Polish.rights_reserved_text : Language == 'EN' ? English.rights_reserved_text : ' Wszelkie prawa zastrzeżone dla' }<a id="creator_1"> @fox45</a>
             </span>
         </div>
 

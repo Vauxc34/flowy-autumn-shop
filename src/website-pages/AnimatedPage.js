@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 /* page's */
@@ -22,6 +22,8 @@ import { Confirmation } from "../components/checkout/Confirmation";
 
 /* component's */
 
+import { LanguageContext } from '../LanguageProvider';
+
 const AnimatedPage = ({
 User,
 UserCart,
@@ -42,20 +44,30 @@ QuantityCartUser,
 setQuantityCartUser,
 allData, 
 }) => {
-
+  
 const location = useLocation()
+
+const languageContext = useContext(LanguageContext);
+const {  Language, Polish, English } = languageContext;
 
 return (
 <>
 <Routes key={location.pathname} location={location}>
 <Route 
 exact path='/' 
-element={<Products />}>
+element={<Products
+  Language={Language}
+  Polish={Polish}
+  English={English}
+/>}>
 </Route>
 
 <Route 
 exact path='/produkt/:id' 
 element={<ProductPage 
+  Language={Language}
+  Polish={Polish}
+  English={English}
 ToastContainer={ToastContainer}
 toast={toast} 
 User={User}
@@ -68,22 +80,37 @@ setQuantityCartUser={setQuantityCartUser}
 
 <Route
 exact path="/produkty"
-element={<Allproducts categories={categories} onFilterCategory={onFilterCategory} ProductList={ProductList} onCategoryFilter={onCategoryFilter} allData={allData} />}>
+element={<Allproducts
+  Language={Language}
+  Polish={Polish}
+  English={English}
+categories={categories} onFilterCategory={onFilterCategory} ProductList={ProductList} onCategoryFilter={onCategoryFilter} allData={allData} />}>
 </Route>
 
 <Route 
 exact path='/koszyk' 
-element={<Cart User={User} UserCart={UserCart} QuantityCartUser={QuantityCartUser} setQuantityCartUser={setQuantityCartUser}/> }>
+element={<Cart 
+  Language={Language}
+  Polish={Polish}
+  English={English}
+User={User} UserCart={UserCart} QuantityCartUser={QuantityCartUser} setQuantityCartUser={setQuantityCartUser}/> }>
 </Route>
 
 <Route 
 exact path='/sposoby-dostawy-i-platnosci'
-element={<Checkout User={User} UserCar={UserCart}/>}>
+element={<Checkout
+  Language={Language}
+  Polish={Polish}
+  English={English}
+User={User} UserCar={UserCart}/>}>
 </Route>
 
 <Route 
 exact path="/rejestracja"
 element={<RegisterPage
+  Language={Language}
+  Polish={Polish}
+  English={English}
 User={User}
 setUser={setUser}
 ToastMessReg={ToastMessReg}
@@ -94,6 +121,9 @@ ToastContainer={ToastContainer}
 <Route
 exact path="/logowanie"
 element={<Login  
+  Language={Language}
+  Polish={Polish}
+  English={English}
   User={User}
   setUser={setUser}
   ToastContainer={ToastContainer}
@@ -104,12 +134,19 @@ element={<Login
 
 <Route 
 exact path="/twoj-profil"
-element={<ProfilePage User={User} setUser={setUser}/>}>
+element={<ProfilePage 
+  Language={Language}
+  Polish={Polish}
+  English={English}
+User={User} setUser={setUser}/>}>
 </Route>
 
 <Route
 exact path='/kontakt' 
 element={<ContactForm
+  Language={Language}
+  Polish={Polish}
+  English={English}
   userName={userName}
   setUserName={setUserName}
   userMail={userMail}

@@ -19,11 +19,15 @@ import CartIcon from '../images/Cart.svg'
 import question_mark from '../images/question_mark.png'
 
 import { CartContext } from '../CartProvider'
+import { LanguageContext } from '../LanguageProvider';
 
 export const Navbar = ({ User, UserCart }) => {
    
     const cartContext = useContext(CartContext);
     const { FetchCart, SetActualQuantityCart, cartQuantity } = cartContext;
+
+    const languageContext = useContext(LanguageContext);
+    const {  Language, Polish, English } = languageContext;
 
     useEffect(() => {
         if(User) { FetchCart(User.cartId)
@@ -52,9 +56,9 @@ export const Navbar = ({ User, UserCart }) => {
             <img src={HamburgerMenuSVG} alt="hamburger" class="navbar_icon" onClick={HandleMenuOpen}/>
             <img src={SomeLogo} alt="logo" class="logo" onClick={() =>  navigate('/')}/>
                 <ul class="desktop-options">
-                    <li onClick={() =>  navigate('/')} class="nav-option">Strona główna {/*<img src={ArrowMenu} alt="arrow-menu" class="arrow-menu"/>*/}</li>
-                    <li onClick={() => navigate('/produkty')} class="nav-option">Produkty</li>
-                    <li onClick={() => navigate('/kontakt')} class="nav-option">Porozmawiaj z nami</li>
+                    <li onClick={() =>  navigate('/')} class="nav-option">{Language == 'PL' ? Polish.navbar_option1 : Language == 'EN' ? English.navbar_option1 : 'Strona główna' }</li>
+                    <li onClick={() => navigate('/produkty')} class="nav-option">{Language == 'PL' ? Polish.navbar_option2 : Language == 'EN' ? English.navbar_option2 : 'Produkty' }</li>
+                    <li onClick={() => navigate('/kontakt')} class="nav-option">{Language == 'PL' ? Polish.navbar_option3 : Language == 'EN' ? English.navbar_option3 : 'Porozmawiaj z nami' }</li>
                 </ul>
                 <ul class="navigation-header">
                     <li class="nav-option" onClick={() =>  navigate('/twoj-profil')}>

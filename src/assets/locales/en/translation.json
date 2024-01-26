@@ -1,0 +1,133 @@
+{
+    "app_lang": "en",
+    "navbar_option1": "Homepage",
+    "navbar_option2": "Products",
+    "navbar_option3": "Talk with us",
+
+    "product_header": "Products",
+    "product_paragraph": "Order it for you or for your beloved ones",
+    "product_button": "Discover our catalogue",
+
+    "subheader_2": "Find the best ones", 
+
+    "advertisment_header": "Clean & elegant",
+    "advertisment_paragraph": "Selection of products for you and your use",
+
+    "advertisment_head_1": "Ecologic",
+    "advertisment_paragraph_1": "All recyclable materials, 0% CO2 emissions",
+    "advertisment_head_2": "Checked",
+    "advertisment_paragraph_2": "100% natural, human friendly ingredients",
+    "advertisment_head_3": "Handmade",
+    "advertisment_paragraph_3": "All candles are craftly made with love",
+    "advertisment_head_4": "Longlife",
+    "advertisment_paragraph_4": "No more waste. Created for last long",
+
+    "opinion_header": "Opinon about us",
+    "opinion_paragraph": "Some quotes from customers",
+
+    "product_page_main_title": "What are we looking for?",
+    "product_page_main_subtitle": "Choose from the best",
+
+    "contact_form_header": "Do you need help?",
+
+    "input_form_text_1": "E-mail address",
+    "input_form_text_2": "Your name & surname",
+
+    "input_form_text_2_1": "Name",
+    "input_form_text_2_2": "Surname",
+
+    "input_form_text_3": "Phone number (optional)",
+    "input_form_text_4": "Your message",
+    "input_form_text_5": "Send a message",
+
+    "input_form_text_6_1": "Password",
+    "input_form_text_6_2": "Repeat password",
+
+    "input_form_text_7": "Address of housing",
+    "input_form_text_8": "City",
+    "input_form_text_9": "Zip Code",
+    "input_form_text_10": "Phone number",
+    "input_form_text_11": "Voidoship",
+
+    "login_unlogged": "Not logged in",
+    "login_unlogged_paragraph": "Log in to spot transactions & other interesting for you thing's",
+    "login_button_1": "Login",
+    "logout_button_1": "Log out",
+
+    "your_address_mail": "Your address email",
+
+    "fun_fact": "Fact of the day",
+
+    "story": "Shopping history",
+
+    "login_confirmation_1": "You already logged in",
+    "login_confirmation_subtitle_1": "Go to the store",
+
+    "register_button_1": "Registration",
+    "register_button_2": "Register",
+
+    "registration_screen_info": "You don't have an account yet?",
+
+    "quantity": "Quantity",
+
+    "specification": "Specification",
+    "shipment_to_detail": "Ship to",
+    "form_of_shipment": "Form of ship",
+    "button_shipment": "Go to shipping",
+    "button_shipment_2": "Back to cart",
+
+    "change_btn_shippment": "Change shippment data",
+
+    "buy_now_btn_1": "You are not logged in",
+    "buy_now_btn_2": "Add product to a bag",
+
+    "subtitle_products": "Other products",
+    "subtitle_products_1": "Free Shipment",
+
+    "cart_details_big_heading": "Your cart with item's",
+    "cart_details_heading_1": "Product with detail's",
+    "cart_details_subheading_1": "Come back to product's",
+    "price": "Price",
+    "overall": "Overall",
+    "overall_subheader": "Every order, will be adding with VAT & other taxes",
+    "cart_go_into_btn": "Go to checkout",
+    "check_pay_go_into_btn": "Go to payment",
+    "checkout_go_into_btn": "Go back to cart",
+    "deletion_cart": "Empty the cart",
+
+    "cart": "Cart",
+    "shipment": "Shipping",
+    "payment": "Payment",
+
+    "address_shipment": "Address of shipment",
+
+    "discount_header": "Did you have an discount?",
+    "discount_btn": "Apply coupon",
+    "payment_header": "Pay for a shopping",
+
+    "success_transaction_header": "Thank you, for a shopping in our store!",
+    "success_transaction_subheader": "It has been paid and accepted for implementation",
+    "order": "Order",
+
+    "pay_btn": "Pay",
+    "back_btn": "Back",
+
+    "credit_card_number": "Credit card number",
+    "expiration_date": "Expiration date",
+
+    "slogan_text": "Every usefull accesorry in low price.",
+
+    "footer_heading_1": "Bookmarks",
+    "footer_list_1_1": "Main page",
+    "footer_list_1_2": "Register",
+    "footer_list_1_3": "Your profile",
+
+    "footer_heading_2": "Information",
+    "footer_list_2_1": "Contact with us",
+    "footer_list_2_2": "Policy privacy",
+
+    "footer_heading_3": "Language page",
+
+    "rights_reserved_text": " All rights reserved for" 
+    
+}

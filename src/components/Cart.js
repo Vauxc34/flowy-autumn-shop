@@ -12,7 +12,7 @@ import { motion } from 'framer-motion'
 
 import { CartContext } from '../CartProvider'
 
-export const Cart = ({ User }) => {
+export const Cart = ({ User, Language, English, Polish }) => {
 
     const navigate = useNavigate() 
     const [HideContent, setHideContent] = useState(false)
@@ -121,26 +121,30 @@ export const Cart = ({ User }) => {
         <motion.div className="cart-itself" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
 
             {User ? <>
-
             <div className='cart-mess'>
-            <h1>Twój koszyk z zakupami</h1>
-            <h2>Wróć do <Link to='/'>produktów</Link></h2>
+            <h1>{Language == 'PL' ? Polish.cart_details_big_heading : Language == 'EN' ? English.cart_details_big_heading : 'Twój koszyk z zakupami' }</h1>
+            <h2>
+            {Language == 'PL' ? 'Wróć do' : Language == 'EN' ? "Back to"  : 'Wróć do' }
+               <Link to='/'> 
+               {Language == 'PL' ? ' produktów' : Language == 'EN' ? " products"  : ' produktów' }</Link></h2>
             </div>
-
             <div className='label-for-cart-prod'>
-                <h3>Produkt i jego szczegóły</h3>
-                <h3>Cena</h3>
+                <h3>{Language == 'PL' ? Polish.cart_details_heading_1 : Language == 'EN' ? English.cart_details_heading_1 : 'Produkt i jego szczegóły' }</h3>
+                <h3>{Language == 'PL' ? Polish.price : Language == 'EN' ? English.price : 'Cena' }</h3>
             </div>
             <hr className='product-line'></hr>
-
             {HideContent ? null : userCartContent.map(item => <Item idProd={item.id} quantityU={item.quantity} PPrice={item.price}/>)}
-            
             <div className="container-for-a-cart-options">
-            <h1>Całość: {User ? OverallPrice : 0} zl<span>Każde zamówienie, VAT i inne podatki będzie miało doliczone</span></h1>
+            <h1>{Language == 'PL' ? Polish.overall : Language == 'EN' ? English.overall : 'Całość' }: {User ? OverallPrice : 0} zl<span>
+            {Language == 'PL' ? Polish.overall_subheader : Language == 'EN' ? English.overall_subheader : 'Każde zamówienie, VAT i inne podatki będzie miało doliczone' }</span></h1>
 
-            {HideContent || userCartContent.length == 0 ? <button className="site-btn" onClick={() => navigate('/')} >Wroc na sklep</button> : <>
-            <button className="site-btn" onClick={() => navigate('/sposoby-dostawy-i-platnosci')}>Przejście do kasy</button>
-            <button className="site-btn" onClick={CleaningCart}>Opróżnij koszyk ❌</button>
+            {HideContent || userCartContent.length == 0 ? <button className="site-btn" onClick={() => navigate('/')} >
+            {Language == 'PL' ? 'Wroc na sklep' : Language == 'EN' ? 'Back to the store' : 'Wroc na sklep' }
+            </button> : <>
+            <button className="site-btn" onClick={() => navigate('/sposoby-dostawy-i-platnosci')}>
+            {Language == 'PL' ? Polish.cart_go_into_btn : Language == 'EN' ? English.cart_go_into_btn : 'Przejście do kasy' }</button>
+            <button className="site-btn" onClick={CleaningCart}>
+            {Language == 'PL' ? Polish.deletion_cart : Language == 'EN' ? English.deletion_cart : 'Opróżnij koszyk' } ❌</button>
             </> }
             
             </div>
@@ -170,10 +174,7 @@ export const Cart = ({ User }) => {
      </div>
     </div>
 
-            </>
- 
-            }
-
+            </>}
 
             <ToastContainer/>
         </motion.div>

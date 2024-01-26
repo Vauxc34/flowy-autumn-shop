@@ -5,8 +5,10 @@ import Shop from './website-pages/Shop'
 import { BrowserRouter } from 'react-router-dom'
 import { PaymentProvider } from './PaymentProvider'
 import { CartProvider } from './CartProvider'
+import { LanguageProvider } from './LanguageProvider'
 
 ReactDOM.render(
+  <LanguageProvider>
   <PaymentProvider>
   <CartProvider>
       <BrowserRouter>
@@ -16,4 +18,5 @@ ReactDOM.render(
     </BrowserRouter>
     </CartProvider>
   </PaymentProvider>
+  </LanguageProvider>
 ,document.getElementById('root'))
