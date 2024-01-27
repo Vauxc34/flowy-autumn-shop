@@ -10,6 +10,7 @@ import RegisterPage from './RegisterPage'
 import ProfilePage from './ProfilePage'
 import ContactForm from './ContactForm';
 import Login from './LoginPage'
+import OrderView from "./OrderView";
 import PrivacyAndPolicy from './PrivacyAndPolicy'
 
 /* page's */
@@ -93,7 +94,10 @@ element={<Cart
   Language={Language}
   Polish={Polish}
   English={English}
-User={User} UserCart={UserCart} QuantityCartUser={QuantityCartUser} setQuantityCartUser={setQuantityCartUser}/> }>
+  User={User} 
+  UserCart={UserCart} 
+  QuantityCartUser={QuantityCartUser} 
+  setQuantityCartUser={setQuantityCartUser}/> }>
 </Route>
 
 <Route 
@@ -102,7 +106,7 @@ element={<Checkout
   Language={Language}
   Polish={Polish}
   English={English}
-User={User} UserCar={UserCart}/>}>
+  User={User} UserCar={UserCart}/>}>
 </Route>
 
 <Route 
@@ -139,6 +143,16 @@ element={<ProfilePage
   Polish={Polish}
   English={English}
 User={User} setUser={setUser}/>}>
+</Route>
+
+<Route 
+exact path="/transakcja/:id"
+element={<OrderView
+  Language={Language}
+  Polish={Polish}
+  English={English}
+  User={User} 
+  setUser={setUser}/>}>
 </Route>
 
 <Route

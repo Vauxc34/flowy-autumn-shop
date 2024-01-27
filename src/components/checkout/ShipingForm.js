@@ -105,7 +105,7 @@ export const ShipingForm = ({
 <input style={{ width: '90%', alignSelf: 'center' }} type='submit' className='site-btn' value={Language == 'PL' ? Polish.check_pay_go_into_btn : Language == 'EN' ? English.check_pay_go_into_btn : "Przejdź do płatnosci" } onClick={(e) => {
   e.preventDefault()
   if(ShipmentForm == 10) {
-    toast.error('Nie ustawiono wysylki!')
+    toast.error(Language == 'PL' ? 'Nie ustawiono wysylki!' : Language == 'EN' ? 'You do not set a shipment!' : 'Nie ustawiono wysylki!')
   } else if(ShipmentForm == 0 || ShipmentForm == 1) {
     next()
   }}}></input>

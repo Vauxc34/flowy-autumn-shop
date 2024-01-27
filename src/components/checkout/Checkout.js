@@ -55,7 +55,7 @@ export const Checkout = ({ User, Language, English, Polish }) => {
         const [SingleData, setSingleData] = useState({})
 
         useEffect(() => { 
-          if(idProd) {
+   
             fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/${idProd}`, {
               method: 'GET',  
               headers: {
@@ -63,8 +63,8 @@ export const Checkout = ({ User, Language, English, Polish }) => {
                   'Content-Type': 'application/json'
                 }        
               }).then(res => res.json()).then(data => setSingleData(data.prod)) 
-          }
-        }, [])
+   
+        }, [idProd])
 
         return (
           <div className='item-coupon'>
@@ -75,9 +75,16 @@ export const Checkout = ({ User, Language, English, Polish }) => {
    
    <div className='row-for-etc' style={{ flexWrap: 'no-wrap' }}>
    <div className="container-for-item-name-h4" style={{ justifyContent: 'flex-start' }}>
-   <h4>{SingleData.name}</h4>   
-   <h3  style={{ margin: '0px 0', padding: '0' }}>{Language == 'PL' ? Polish.price : Language == 'EN' ? English.price : 'Cena' }: {Price}</h3>
-   <h2  style={{ margin: '5px 0', padding: '5px' }}>{Language == 'PL' ? Polish.quantity : Language == 'EN' ? English.quantity : 'Ilość' }: {Quantity}</h2>
+
+   <h4 className='container-for-item-name-h4'>
+   <h4 style={{ textAlign: 'right' }}>{SingleData.name}</h4>               
+  </h4>
+  <h4 className='container-for-item-name-h4'>
+  <h3  style={{ margin: '0px 0', padding: '0' }}>{Language == 'PL' ? Polish.price : Language == 'EN' ? English.price : 'Cena' }: {Price}</h3>
+  </h4>
+  <h4 className='container-for-item-name-h4'>
+  <h2>{Language == 'PL' ? Polish.quantity : Language == 'EN' ? English.quantity : 'Ilość' }: {Quantity}</h2>
+  </h4>
    </div>
    </div>
         </div>  
@@ -107,7 +114,7 @@ export const Checkout = ({ User, Language, English, Polish }) => {
           let Query = `UPDATE carts SET products = '${JSON.stringify(newArray)}', coupon_applied= 1 WHERE idUser = ${User.id}`
           ApplyingCouponFunction(Query)
 
-          toast.success('Uzyto kodu')
+          toast.success(Language == 'PL' ? 'Uzyto kodu' : Language == 'EN' ? 'You used code' : 'Uzyto kodu')
           window.location.reload()
 
         } else if (PromoCode == 'CUT75' && isCouponApplied == 0) {
@@ -124,10 +131,10 @@ export const Checkout = ({ User, Language, English, Polish }) => {
           let Query = `UPDATE carts SET products = '${JSON.stringify(newArray)}', coupon_applied= 1 WHERE idUser = ${User.id}`
           ApplyingCouponFunction(Query)
 
-          toast.success('Uzyto kodu')
+          toast.success(Language == 'PL' ? 'Uzyto kodu' : Language == 'EN' ? 'You used code' : 'Uzyto kodu')
           window.location.reload()
 
-        } else if (PromoCode != 'CUT50' || PromoCode != 'CUT75' && isCouponApplied == 0) { toast.error('Wprowadzono zly kod')} else if (isCouponApplied == 1) { toast.error('Kod zostal uzyty')}
+        } else if (PromoCode != 'CUT50' || PromoCode != 'CUT75' && isCouponApplied == 0) { toast.error(Language == 'PL' ? 'Wprowadzono zly kod' : Language == 'EN' ? 'You entered wrong code' : 'Wprowadzono zly kod')} else if (isCouponApplied == 1) { toast.error(Language == 'PL' ? 'Uzyto kodu' : Language == 'EN' ? 'You used code' : 'Uzyto kodu')}
       }
 
       return (
@@ -140,7 +147,7 @@ export const Checkout = ({ User, Language, English, Polish }) => {
 
                 <div style={{ display: 'flex', 
                 flexDirection: 'column',
-                width: '110%', 
+                width: window.innerWidth < 900 ? 'unset' : '110%', 
                 margin: '20px' }}>
 
                   {userCartContent.map(item => <SingleItem idProd={item.id} Price={item.price} Quantity={item.quantity} item={item} /> )} 

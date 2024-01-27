@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectCoverflow, Pagination } from 'swiper'
+import { EffectCoverflow, Pagination, Navigation } from 'swiper'
 import { motion } from 'framer-motion' 
 import axios from 'axios'
 
@@ -14,6 +14,8 @@ const ProductPage = ({ User, ToastContainer, Language, Polish ,English }) => {
     
     let location = useLocation()
     const [Product, setProduct] = useState('') 
+    const [MainImage, setMainImage] = useState('')
+    const [ProductGallery, setProductGallery] = useState([])
     const [ProductList, setProductList] = useState('')
     const [QuantityOfProduct, setQuantityOfProduct] = useState(1) 
     const [ButtonCartVisible, setButtonCartVisible] = useState(false)
@@ -94,6 +96,14 @@ const ProductPage = ({ User, ToastContainer, Language, Polish ,English }) => {
         }
     }, [User, ProductLink, userCartContent]);
 
+    useEffect(() => {
+
+        if(User && Product) {
+            setProductGallery(JSON.parse(Product.gallery))
+        }
+
+    }, [User, Product])
+
 return (
 <>
     
@@ -109,7 +119,36 @@ exit={{ opacity: 0 }}
 
 <h1 className='product-title-- medium-hide'>{Product.name}</h1>
 
-<img className='product-image--' src={Product.image} />
+<div className='product-image--' style={{ backgroundImage: `url(${MainImage == '' ? Product.image : MainImage})`}} >
+
+</div>
+
+<div style={{ display: 'flex'  }}>
+
+<Swiper 
+        navigation={true}
+        modules={[ Navigation]}
+        className="mySwiper slidder__"
+        style={{  width: '500px' }}
+      >
+
+        {Product == '' ? null : ProductGallery.map(item => <SwiperSlide
+        onClick={() => setMainImage(item.img)}
+        className='slide_galleries'
+        >
+            <div  style={{ height: '250px' , 
+            width: '250px', 
+            backgroundImage: `url(${item.img})`,
+            backgroundSize: '60%',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '50% 50%'
+            }}></div>
+        </SwiperSlide>)}
+        
+</Swiper>
+
+</div>
+
 
 <div className='container-for-etc-product mobile-hide'>
 
@@ -185,6 +224,11 @@ exit={{ opacity: 0 }}
     <br></br>
 
     <span className='parameter-itself'>
+        <p>{Language == 'PL' ? 'Kategoria' : Language == 'EN' ? 'Category' : 'Kategoria' }: </p>
+        <p>{Product.category}</p>
+    </span>
+
+    <span className='parameter-itself'>
         <p>SKU: </p>
         <p>{Product.SKU}</p>
     </span>
@@ -238,7 +282,7 @@ exit={{ opacity: 0 }}
         className="mySwiper"
       >
        {ProductList == '' ? null : ProductList.map(item => 
-        <SwiperSlide key={item}>
+        <SwiperSlide key={item} className='slide_others'>
         <div class="product-itself" style={{ position: 'absolute', zIndex: 32 }} onClick={() => window.location.replace('/produkt/' + item.id)}>
             <div onClick="" class="product-img" style={{ background: `url(${item.image}) 50% 50%`, backgroundSize: 'cover' }}></div>
             <div class="description-box-product">

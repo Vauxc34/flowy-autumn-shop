@@ -34,7 +34,7 @@ const Shop = () =>  {
   const [userMail, setUserMail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [userPasswordRepeat, setUserPasswordRepeat] = useState('')  
-  const ToastMessReg = () => toast.success('Pomyślnie zarejestrowano 🥳')
+  const ToastMessReg = () => toast.success(Language == 'PL' ? 'Pomyślnie zarejestrowano 🥳' : Language == 'EN' ? 'You succesfully registered 🥳' : 'Pomyślnie zarejestrowano 🥳')
  
   useEffect(() => {
     const data = localStorage.getItem('User');

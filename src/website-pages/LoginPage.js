@@ -33,7 +33,7 @@ const LoginPage = ({
         mail: userMail,
         password: userPassword
       })
-      }).then(res => res.status >= 401 ? toast.error('Wprowadzono zle dane') : res.json()).then(data =>  setUser(data.mess[0]))
+      }).then(res => res.status >= 401 ? toast.error(Language == 'PL' ? 'Wprowadzono zle dane' : Language == 'EN' ? 'You entered wrong data' : 'Wprowadzono zle dane') : res.json()).then(data =>  setUser(data.mess[0]))
 
   }
 

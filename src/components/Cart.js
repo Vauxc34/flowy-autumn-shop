@@ -46,7 +46,7 @@ export const Cart = ({ User, Language, English, Polish }) => {
     const Item = ({idProd, quantityU, PPrice}) => {
         
         const [singleProdDetails, setSingleProdDetails] = useState({}); 
-
+        
         const RemovingProductInAcart = () => {   
           let CartId = User.cartId
           let IdProduct = idProd
@@ -55,7 +55,6 @@ export const Cart = ({ User, Language, English, Polish }) => {
           let ProductPrice = PPrice
           RemovingProductInAcartFunction(CartId, IdProduct, foundIndex, QuantityUserProd, ProductPrice)
         }
-
         const AdddingProductInAcart = async () => { 
           let CartId = User.cartId
           let IdProduct = idProd
@@ -67,50 +66,71 @@ export const Cart = ({ User, Language, English, Polish }) => {
 
         useEffect(() => {
           const fetchData = async () => {
-            try {
-              const response = await axios.get(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/${idProd}`).then
-              (response => setSingleProdDetails(response.data.prod))
+
+            if(idProd) {
+
+              try {
+                const response = await axios.get(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products/${idProd}`)
+                setSingleProdDetails(response.data.prod)
+              } catch (error) {
+                console.error('Error fetching product details:', error);
+              }
+
+            } else {
                
-            } catch (error) {
-              console.error('Error fetching product details:', error);
             }
+
+            
           };
       
           fetchData();
-        }, [idProd]); 
+        }, [idProd])
         
         return (
 
-            <div className="cart-item-itself">
-            <div className="container-for-etc">
+          <div className="cart-item-itself">
+          <div className="container-for-etc">
             <div className='row-for-etc'>
-            <div className="product-image-cart" style={{ backgroundImage: `url(${singleProdDetails.image})` }}></div>
+              <div className="product-image-cart" style={{ backgroundImage: `url(
+                ${singleProdDetails && singleProdDetails.image ?  singleProdDetails.image  : 
+                  'https://placehold.co/150x150/purple/white' })` }}></div>
             </div>
-            <div className='row-for-etc'>
-            <div className="container-for-item-name-h4">
-            <h4>{singleProdDetails.name}</h4>
-            <span></span>  
+            <div className='row-for-etc' style={{ width: window.innerWidth < 600 ? '100%' : '50%' }}>
+              <div className="container-for-item-name-h4">
+                {singleProdDetails && singleProdDetails.name ? (
+                  <h4>{singleProdDetails.name}</h4>
+                ) : (
+                  <p>Loading...</p>
+                )}
+                <span></span>
+              </div>
+              <div className="container-for-item-name-h4">
+                {/* <a className='site-btn'>usuń</a> */}
+                <div className='quantity-box-container'>
+                  {singleProdDetails && singleProdDetails.price ? (
+                    <p>{singleProdDetails.price} zl</p>
+                  ) : (
+                    <p>Loading...</p>
+                  )}
+                  <div className='quantity-box'>
+                    <div className='select-item-quantity'>
+                      <div onClick={AdddingProductInAcart} value="+" className='p__'>+</div>
+                      <span className='p_quantity-itself' >{quantityU}</span> 
+                      <div onClick={RemovingProductInAcart} value="-" className='p__' >-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="container-for-item-name-h4">
+          </div>
+        </div>
 
-            {/* <a className='site-btn'>usuń</a> */}
-            
-            <div className='quantity-box-container'>
-            <p>{singleProdDetails.price} zl</p>
-            <div className='quantity-box'>
-            <div className='select-item-quantity'>
-               
-              <div onClick={AdddingProductInAcart} value="+" className='p__'>+</div>
-              <span className='p_quantity-itself' >{quantityU}</span> 
-              <div onClick={RemovingProductInAcart} value="-" className='p__' >-</div>
-               
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
+
+
+
+        
+        
+
 
         )
  
@@ -157,8 +177,6 @@ export const Cart = ({ User, Language, English, Polish }) => {
            
        <h1>Zaloguj sie</h1>
 
-       {/*<img style={{ height: '17.5em', width: '15em', margin: '4vh', alignSelf: 'center' }} src=''></img>*/}
-
        <h2>w celu dokonania zakupow</h2>
 
        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', }}>
@@ -172,7 +190,7 @@ export const Cart = ({ User, Language, English, Polish }) => {
        </form>
      
      </div>
-    </div>
+        </div>
 
             </>}
 

@@ -87,11 +87,11 @@ const Products = ({  onAddToCart, Language, Polish, English }) => {
             <span class="price-product">{item.price} zł</span>
             </div>
             </div>
-            )}</div>
+            ).splice(0, 4)}</div>
 
             {/*<button class="site-btn">
                 Zobacz więcej
-    </button>*/}
+            </button>*/}
 
         </div>
 

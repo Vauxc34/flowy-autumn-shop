@@ -54,7 +54,7 @@ export const AddressForm = ({ setUserBillingInfo, next, Language, English, Polis
            InputForm.lastName == undefined || 
            InputForm.zip == undefined ||
            InputForm.phone_number == undefined) {
-            toast.error('Nie uzupełniono wszystkich pól')
+            toast.error(Language == 'PL' ? 'Nie uzupelniono pol' : Language == 'EN' ? 'You dont fill fields' : 'Nie uzupelniono pol')
           } else {  
             next()  
             SetUserAddress() }

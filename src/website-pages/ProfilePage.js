@@ -22,18 +22,14 @@ const ProfilePage = ({
     const [UserTransactions, setUserTransactions] = useState([])
 
     useEffect(() => {
-
       if(User) {
-
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}pay/user/${User.id}`, {
           method: 'GET',  
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             }}).then(res => res.json()).then(data => setUserTransactions(data.content[0]))
-
       } else { }
-
     }, [])
 
     const TransactionTile = ({ item, idTrans }) => {
@@ -72,7 +68,11 @@ const ProfilePage = ({
         <div className="container-for-etc">
 
           <div className='row-for-etc'>
-            
+          <p><button 
+          className='site-btn' 
+          style={{ background: "#407ff5" }}
+          onClick={() => navigate(`/transakcja/${idTrans}`)}
+          >{Language == 'PL' ? 'Podejrzyj' : Language == 'EN' ? 'Check it' : 'Podejrzyj' }</button></p>
           </div>
 
           <div className='row-for-etc' style={{ textAlign: 'right' }}>
@@ -87,8 +87,6 @@ const ProfilePage = ({
       )
 
     }
-
-    //console.log(UserTransactions)
     
     const LogOut = () => {
       setUser(null)

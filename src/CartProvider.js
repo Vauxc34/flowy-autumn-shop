@@ -1,10 +1,15 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
 import { toast } from 'react-toastify'
 import axios from 'axios';
+
+import { LanguageContext } from './LanguageProvider'
 
 export const CartContext = createContext();
 
 export const CartProvider = props => {
+
+    const languageContext = useContext(LanguageContext);
+    const {  Language  } = languageContext;
 
     const [userCartContent, setUserCartContent] = useState([])
     const [cartQuantity, setCartQuantity] = useState(0)
@@ -36,7 +41,7 @@ export const CartProvider = props => {
                 quantity: QuantityOfProduct,
                 price: ProductPrice
             })
-        }).then(res => res.json()).then(data => toast.success('Dodales produkt')) 
+        }).then(res => res.json()).then(data => toast.success(Language == 'PL' ? 'Dodales produkt' : Language == 'EN' ? 'You added product' : 'Dodales produkt')) 
     }
 
     const ModifyProductInAcartFunction = (CartId, ProductLink, foundIndex, QuantityOfProduct, ProductPrice) => {      
@@ -53,7 +58,7 @@ export const CartProvider = props => {
                 num_prod:  QuantityOfProduct,
                 price: ProductPrice
             })
-        }).then(res => res.json()).then(data => toast.success('Dodales produkt'))
+        }).then(res => res.json()).then(data => toast.success(Language == 'PL' ? 'Dodales produkt' : Language == 'EN' ? 'You added product' : 'Dodales produkt'))
     }
 
     const RemovingProductInAcartFunction = async (CartId, IdProduct, foundIndex, QuantityUserProd, ProductPrice) => {   
@@ -66,7 +71,7 @@ export const CartProvider = props => {
             price: ProductPrice
           })
           .then((response) => {
-            toast.success('Zmieniono stan w koszyku')
+            toast.success(Language == 'PL' ? 'Zmieniles stan produktu' : Language == 'EN' ? 'You changed quantity' : 'Zmieniles stan produktu')
             window.location.reload()
           }, (error) => {
             toast.log(error);
@@ -84,7 +89,7 @@ export const CartProvider = props => {
             price: ProductPrice
           })
           .then((response) => {
-            toast.success('Zmieniono stan w koszyku')
+            toast.success(Language == 'PL' ? 'Zmieniles stan produktu' : Language == 'EN' ? 'You changed quantity' : 'Zmieniles stan produktu')
             window.location.reload()
           }, (error) => {
             toast.log(error);
@@ -98,7 +103,7 @@ export const CartProvider = props => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-              }}).then(res => res.json()).then(toast.info('Czysto'))
+              }}).then(res => res.json()).then(toast.info(Language == 'PL' ? 'Czysto' : Language == 'EN' ? 'Cleaned' : 'Czysto'))
               setCartQuantity(0)
     }
 
@@ -123,7 +128,7 @@ export const CartProvider = props => {
           Query: Query
         })}
     ).then(res => res.json())
-    } else { toast.error('Wykorzystano rabat') }
+    } else { toast.error(Language == 'PL' ? 'Wykorzystano rabat' : Language == 'EN' ? 'You used promo code' : 'Wykorzystano rabat') }
     } 
     
     return(

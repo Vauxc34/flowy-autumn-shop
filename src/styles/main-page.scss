@@ -608,8 +608,8 @@ form .site-btn {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 267px !important;
-    height: 244px !important;
+    width: 267px;
+    height: 244px;
     border-radius: 6px;
     background: #fff;
     margin: 0 12.35px;
@@ -618,6 +618,16 @@ form .site-btn {
     transition: all .2s ease-out;
   }
   
+  .slide_others {
+    width: 267px !important;
+    height: 244px !important;
+  }
+
+  .slide_galleries {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
   .swiper-slide img {
     display: block;
     width: 100%;

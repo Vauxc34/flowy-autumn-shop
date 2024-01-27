@@ -30,14 +30,13 @@ const RegisterPage = ({
   const RegisterNewUser = () => {
     if(userName == '' || userSurname == '' || userMail == '' || userPassword == '' || userPasswordRepeat == '') {
 
-      toast.error('Nie uzupelniles pol')
+      toast.error(Language == 'PL' ? 'Nie uzupelniles pol' : Language == 'EN' ? 'You dont fill fields' : 'Nie uzupelniles pol')
  
     }if(userPassword != userPasswordRepeat) {
 
-      toast.error('Haslo sie nie zgadza')
+      toast.error(Language == 'PL' ? 'Haslo sie nie zgadza' : Language == 'EN' ? 'Password is not correct' : 'Haslo sie nie zgadza')
 
     } else {
-
     fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/`, {
     method: 'POST',  
     headers: {
@@ -53,8 +52,8 @@ const RegisterPage = ({
           role: "client",
           cartId: NewCartId.current
     })
-    }).then(res => res.status >= 400 ? toast.error('Nie mozna sie zalogowac') : res.json() )
-    .then(toast.success('Zarejestrowano')).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId.current}`, {
+    }).then(res => res.status >= 400 ? toast.error(Language == 'PL' ? 'Nie mozna sie zalogowac' : Language == 'EN' ? 'You cannot log in' : 'Nie mozna sie zalogowac') : res.json() )
+    .then(toast.success(Language == 'PL' ? 'Zarejestrowano' : Language == 'EN' ? 'You succesfuly registered' : 'Zarejestrowano')).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId.current}`, {
         method: 'GET',  
         headers: {
             'Accept': 'application/json',
@@ -71,7 +70,7 @@ const RegisterPage = ({
             products: [], 
             payment_method: "not_selected",
             amount_of_money: 0
-    })})).then(navigate('/')))}
+    })})))}
   }
 
   const handleSubmit = async e => {
@@ -97,11 +96,11 @@ const RegisterPage = ({
 
 <form onSubmit={handleSubmit}>
 <div className='input-container'>
-<label>{Language == 'PL' ? Polish.input_form_text_2_1 : Language == 'EN' ? English.input_form_text_2_1 : 'Imię' }</label><input type="text" value={userName} onChange={(e) => setUserName(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_2_1 : Language == 'EN' ? English.input_form_text_2_1 : 'Imię' }</label><input type="text" value={userName}  minLength={3} onChange={(e) => setUserName(e.target.value)}></input>
 </div>
 
 <div className='input-container'>
-<label>{Language == 'PL' ? Polish.input_form_text_2_2 : Language == 'EN' ? English.input_form_text_2_2 : 'Nazwisko' }</label><input type="text" value={userSurname} onChange={(e) => setUserSurname(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_2_2 : Language == 'EN' ? English.input_form_text_2_2 : 'Nazwisko' }</label><input type="text" value={userSurname} minLength={3} onChange={(e) => setUserSurname(e.target.value)}></input>
 </div>
 
 <div className='input-container'>
@@ -109,11 +108,11 @@ const RegisterPage = ({
 </div>
 
 <div className='input-container'>
-<label>{Language == 'PL' ? Polish.input_form_text_6_1 : Language == 'EN' ? English.input_form_text_6_1 : 'Hasło' }</label><input type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_6_1 : Language == 'EN' ? English.input_form_text_6_1 : 'Hasło' }</label><input type="password" pattern="[^0-9]*" value={userPassword} minLength={8} onChange={(e) => setUserPassword(e.target.value)}></input>
 </div>
 
 <div className='input-container'>
-<label>{Language == 'PL' ? Polish.input_form_text_6_2 : Language == 'EN' ? English.input_form_text_6_2 : 'Powtórz hasło' }</label><input type="password" value={userPasswordRepeat} onChange={(e) => setUserPasswordRepeat(e.target.value)}></input>
+<label>{Language == 'PL' ? Polish.input_form_text_6_2 : Language == 'EN' ? English.input_form_text_6_2 : 'Powtórz hasło' }</label><input type="password" pattern="[^0-9]*" value={userPasswordRepeat} minLength={8} onChange={(e) => setUserPasswordRepeat(e.target.value)}></input>
 </div>
 
 <input type="submit" className='site-btn' onClick={RegisterNewUser} value={Language == 'PL' ? Polish.register_button_2 : Language == 'EN' ? English.register_button_2 : 'Zarejestruj się' }></input>
@@ -130,10 +129,10 @@ value={"Zaloguj się z G"}
 <ToastContainer/>
 </form>
 
-
-
-
-</> : <h4>Nie znaleziono 404</h4>   }
+</> : User ? <>
+<h4>{Language == 'PL' ? 'Zarejestrowano' : Language == 'EN' ? 'You succesfully registered' : 'Zarejestrowano' }</h4>
+<Link to="/"><h5>{Language == 'PL' ? Polish.login_confirmation_subtitle_1 : Language == 'EN' ? English.login_confirmation_subtitle_1 : 'Przejdz na sklep' }</h5></Link>
+</> : <h4>{Language == 'PL' ? 'Nie znaleziono' : Language == 'EN' ? 'Not found' : 'Nie znaleziono' } 404</h4>   }
 
 </div>
 </div>

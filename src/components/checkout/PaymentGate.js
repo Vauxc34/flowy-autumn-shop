@@ -476,7 +476,7 @@ export const PaymentGate = ({
                 var teardown = function (event) {
                     event.preventDefault();
                     var formIsInvalid = false;
-                    if (formIsInvalid) { toast.error("Card input is not valid"); return }
+                    if (formIsInvalid) { toast.error(Language == 'PL' ? "Dane karty sa zle" : Language == 'EN' ? "Card input is not valid" : "Dane karty sa zle"); return }
                     hostedFieldsInstance.tokenize({ 
                         cardholderName: $('#cc-name').val()
                         }, 
