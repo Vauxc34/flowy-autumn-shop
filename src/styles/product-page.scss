@@ -1,4 +1,38 @@
 
+/* guest */
+
+.card_newUser {
+    padding: 10px;
+    height: 72.5vh;
+    width: 90%;
+    background-color: #fff;
+}
+
+.layer__ {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    background: #637069cb;
+}
+
+.CloseGuestScreen {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: red;
+    height: 68px !important;
+    width: 68px !important;
+    cursor: pointer;
+    z-index: 999;
+}
+
+/* guest */
+
 .wrapper-product {
 display: flex;
 position: relative;

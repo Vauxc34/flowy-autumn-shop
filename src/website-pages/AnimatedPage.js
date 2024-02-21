@@ -71,6 +71,7 @@ element={<ProductPage
   English={English}
 ToastContainer={ToastContainer}
 toast={toast} 
+setUser={setUser}
 User={User}
 ProductList={ProductList}
 UserCart={UserCart}

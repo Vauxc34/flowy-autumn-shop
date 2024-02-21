@@ -39,15 +39,12 @@ const LoginPage = ({
 
   return (
     <>
-    
     <motion.section 
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     id='register'>
-
     <div className='startup-screen'>
-
     <div className='widget-description'>
 
       {User == null ?   <>
@@ -93,15 +90,9 @@ const LoginPage = ({
 
     </div>
     <ToastContainer/>
-
-
     </div>
-
     </motion.section>
-
     </>
-
- 
   )
 }
 

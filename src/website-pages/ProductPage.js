@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useContext } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, {useState, useEffect, useContext, useRef } from 'react'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow, Pagination, Navigation } from 'swiper'
 import { motion } from 'framer-motion' 
@@ -8,7 +8,9 @@ import axios from 'axios'
 import { CartContext } from '../CartProvider'
 import { toast } from 'react-toastify'
 
-const ProductPage = ({ User, ToastContainer, Language, Polish ,English }) => {
+import CloseIcon from '@mui/icons-material/Close';
+
+const ProductPage = ({ User, setUser, ToastContainer, Language, Polish ,English }) => {
 
     let navigate = useNavigate()
     
@@ -32,10 +34,6 @@ const ProductPage = ({ User, ToastContainer, Language, Polish ,English }) => {
         ApplyingCouponFunction } = cartContext;
     
     useEffect(() => { if(User) { FetchCart(User.cartId) } else {  } }, [User]) 
-
-    const findItemById = (items) => {
-        return items.find(item => item.id == ProductLink);
-    }
 
     const GetItemIndex = (items) => {
         return userCartContent.findIndex(item => item.id == ProductLink);
@@ -76,6 +74,126 @@ const ProductPage = ({ User, ToastContainer, Language, Polish ,English }) => {
     } else { window.location.reload() }
     }
 
+    /* guest account */
+
+    const [isBuyNowClicked, setIsBuyNowClicked] = useState(false)
+
+    const FormGuest = () => {
+
+        const [GuestMail, setGuestMail] = useState('')
+        const [GuestPassword, setGuestPassword] = useState('')
+        const NewUserId = useRef(Math.floor(Math.random() * 999))
+        const NewCartId = useRef(Math.floor(Math.random() * 999))
+    
+        const GuestAccountCreate = () => {
+            fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/`, {
+                method: 'POST',  
+                headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                      id: NewUserId.current,
+                      name: `Guest ${Math.floor(Math.random() * 890)}`,
+                      surname: `${Math.floor(Math.random() * 890)}`, 
+                      mail: GuestMail,
+                      password: GuestPassword,
+                      role: "client-guest",
+                      cartId: NewCartId.current
+                })
+            }).then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}users/${NewUserId.current}`, {
+                    method: 'GET',  
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      }
+            }).then(res => res.json()).then(data => setUser(data.content[0][0]))
+            .then(fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}cart/${NewUserId.current}`, {
+                    method: 'POST',  
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                      },
+                    body: JSON.stringify({
+                      id: NewCartId.current,
+                      products: [], 
+                      payment_method: "not_selected",
+                      amount_of_money: 0
+                  })
+                  }).then(AddProductToAcartFunction(NewCartId.current, ProductLink, QuantityOfProduct, Product.price))).then(navigate('/koszyk'))
+            
+            )
+        }
+
+        return (
+            <>
+            
+            <div className='layer__'>
+
+                <CloseIcon className='CloseGuestScreen' onClick={() => setIsBuyNowClicked(false)}/>
+
+
+                <div className='card_newUser' style={{ overflowY: 'scroll' }}>
+
+                <div className="wrapper-product">
+
+<div className='row-product' style={{ height: '70vh', backgroundColor: '#c8258691' }}>
+
+<div className='widget-description'>
+
+    <>
+
+<h1 style={{ margin:'10px 0' }}>Podaj dane</h1>
+
+<div className='input-container' style={{ width: '90%' }} >
+<label>{Language == 'PL' ? Polish.input_form_text_1 : Language == 'EN' ? English.input_form_text_1 : 'Adres e-mail' }</label><input type="email" value={GuestMail} onChange={e => setGuestMail(e.target.value)} ></input>
+</div>
+
+<div className='input-container' style={{ width: '90%' }} >
+<label>{Language == 'PL' ? Polish.input_form_text_6_1 : Language == 'EN' ? English.input_form_text_6_1 : 'Hasło' }</label><input type="password" value={GuestPassword} onChange={e => setGuestPassword(e.target.value)} ></input>
+</div>
+
+<input type="submit" style={{ width: '90%', alignSelf: 'center' }} className='site-btn' onClick={GuestAccountCreate} value={'Zeby kontynuowac'}></input>
+
+<h5 style={{ margin: '20px 0 0' }}>{Language == 'PL' ? Polish.registration_screen_info : Language == 'EN' ? English.registration_screen_info : 'Nie masz konta?' } <Link to="/rejestracja">
+{Language == 'PL' ? Polish.register_button_2 : Language == 'EN' ? English.register_button_2 : 'Zarejestruj się' } 
+  </Link></h5>
+
+
+    </>   
+
+</div>
+
+</div>
+<div className='row-product' style={{ textAlign: 'center' }}>
+
+<h1 class="product-title--" style={{ alignSelf: 'center' }}>{Product.name}</h1>
+
+<div className='product-image--' style={{ 
+    height: '250px',
+    width: '250px',
+    backgroundImage: `url(${MainImage == '' ? Product.image : MainImage})`
+}}></div>
+
+<h2 style={{ margin: '20px 0 ' }}>{Language == 'PL' ? Polish.quantity : Language == 'EN' ? English.quantity : 'Ilość' }: {QuantityOfProduct} w cenie {Product.price}zl za sztuke</h2>
+
+</div>
+
+
+                </div>
+
+              
+                </div>
+
+            </div>
+
+            </>
+        )
+
+    }
+
+    /* guest account */
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_ACTUAL_LINK_APPLICATION}products`, {
                     method: 'GET',  
@@ -114,6 +232,8 @@ exit={{ opacity: 0 }}
 >
 
 <div className="wrapper-product">
+
+    {isBuyNowClicked == true ? <FormGuest/> : null}
 
 <div className='row-product'>
 
@@ -213,7 +333,7 @@ exit={{ opacity: 0 }}
     {User ? <> {ButtonCartVisible ? 
      <button className='site-btn' onClick={ModifyProductInAcart} id="buy_btn">{Language == 'PL' ? Polish.buy_now_btn_2 : Language == 'EN' ? English.buy_now_btn_2 : 'Dodaj do koszyka' }</button> :
      <button className='site-btn' onClick={AddProductToAcart} id="buy_btn">{Language == 'PL' ? Polish.buy_now_btn_2 : Language == 'EN' ? English.buy_now_btn_2 : 'Dodaj do koszyka' }</button>} </> : 
-     <button className='site-btn' onClick={() => navigate('/logowanie')} id="buy_btn">{Language == 'PL' ? Polish.buy_now_btn_1 : Language == 'EN' ? English.buy_now_btn_1 : 'Nie jestes zalogowany' }</button>} 
+     <button className='site-btn' onClick={() => setIsBuyNowClicked(true)} id="buy_btn">{Language == 'PL' ? Polish.buy_now_btn_1 : Language == 'EN' ? English.buy_now_btn_1 : 'Nie jestes zalogowany' }</button>} 
 
 </div>
 </div>

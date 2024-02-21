@@ -70,7 +70,8 @@ const RegisterPage = ({
             products: [], 
             payment_method: "not_selected",
             amount_of_money: 0
-    })})))}
+        })
+        })))}
   }
 
   const handleSubmit = async e => {
